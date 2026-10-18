@@ -8,14 +8,13 @@ The code lives in `web_kit/`. This folder holds the design notes and screenshots
 
 ## Screenshots
 
-Captured from a real run on an Intel UHD GPU (headless Edge), playing the exported "Jeriq airplane mode" song.
+Captured from a real run on an Intel UHD GPU (headless Edge), playing the built-in synthetic 120 BPM demo.
 
 | | |
 |---|---|
 | ![Resting](screenshots/01-resting.png) | **Resting.** No source is playing. The disk is dim and slow, and the jets are off. |
 | ![Jets](screenshots/02-playing-jets.png) | **Playing.** The disk turns and brightens, and bass hits fire the vertical jets. |
-| ![Build](screenshots/03-build-scene.png) | **"Build" scene.** The camera drifts closer and the disk heats up. |
-| ![Squall](screenshots/04-squall-for-comparison.png) | **For comparison:** Squall, the first main visual, on the same song. |
+| ![Squall](screenshots/04-squall-for-comparison.png) | **For comparison:** Squall, the first main visual, on the same demo signal. |
 
 ## Goal
 

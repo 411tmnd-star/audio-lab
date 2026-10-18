@@ -656,12 +656,12 @@ def test_cli_schema_kind(tmp_path):
 
 # ---- the two real songs ------------------------------------------------------------------------
 
-SEYI = ROOT / "outputs" / "Seyi-Vibez-SWAGUU-feat-Quavo" / "song_analysis.json"
+TRACK_A = ROOT / "outputs" / "track_a" / "song_analysis.json"
 DETTY = ROOT / "outputs" / "Detty - Party scatter demo" / "song_analysis.json"
 have = lambda p: p.exists() and all((p.parent / "visual" / f"visual_mapping.{x}.json").exists() for x in review.PROFILES)
-needs_seyi = pytest.mark.skipif(not have(SEYI), reason="Seyi mappings not generated")
+needs_track_a = pytest.mark.skipif(not have(TRACK_A), reason="Track A mappings not generated")
 needs_detty = pytest.mark.skipif(not have(DETTY), reason="Detty mappings not generated")
-needs_both = pytest.mark.skipif(not (have(SEYI) and have(DETTY)), reason="mappings not generated")
+needs_both = pytest.mark.skipif(not (have(TRACK_A) and have(DETTY)), reason="mappings not generated")
 
 
 @pytest.fixture(scope="module")
@@ -669,7 +669,7 @@ def real(tmp_path_factory):
     """Plan every real song x profile in a scratch copy, so the repository outputs stay untouched."""
     out = {}
     root = tmp_path_factory.mktemp("real")
-    for name, src in (("seyi", SEYI), ("detty", DETTY)):
+    for name, src in (("track_a", TRACK_A), ("detty", DETTY)):
         if not have(src):
             continue
         dst = root / name
@@ -683,11 +683,11 @@ def real(tmp_path_factory):
     return out
 
 
-@needs_seyi
+@needs_track_a
 @pytest.mark.parametrize("prof", review.PROFILES)
-def test_seyi_transition_is_anticipated_and_lands_on_the_interpreted_change(real, prof):
+def test_track_a_transition_is_anticipated_and_lands_on_the_interpreted_change(real, prof):
     from audiolab.interpretation.engine import load_interpretation
-    analysis, j = real[("seyi", prof)]
+    analysis, j = real[("track_a", prof)]
     m, arr = load_timeline(j), load_arrays(load_timeline(j), j)
     interp = load_interpretation(analysis.parent / "song_interpretation.json")
     entry = next(i for i in interp.interpretations if i.label == "bass_entry")  # found from data, not hard-coded
@@ -704,10 +704,10 @@ def test_seyi_transition_is_anticipated_and_lands_on_the_interpreted_change(real
     assert before.state == "rest" and after.state in ("build", "active")
 
 
-@needs_seyi
+@needs_track_a
 @pytest.mark.parametrize("prof", review.PROFILES)
-def test_seyi_state_follows_the_sections_and_lags_the_drop_by_a_documented_amount(real, prof):
-    m = load_timeline(real[("seyi", prof)][1])
+def test_track_a_state_follows_the_sections_and_lags_the_drop_by_a_documented_amount(real, prof):
+    m = load_timeline(real[("track_a", prof)][1])
     first_active = next(s for s in m.states if s.state == "active")
     assert 16.6 <= first_active.start_s <= 20.5 and m.states[0].state == "rest" and m.states[-1].state in ("settle", "rest")
     assert len(m.states) / (m.timebase.duration_s / 60) < 10, "section-level, not beat-level"
@@ -747,7 +747,7 @@ def test_detty_quiet_middle_reaches_rest_only_in_the_cinematic_profile(real):
 
 
 @needs_both
-@pytest.mark.parametrize("song_name", ["seyi", "detty"])
+@pytest.mark.parametrize("song_name", ["track_a", "detty"])
 @pytest.mark.parametrize("prof", review.PROFILES)
 def test_real_timelines_validate_reproduce_and_respect_every_constraint(real, song_name, prof):
     if (song_name, prof) not in real:
@@ -763,7 +763,7 @@ def test_real_timelines_validate_reproduce_and_respect_every_constraint(real, so
 
 @needs_both
 def test_real_planning_leaves_the_sources_untouched(tmp_path):
-    for src in (SEYI, DETTY):
+    for src in (TRACK_A, DETTY):
         dst = tmp_path / src.parent.name
         shutil.copytree(src.parent, dst, ignore=shutil.ignore_patterns("plots", "motion", "visual_baseline_v1", "*.wav"))
         before = {p.relative_to(dst).as_posix(): sha(p) for p in dst.rglob("*") if p.is_file()}

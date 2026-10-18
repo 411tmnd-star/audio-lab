@@ -110,7 +110,7 @@ describe("bass shaper", () => {
     assert.ok(states.slice(30).every((s) => s.kick < 0.3), "no false kicks on a steady level after warm-up");
   });
 
-  it("sees bass re-entries that a loud steady sub would hide (the Swaguu case)", () => {
+  it("sees bass re-entries that a loud steady sub would hide (the Track A case)", () => {
     // A steady 54 dB sub tone, and a punch band at 32 dB that jumps to 45 dB for 3 frames every 0.7 s.
     const dt = 1 / 43;
     const frames = Math.round(12 / dt);

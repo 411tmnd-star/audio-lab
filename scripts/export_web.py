@@ -16,9 +16,9 @@ Run it from the AudioLab project with its virtualenv:
 
   python scripts/export_web.py --spec web_songs.json --out ../353-curiosity/public/motion
 
-web_songs.json:  [{"id": "seyi", "title": "...", "motionDir": "outputs/.../motion",
+web_songs.json:  [{"id": "track_a", "title": "...", "motionDir": "outputs/.../motion",
                    "source": "path/to/the/original/audio.mp3",      (optional: enables the features bundle)
-                   "audio": "/motion/audio/seyi.m4a" or null, "rights": "who allows this audio here"}]
+                   "audio": "/motion/audio/track_a.m4a" or null, "rights": "who allows this audio here"}]
 
 "source" is read only to compute the readings. It is never copied into the bundle; "audio" is what ships.
 """

@@ -2,33 +2,33 @@
   "format": "motion-web/1",
   "songs": [
     {
-      "id": "seyi",
-      "title": "Seyi Vibez - SWAGUU (feat. Quavo)",
+      "id": "track-a",
+      "title": "Track A",
       "durationS": 78.019048,
       "audio": null,
       "profiles": [
         {
           "id": "balanced",
           "label": "Balanced",
-          "timeline": "/motion/seyi/balanced.timeline.json",
-          "curves": "/motion/seyi/balanced.curves.bin"
+          "timeline": "/motion/track-a/balanced.timeline.json",
+          "curves": "/motion/track-a/balanced.curves.bin"
         },
         {
           "id": "bass_pulse",
           "label": "Bass pulse",
-          "timeline": "/motion/seyi/bass_pulse.timeline.json",
-          "curves": "/motion/seyi/bass_pulse.curves.bin"
+          "timeline": "/motion/track-a/bass_pulse.timeline.json",
+          "curves": "/motion/track-a/bass_pulse.curves.bin"
         },
         {
           "id": "cinematic",
           "label": "Cinematic",
-          "timeline": "/motion/seyi/cinematic.timeline.json",
-          "curves": "/motion/seyi/cinematic.curves.bin"
+          "timeline": "/motion/track-a/cinematic.timeline.json",
+          "curves": "/motion/track-a/cinematic.curves.bin"
         }
       ],
       "features": {
-        "meta": "/motion/seyi/features.json",
-        "bin": "/motion/seyi/features.bin"
+        "meta": "/motion/track-a/features.json",
+        "bin": "/motion/track-a/features.bin"
       }
     },
     {
@@ -62,36 +62,36 @@
       }
     },
     {
-      "id": "jeriq-airplane-mode",
-      "title": "Jeriq airplane mode",
+      "id": "track-b",
+      "title": "Track B",
       "durationS": 258.168163,
       "audio": {
-        "src": "/motion/audio/jeriq-airplane-mode.mp3",
+        "src": "/motion/audio/track-b.mp3",
         "rights": "local test upload; the audio file is not committed (*.wav etc. are git-ignored)"
       },
       "profiles": [
         {
           "id": "balanced",
           "label": "Balanced",
-          "timeline": "/motion/jeriq-airplane-mode/balanced.timeline.json",
-          "curves": "/motion/jeriq-airplane-mode/balanced.curves.bin"
+          "timeline": "/motion/track-b/balanced.timeline.json",
+          "curves": "/motion/track-b/balanced.curves.bin"
         },
         {
           "id": "bass_pulse",
           "label": "Bass pulse",
-          "timeline": "/motion/jeriq-airplane-mode/bass_pulse.timeline.json",
-          "curves": "/motion/jeriq-airplane-mode/bass_pulse.curves.bin"
+          "timeline": "/motion/track-b/bass_pulse.timeline.json",
+          "curves": "/motion/track-b/bass_pulse.curves.bin"
         },
         {
           "id": "cinematic",
           "label": "Cinematic",
-          "timeline": "/motion/jeriq-airplane-mode/cinematic.timeline.json",
-          "curves": "/motion/jeriq-airplane-mode/cinematic.curves.bin"
+          "timeline": "/motion/track-b/cinematic.timeline.json",
+          "curves": "/motion/track-b/cinematic.curves.bin"
         }
       ],
       "features": {
-        "meta": "/motion/jeriq-airplane-mode/features.json",
-        "bin": "/motion/jeriq-airplane-mode/features.bin"
+        "meta": "/motion/track-b/features.json",
+        "bin": "/motion/track-b/features.bin"
       }
     }
   ]

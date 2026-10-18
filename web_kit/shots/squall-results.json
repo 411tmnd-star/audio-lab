@@ -7,7 +7,7 @@
  {
   "name": "the loop draws while idle (calm map)",
   "ok": true,
-  "detail": "13 -> 26 frames in 0.5 s"
+  "detail": "13 -> 23 frames in 0.5 s"
  },
  {
   "name": "idle: calm, Force 0, two storms",
@@ -82,17 +82,17 @@
  {
   "name": "BASS: kicks raise bass and bass hit; storms deepen (vortex speed up)",
   "ok": true,
-  "detail": "vortex 0.10 -> 0.41"
+  "detail": "vortex 0.10 -> 0.40"
  },
  {
   "name": "BASS HIT: inflow surges on kicks and a pressure ring leaves the eyes",
   "ok": true,
-  "detail": "peak inflow 0.42, rings +11 (12 kicks)"
+  "detail": "peak inflow 0.41, rings +9 (12 kicks)"
  },
  {
   "name": "HIGH: hi-hats raise high and bring rain; kicks alone do not",
   "ok": true,
-  "detail": "rain kicks 0.00 -> hats 0.28"
+  "detail": "rain kicks 0.00 -> hats 0.31"
  },
  {
   "name": "MID: tones raise mid and speed up the jet stream",
@@ -102,12 +102,12 @@
  {
   "name": "RMS: overall energy raises the Beaufort force above silence in every loud segment",
   "ok": true,
-  "detail": "force kicks 7.70, hats 1.28, mid 3.54"
+  "detail": "force kicks 7.79, hats 1.30, mid 3.51"
  },
  {
   "name": "ONSET: detected onsets strike lightning, at most 3 a second",
   "ok": true,
-  "detail": "kick segment (5.2 s): 11 beat frames, 10 strikes; hats: 6"
+  "detail": "kick segment (5.2 s): 9 beat frames, 9 strikes; hats: 1"
  },
  {
   "name": "silence again: calm returns, strikes stop",
@@ -117,7 +117,7 @@
  {
   "name": "status chip says the doldrums or paused at the end",
   "ok": true,
-  "detail": "silent"
+  "detail": "paused"
  },
  {
   "name": "no exceptions while playing a real file",
@@ -142,22 +142,22 @@
  {
   "name": "click strip at 25% seeks while paused",
   "ok": true,
-  "detail": "time 19.56 s, wanted 19.50"
+  "detail": "time 19.63 s, wanted 19.50"
  },
  {
   "name": "click strip at 50% seeks while paused",
   "ok": true,
-  "detail": "time 39.37 s, wanted 39.01"
+  "detail": "time 39.40 s, wanted 39.01"
  },
  {
   "name": "click strip at 80% seeks while paused",
   "ok": true,
-  "detail": "time 63.06 s, wanted 62.42"
+  "detail": "time 63.09 s, wanted 62.42"
  },
  {
   "name": "playhead follows the seek",
   "ok": true,
-  "detail": "80.93%"
+  "detail": "81.00%"
  },
  {
   "name": "scene state follows the motion timeline across seeks (rest, build, active, settle, rest)",
@@ -177,17 +177,17 @@
  {
   "name": "playback advances at real time (offline clock)",
   "ok": true,
-  "detail": "1.01x"
+  "detail": "1.00x"
  },
  {
   "name": "clock, playhead and range value all track the frame time",
   "ok": true,
-  "detail": "0:23.5, head 30.17%, range 23.54"
+  "detail": "0:23.6, head 30.21%, range 23.57"
  },
  {
   "name": "BAROMETER falls before a louder passage and rises as it clears (from the forecast)",
   "ok": true,
-  "detail": "t=15.00s tendency 0.81 (falling); t=72.00s -0.76 (rising)"
+  "detail": "t=15.00s tendency 0.81 (falling); t=72.00s -0.77 (rising)"
  },
  {
   "name": "keyboard: arrow keys seek by 5 s",
@@ -222,7 +222,7 @@
  {
   "name": "MOUSE drag on an L moves that storm under the pointer",
   "ok": true,
-  "detail": "storm 677,432 vs pointer 672,435"
+  "detail": "storm 678,431 vs pointer 673,434"
  },
  {
   "name": "double-click on empty map seeds a storm there",
@@ -257,7 +257,7 @@
  {
   "name": "TOUCH drag on an L moves the storm",
   "ok": true,
-  "detail": "storm 500,405 vs finger 484,412"
+  "detail": "storm 502,406 vs finger 486,413"
  },
  {
   "name": "Add and Remove storm buttons work (keyboard route)",
@@ -357,7 +357,7 @@
  {
   "name": "UNSUPPORTED Web Audio: the demo still plays and drives the map",
   "ok": true,
-  "detail": "{\"frames\":86,\"force\":7}"
+  "detail": "{\"frames\":61,\"force\":5}"
  },
  {
   "name": "UNSUPPORTED fullscreen: no fullscreen button",

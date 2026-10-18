@@ -265,23 +265,23 @@ def test_profiles_are_versioned_and_the_phase_70_originals_are_kept():
 
 # ---- real songs against the frozen baseline ----------------------------------------------------
 
-SEYI = ROOT / "outputs" / "Seyi-Vibez-SWAGUU-feat-Quavo" / "song_analysis.json"
+TRACK_A = ROOT / "outputs" / "track_a" / "song_analysis.json"
 DETTY = ROOT / "outputs" / "Detty - Party scatter demo" / "song_analysis.json"
 have = lambda p: p.exists() and (p.parent / cal.BASELINE_DIR).exists() and (p.parent / "visual").exists()
-needs_seyi = pytest.mark.skipif(not have(SEYI), reason="Seyi mappings not generated")
+needs_track_a = pytest.mark.skipif(not have(TRACK_A), reason="Track A mappings not generated")
 needs_detty = pytest.mark.skipif(not have(DETTY), reason="Detty mappings not generated")
-needs_both = pytest.mark.skipif(not (have(SEYI) and have(DETTY)), reason="mappings not generated")
+needs_both = pytest.mark.skipif(not (have(TRACK_A) and have(DETTY)), reason="mappings not generated")
 
 
 @needs_both
-@pytest.mark.parametrize("song", [SEYI, DETTY], ids=["seyi", "detty"])
+@pytest.mark.parametrize("song", [TRACK_A, DETTY], ids=["track_a", "detty"])
 def test_the_frozen_baseline_still_validates_against_its_sources(song):
     for name in ("balanced", "bass_pulse", "cinematic"):
         assert validate_mapping(song.parent / cal.BASELINE_DIR / f"visual_mapping.{name}.json") == []
 
 
 @needs_both
-@pytest.mark.parametrize("song", [SEYI, DETTY], ids=["seyi", "detty"])
+@pytest.mark.parametrize("song", [TRACK_A, DETTY], ids=["track_a", "detty"])
 def test_detail_activity_is_no_longer_saturated_and_separates_calm_from_lively(song):
     from audiolab.interpretation.context import AnalysisContext
     ctx = AnalysisContext(song)
@@ -293,18 +293,18 @@ def test_detail_activity_is_no_longer_saturated_and_separates_calm_from_lively(s
 
 
 @needs_both
-@pytest.mark.parametrize("song", [SEYI, DETTY], ids=["seyi", "detty"])
+@pytest.mark.parametrize("song", [TRACK_A, DETTY], ids=["track_a", "detty"])
 def test_cinematic_motion_weight_is_more_distinct_from_intensity_than_before(song):
     old, new = (cal.channel_distinctness(cal.load_version(song, "cinematic", d)) for d in (cal.BASELINE_DIR, "visual"))
     assert new["intensity~motion_weight"]["detrended"] < old["intensity~motion_weight"]["detrended"] - 0.05
     assert new["intensity~motion_weight"]["detrended"] < 0.9 and new["scale~motion_weight"]["detrended"] < 0.75
 
 
-@needs_seyi
-def test_seyi_quiet_intro_stays_sparse_for_balanced_pulses():
-    reg = cal.regions(SEYI)
+@needs_track_a
+def test_track_a_quiet_intro_stays_sparse_for_balanced_pulses():
+    reg = cal.regions(TRACK_A)
     assert reg["sparse"] and reg["body"], "regions come from the interpretation"
-    old, new = (cal.intro_pulses(cal.load_version(SEYI, "balanced", d), reg) for d in (cal.BASELINE_DIR, "visual"))
+    old, new = (cal.intro_pulses(cal.load_version(TRACK_A, "balanced", d), reg) for d in (cal.BASELINE_DIR, "visual"))
     assert old["intro_max"] > 0.9 and new["intro_max"] <= 0.5 and new["body_max"] >= 0.9
     assert new["intro_p90"] < 0.5 * new["body_p90"]
 
@@ -325,7 +325,7 @@ def test_detty_quiet_middle_differs_by_profile_as_intended():
 
 
 @needs_both
-@pytest.mark.parametrize("song", [SEYI, DETTY], ids=["seyi", "detty"])
+@pytest.mark.parametrize("song", [TRACK_A, DETTY], ids=["track_a", "detty"])
 def test_bass_pulse_motion_is_smoother_and_transitions_gain_a_supported_continuous_part(song):
     from audiolab.interpretation.context import AnalysisContext
     from audiolab.interpretation.engine import load_interpretation
@@ -338,7 +338,7 @@ def test_bass_pulse_motion_is_smoother_and_transitions_gain_a_supported_continuo
 
 
 @needs_both
-@pytest.mark.parametrize("song", [SEYI, DETTY], ids=["seyi", "detty"])
+@pytest.mark.parametrize("song", [TRACK_A, DETTY], ids=["track_a", "detty"])
 def test_bass_pulse_beat_position_pattern_comes_from_the_measurements_not_the_profile_tweaks(song):
     from audiolab.visual_mapping.review import pulse_by_beat_position
     from audiolab.interpretation.context import AnalysisContext

@@ -7,7 +7,7 @@ import type { SquallApi, SquallSnapshot } from "@/components/squall/SquallCanvas
 import { AudioPipeline } from "@/lib/pipeline";
 
 // Preview harness only. It owns the pipeline so a browser script can read it, and exposes the simulation's
-// snapshot. Query: ?view=squall|constellation|switch  ?source=demo|song:seyi|mic (clicks the matching button)
+// snapshot. Query: ?view=squall|constellation|switch  ?source=demo|song:track-a|mic (clicks the matching button)
 // window.__leaks wraps the browser APIs the visuals use, so cleanup can be checked after an unmount.
 const w = window as unknown as Record<string, unknown>;
 

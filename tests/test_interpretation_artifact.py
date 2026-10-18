@@ -288,42 +288,42 @@ def test_cli_schema_kind(tmp_path):
 
 # ---- the two real songs ------------------------------------------------------------------------
 
-SEYI = ROOT / "outputs" / "Seyi-Vibez-SWAGUU-feat-Quavo" / "song_analysis.json"
+TRACK_A = ROOT / "outputs" / "track_a" / "song_analysis.json"
 DETTY = ROOT / "outputs" / "Detty - Party scatter demo" / "song_analysis.json"
-needs_seyi = pytest.mark.skipif(not SEYI.exists(), reason="Seyi analysis not generated")
+needs_track_a = pytest.mark.skipif(not TRACK_A.exists(), reason="Track A analysis not generated")
 needs_detty = pytest.mark.skipif(not DETTY.exists(), reason="Detty analysis not generated")
 
 
-@needs_seyi
-def test_seyi_bass_entry_at_the_drop_and_its_link_to_novelty():
-    model = interpret(SEYI)
+@needs_track_a
+def test_track_a_bass_entry_at_the_drop_and_its_link_to_novelty():
+    model = interpret(TRACK_A)
     entry = next(i for i in model.interpretations if i.label == "bass_entry")
     assert entry.start_s == pytest.approx(16.6, abs=0.6)
     assert all(c.met for c in entry.evidence.criteria)
     assert entry.attributes["rise_db"] >= 15
-    ctx = AnalysisContext(SEYI)
+    ctx = AnalysisContext(TRACK_A)
     peaks = [e for e in ctx.analysis.events if e.id in entry.evidence.supporting_event_ids and e.type == "novelty_peak"]
     assert peaks and abs(peaks[0].time_s - entry.start_s) <= 1.0, "the novelty curve peaks at the same moment"
     candidate = next(i for i in model.interpretations if i.label == "transition_candidate" and abs(i.start_s - 16.6) < 0.6)
     assert entry.id in candidate.related_ids and "novelty" in candidate.attributes["channels"]
 
 
-@needs_seyi
+@needs_track_a
 @pytest.mark.parametrize("window_beats", [6, 8, 10])
 @pytest.mark.parametrize("min_rise_db", [8.0, 12.0, 16.0])
-def test_seyi_bass_entry_survives_configuration_changes(window_beats, min_rise_db):
+def test_track_a_bass_entry_survives_configuration_changes(window_beats, min_rise_db):
     cfg = InterpretConfig()
     cfg.common.window_beats = window_beats
     cfg.bass_entry.min_rise_db = min_rise_db
-    entries = [i for i in interpret(SEYI, cfg).interpretations if i.label == "bass_entry"]
+    entries = [i for i in interpret(TRACK_A, cfg).interpretations if i.label == "bass_entry"]
     assert any(abs(e.start_s - 16.6) <= 1.0 for e in entries)
 
 
-@needs_seyi
-def test_seyi_label_follows_the_data_not_the_song():
+@needs_track_a
+def test_track_a_label_follows_the_data_not_the_song():
     cfg = InterpretConfig()
     cfg.bass_entry.min_rise_db = 60.0  # more than any real rise: the label must disappear
-    assert not [i for i in interpret(SEYI, cfg).interpretations if i.label == "bass_entry"]
+    assert not [i for i in interpret(TRACK_A, cfg).interpretations if i.label == "bass_entry"]
 
 
 @needs_detty
@@ -342,7 +342,7 @@ def test_detty_recurring_bursts_are_not_called_bass_entries():
     )
 
 
-@pytest.mark.parametrize("path", [SEYI, DETTY], ids=["seyi", "detty"])
+@pytest.mark.parametrize("path", [TRACK_A, DETTY], ids=["track_a", "detty"])
 def test_real_songs_interpret_validate_and_leave_the_analysis_untouched(path, tmp_path):
     if not path.exists():
         pytest.skip("analysis not generated")

@@ -101,7 +101,7 @@ command in `web_kit/preview/README.txt` (on Windows keep the single quotes aroun
 - Recent jobs, restoring completed and failed jobs, and refresh during processing resume.
 - Failure paths: empty upload (400), second upload while busy (409), nonexistent job `viz.json` (404), unknown
   job status (404), path traversal (404).
-- Exported the Jeriq test song (258 s) to `web_kit`; Squall at `/squall?source=song:jeriq-airplane-mode` loads its
+- Exported the Track B test song (258 s) to `web_kit`; Squall at `/squall?source=song:track-b` loads its
   timeline, curves, features and audio, shows the weather map with a forecast strip, and the playhead advances.
 
 ## Known limitations

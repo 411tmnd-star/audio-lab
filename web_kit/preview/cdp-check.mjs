@@ -163,7 +163,7 @@ try {
 
   // 2. A pre-computed track, with a real click.
   await open();
-  await click('[data-source="song:seyi"]');
+  await click('[data-source="song:track-a"]');
   await sleep(3500);
   s = await summary();
   check("offline: pre-computed track loads and plays", s.kind === "offline" && s.isPlaying && s.canSeek === true && Math.round(s.duration) === 78, `kind=${s.kind} duration=${s.duration}`);
@@ -172,7 +172,7 @@ try {
   await sleep(1200);
   s = await summary();
   check("offline: seek jumps the playhead", s.lastTime > 39.5 && s.lastTime < 43, `time=${s.lastTime.toFixed(2)}`);
-  await shot("pipe_offline_seyi.png");
+  await shot("pipe_offline_track-a.png");
 
   // 3. A file through the page's own file picker (live path, real AnalyserNode), compared with the offline analysis of the same audio.
   await open();

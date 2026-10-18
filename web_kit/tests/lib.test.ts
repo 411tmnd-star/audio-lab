@@ -29,7 +29,7 @@ const throwsAt = (fn: () => unknown, path: RegExp) =>
 
 describe("the real exported bundle", () => {
   it("parses the manifest, every timeline and every curves file", () => {
-    assert.deepEqual(manifest.songs.map((s) => s.id), ["seyi", "detty", "jeriq-airplane-mode"]);
+    assert.deepEqual(manifest.songs.map((s) => s.id), ["track-a", "detty", "track-b"]);
     for (const song of manifest.songs) {
       assert.deepEqual(song.profiles.map((p) => p.id), PROFILES);
       for (const p of PROFILES) {
@@ -44,7 +44,7 @@ describe("the real exported bundle", () => {
 
   it("decodes curves in the right order: the curve at a burst's peak equals the burst's amplitude", () => {
     // If the track->property order or the byte layout were wrong, these would not match.
-    for (const song of ["seyi", "detty"]) {
+    for (const song of ["track-a", "detty"]) {
       const { timeline, curves } = load(song, "balanced");
       const burst = timeline.actions.find((a) => a.rule === "transition_burst")!;
       const i = curveIndex(curves, "main_element", "accent");
@@ -60,7 +60,7 @@ describe("the real exported bundle", () => {
   });
 
   it("reads the scene state at any timestamp", () => {
-    const { timeline } = load("seyi", "balanced");
+    const { timeline } = load("track-a", "balanced");
     assert.equal(sceneAt(timeline, 0).state, "rest");
     assert.equal(sceneAt(timeline, 5).state, "rest");
     assert.equal(sceneAt(timeline, 30).state, "active");
@@ -79,8 +79,8 @@ describe("the real exported bundle", () => {
     }
   });
 
-  it("shows the anticipation of Seyi's transition: preparing before the event, peaking on it", () => {
-    const { timeline } = load("seyi", "balanced");
+  it("shows the anticipation of Track A's transition: preparing before the event, peaking on it", () => {
+    const { timeline } = load("track-a", "balanced");
     const burst = timeline.actions.find((a) => a.rule === "transition_burst" && Math.abs(a.source! - 16.6) < 0.2)!;
     assert.equal(burst.policy, "anticipatory");
     assert.ok(Math.abs(burst.lookahead - 0.7) < 1e-6 && Math.abs(burst.start - (burst.source! - 0.7)) < 1e-5);
@@ -104,7 +104,7 @@ describe("the real exported bundle", () => {
   });
 
   it("interpolates curves linearly and clamps outside the audio", () => {
-    const { curves } = load("seyi", "balanced");
+    const { curves } = load("track-a", "balanced");
     const k = 3;
     const a = curves.data[k * curves.nSamples + 10];
     const b = curves.data[k * curves.nSamples + 11];
@@ -115,7 +115,7 @@ describe("the real exported bundle", () => {
   });
 
   it("agrees with the phases that the Python plan guarantees", () => {
-    for (const song of ["seyi", "detty"]) {
+    for (const song of ["track-a", "detty"]) {
       for (const p of PROFILES) {
         const { timeline } = load(song, p);
         for (const a of timeline.actions) {
@@ -130,7 +130,7 @@ describe("the real exported bundle", () => {
 });
 
 describe("the parser rejects bad bundles with the exact path", () => {
-  const base = () => raw("seyi", "cinematic");
+  const base = () => raw("track-a", "cinematic");
   const bad = (edit: (t: any) => void) => () => {
     const t = base();
     edit(t);
@@ -162,7 +162,7 @@ describe("the parser rejects bad bundles with the exact path", () => {
     throwsAt(bad((t) => (t.durationS = -1)), /durationS.*positive/);
   });
   it("a truncated or corrupt curves file", () => {
-    const { timeline } = load("seyi", "cinematic");
+    const { timeline } = load("track-a", "cinematic");
     const p = manifest.songs[0].profiles[2];
     const whole = bin(p.curves);
     throwsAt(() => decodeCurves(whole.slice(0, whole.byteLength - 4), timeline), /expected \d+ bytes/);

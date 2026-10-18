@@ -4,7 +4,7 @@ import Instrument from "@/components/instrument/Instrument";
 import type { AudioPipeline } from "@/lib/pipeline";
 
 // Preview harness only. Mounts the page, and taps the pipeline's frame stream into window.__diag so a
-// browser-automation script can read what the pipeline produced. Query: ?source=demo|song:seyi|mic ?visual=particles ?profile=pulse
+// browser-automation script can read what the pipeline produced. Query: ?source=demo|song:track-a|mic ?visual=particles ?profile=pulse
 createRoot(document.getElementById("root")!).render(
   <div className="mx-auto max-w-6xl px-4 py-8">
     <Instrument />

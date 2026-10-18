@@ -211,7 +211,7 @@ TypeScript check and the pre-existing Constellation/pipeline browser check (`pre
   `mid` to 0.73 and the jet 0.02 → 0.18; every loud segment lifts the Beaufort force (7.6, 1.3, 3.6); onsets
   strike lightning, within the 3-a-second limit; silence again returns to Force 0 and stops strikes. Map
   captures at each moment are in `shots/squall-10…13`.
-- *Forecast, seeking, scenes* (pre-computed Seyi track). The strip is drawn; clicking it at 25, 50 and 80 %
+- *Forecast, seeking, scenes* (pre-computed Track A track). The strip is drawn; clicking it at 25, 50 and 80 %
   seeks while paused to within 0.7 s; the playhead, clock and range input follow the frame time; the clock runs
   at 1.00× real time; the scene state matches the AudioLab timeline after seeks to rest, build, active, settle and
   rest; the barometer reads "falling" at 15 s (before the loud section) and "rising" at 72 s, matching the forecast
@@ -292,8 +292,8 @@ breathes with the music rather than showing numbers. The creative direction come
 - **Combination:** the larger of the two paths. A sustained bass line holds steady rather than pumping.
 - **Warm-up:** no kicks for the first 0.5 s while the window settles.
 
-### Low end: sub versus punch (revised after Swaguu)
-Swaguu's low end is mostly a sustained sub tone below 40 Hz (72% of its 20-500 Hz power), with bass notes
+### Low end: sub versus punch (revised after Track A)
+Track A's low end is mostly a sustained sub tone below 40 Hz (72% of its 20-500 Hz power), with bass notes
 re-entering between beats rather than a kick on every beat. A single summed bass band is dominated by that
 sub, so the re-entries barely register. The live engine now reads two things from a second 4096-point
 analyser:
@@ -305,12 +305,12 @@ Measured as event capture (`tests/low-measure.ts --events`): events are raw rise
 The events come from the punch band itself, which favours punch-based readings, so treat the gap as an
 upper bound.
 
-| | Seyi recall / precision | Detty | Jeriq |
+| | Track A recall / precision | Detty | Track B |
 |---|---|---|---|
 | Before: one band 40-150 Hz, 2048 FFT | 38% / 89% | 24% / 87% | 42% / 91% |
 | Now: punch 60-150 Hz, 4096 FFT, kickSpan 0.15, release 0.5 | 69% / 87% | 37% / 88% | 57% / 89% |
 
-The sub band alone is noisy (about 35% precision on Seyi and Jeriq), and adding it to the punch band did not
+The sub band alone is noisy (about 35% precision on Track A and Track B), and adding it to the punch band did not
 help, so it only shapes the swell. An 8192-point FFT captured more but smeared timing and lowered precision.
 Settings were chosen by a rule fixed beforehand: precision of at least 85% on every song, then highest recall.
 
@@ -319,7 +319,7 @@ the shaper deliberately ignores those instead of inventing hits.
 
 **Correction.** The earlier per-beat "hit rate" and median-offset table was weak: the peak was searched
 inside the same window it was tested against. It also assumed a bass hit on every beat, which is false for
-Seyi. It has been removed. Do not read an early or late offset against the beat grid as a timing error.
+Track A. It has been removed. Do not read an early or late offset against the beat grid as a timing error.
 
 ## Latency and sync
 The analyser sees the audio before the output device, so visuals run ahead of what you hear by the device

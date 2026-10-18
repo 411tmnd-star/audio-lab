@@ -273,7 +273,7 @@ describe("offline source (the real exported bundle)", () => {
     const restore = serveFromDisk();
     try {
       const clock = new Clock();
-      const src = await loadOfflineSource({ manifestUrl: MANIFEST, songId: "seyi", now: clock.now });
+      const src = await loadOfflineSource({ manifestUrl: MANIFEST, songId: "track-a", now: clock.now });
       assert.equal(src.kind, "offline");
       assert.ok(src.canSeek);
       assert.equal(src.status().duration && Math.round(src.status().duration!), 78);
@@ -319,7 +319,7 @@ describe("offline source (the real exported bundle)", () => {
   it("exposes the motion timeline and curves for consumers that want them", async () => {
     const restore = serveFromDisk();
     try {
-      const src = await loadOfflineSource({ manifestUrl: MANIFEST, songId: "seyi", profileId: "cinematic" });
+      const src = await loadOfflineSource({ manifestUrl: MANIFEST, songId: "track-a", profileId: "cinematic" });
       assert.equal(src.motion.timeline.profile.name, "cinematic");
       assert.ok(src.motion.curves.data.length > 0);
       assert.ok(src.beats.length > 100);
@@ -332,21 +332,21 @@ describe("offline source (the real exported bundle)", () => {
     const restore = serveFromDisk();
     try {
       await assert.rejects(() => loadOfflineSource({ manifestUrl: MANIFEST, songId: "nope" }), /not in the manifest/);
-      await assert.rejects(() => loadOfflineSource({ manifestUrl: MANIFEST, songId: "seyi", profileId: "nope" }), /no profile/);
+      await assert.rejects(() => loadOfflineSource({ manifestUrl: MANIFEST, songId: "track-a", profileId: "nope" }), /no profile/);
     } finally {
       restore();
     }
   });
 
   it("rejects a truncated features file with the field named", () => {
-    const meta = parseFeaturesMeta(JSON.parse(readFileSync(join(PUBLIC, "motion/seyi/features.json"), "utf8")));
-    const bin = readFileSync(join(PUBLIC, "motion/seyi/features.bin"));
+    const meta = parseFeaturesMeta(JSON.parse(readFileSync(join(PUBLIC, "motion/track-a/features.json"), "utf8")));
+    const bin = readFileSync(join(PUBLIC, "motion/track-a/features.bin"));
     const ab = bin.buffer.slice(bin.byteOffset, bin.byteOffset + bin.byteLength - 8);
     assert.throws(() => decodeFeatureChannels(ab, meta), /features\.bin/);
   });
 
   it("rejects a features file with the wrong format or channels", () => {
-    const good = JSON.parse(readFileSync(join(PUBLIC, "motion/seyi/features.json"), "utf8"));
+    const good = JSON.parse(readFileSync(join(PUBLIC, "motion/track-a/features.json"), "utf8"));
     assert.throws(() => parseFeaturesMeta({ ...good, format: "audio-features/9" }), /unsupported format/);
     assert.throws(() => parseFeaturesMeta({ ...good, channels: ["lowDb"] }), /features\.channels/);
     assert.throws(() => parseFeaturesMeta({ ...good, beats: [2, 1] }), /sorted/);
@@ -359,9 +359,9 @@ describe("one contract, two paths", () => {
     const restore = serveFromDisk();
     try {
       const clock = new Clock();
-      const off = await loadOfflineSource({ manifestUrl: MANIFEST_URL, songId: "seyi", now: clock.now });
-      const meta = parseFeaturesMeta(JSON.parse(readFileSync(join(PUBLIC, "motion/seyi/features.json"), "utf8")));
-      const bin = readFileSync(join(PUBLIC, "motion/seyi/features.bin"));
+      const off = await loadOfflineSource({ manifestUrl: MANIFEST_URL, songId: "track-a", now: clock.now });
+      const meta = parseFeaturesMeta(JSON.parse(readFileSync(join(PUBLIC, "motion/track-a/features.json"), "utf8")));
+      const bin = readFileSync(join(PUBLIC, "motion/track-a/features.bin"));
       const r = decodeFeatureChannels(bin.buffer.slice(bin.byteOffset, bin.byteOffset + bin.byteLength), meta);
       const rate = meta.rateHz;
 

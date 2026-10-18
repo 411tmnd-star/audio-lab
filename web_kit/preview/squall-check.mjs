@@ -148,10 +148,10 @@ try {
 
   // =================================================================================================
   if (run("offline")) {
-    console.log("\n== 4. Forecast strip, seeking, scene states (pre-computed Seyi track) ==");
+    console.log("\n== 4. Forecast strip, seeking, scene states (pre-computed Track A track) ==");
     await b.viewport(1280, 820);
     await open(b);
-    await b.click("[data-source='song:seyi']");
+    await b.click("[data-source='song:track-a']");
     check("track loads as an offline source with a duration", await waitFor(b, "window.__pipeline.getState().source?.kind === 'offline' && window.__pipeline.getState().duration > 60"));
     check("forecast strip is ready", await waitFor(b, "document.querySelector('[data-forecast]')?.dataset.forecast === 'ready'", 5000));
     const strip = await b.rect("[data-forecast]");
@@ -172,7 +172,7 @@ try {
     check("playhead follows the seek", Math.abs(headLeft - 80) < 4, `${f2(headLeft)}%`);
 
     // Scene states, against the timeline the AudioLab analysis wrote.
-    const tl = JSON.parse(readFileSync(join(root, "public/motion/seyi/balanced.timeline.json"), "utf8"));
+    const tl = JSON.parse(readFileSync(join(root, "public/motion/track-a/balanced.timeline.json"), "utf8"));
     const want = (t) => tl.states.find((s) => t >= s.start && t < s.end)?.state;
     let okScenes = true;
     const seen = [];
@@ -216,7 +216,7 @@ try {
         return new Response("nope", { status: 404 });
       }
     };
-    const fc = await forecastFromSong("/motion/manifest.json", "seyi").finally(() => { globalThis.fetch = realFetch; }); // later Edge launches need the real fetch
+    const fc = await forecastFromSong("/motion/manifest.json", "track-a").finally(() => { globalThis.fetch = realFetch; }); // later Edge launches need the real fetch
     let best = { t: 0, v: -1 };
     for (let t = 2; t < fc.durationS - 6; t += 0.25) if (tendencyAt(fc, t) > best.v) best = { t, v: tendencyAt(fc, t) };
     let low = { t: 0, v: 1 };
@@ -458,11 +458,11 @@ try {
     // Loading, on a slow network.
     await b.send("Network.enable");
     await b.goto(SITE, "!!document.querySelector('[data-source=demo]')");
-    await waitFor(b, "!!document.querySelector(\"[data-source='song:seyi']\")", 8000);
+    await waitFor(b, "!!document.querySelector(\"[data-source='song:track-a']\")", 8000);
     await b.send("Network.emulateNetworkConditions", { offline: false, latency: 1200, downloadThroughput: 60000, uploadThroughput: 60000 });
-    await b.js("document.querySelector(\"[data-source='song:seyi']\").click()");
+    await b.js("document.querySelector(\"[data-source='song:track-a']\").click()");
     await sleep(400);
-    const loading = await b.js("({ text: document.querySelector(\"[data-source='song:seyi']\")?.textContent, others: document.querySelector('[data-source=demo]')?.disabled || document.querySelector(\"[data-source='song:detty']\")?.disabled })");
+    const loading = await b.js("({ text: document.querySelector(\"[data-source='song:track-a']\")?.textContent, others: document.querySelector('[data-source=demo]')?.disabled || document.querySelector(\"[data-source='song:detty']\")?.disabled })");
     await shot(b, "50-loading");
     check("LOADING: the chosen track shows 'Loading…' and other tracks are disabled meanwhile", loading.text === "Loading…" && loading.others === true, JSON.stringify(loading));
     await waitFor(b, "window.__pipeline.getState().source?.kind === 'offline'", 40000);
@@ -535,8 +535,8 @@ try {
       const d = await u.js("JSON.stringify({ frames: window.__snapshot.current?.frames, force: window.__snapshot.current?.readout.force })").then(JSON.parse);
       check("UNSUPPORTED Web Audio: the demo still plays and drives the map", d.frames > 30 && d.force > 0, JSON.stringify(d));
       check("UNSUPPORTED fullscreen: no fullscreen button", un.full === false);
-      await u.goto(SITE, "!!document.querySelector(\"[data-source='song:seyi']\")");
-      await u.click("[data-source='song:seyi']");
+      await u.goto(SITE, "!!document.querySelector(\"[data-source='song:track-a']\")");
+      await u.click("[data-source='song:track-a']");
       check("UNSUPPORTED Web Audio: a pre-computed track still loads and plays", await waitFor(u, "window.__pipeline.getState().source?.kind === 'offline'", 6000));
       await waitFor(u, "document.querySelector('[data-forecast]')?.dataset.forecast === 'ready'", 4000);
       check("UNSUPPORTED Web Audio: its forecast still works (built from the features bundle, no decode)", (await u.js("document.querySelector('[data-forecast]').dataset.forecast")) === "ready");

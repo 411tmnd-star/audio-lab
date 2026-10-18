@@ -1,16 +1,14 @@
 # Sample outputs
 
-Real output of the pipeline for three songs. The audio itself is not included.
+Real pipeline output for one song, "Detty - Party scatter demo", which is the author's own track. The audio itself is not included.
 
-| Folder | Contents |
+| File | Contents |
 |---|---|
-| `seyi/` | `song_analysis.json`, `song_interpretation.json`, and `plots/` (overview, bars, bands, interpretation, motion states, motion timeline, visual comparison) |
-| `detty/` | `song_analysis.json`, `song_interpretation.json` |
-| `jeriq-airplane-mode/` | `song_analysis.json` |
+| `detty/song_analysis.json` | Schema `schemas/song_analysis.v1.json`: tempo, diagnostics, per-frame feature curves, detected events and provenance |
+| `detty/song_interpretation.json` | Schema `schemas/song_interpretation.v1.json`: the rule-based reading of the analysis, with its vocabulary, skipped rules, stated limitations and provenance |
+| `detty/plots/` | Overview, bars, bands, interpretation, motion states, motion timeline and visual comparison |
 
-- `song_analysis.json` (schema `schemas/song_analysis.v1.json`): tempo, diagnostics, per-frame feature curves, detected events and provenance.
-- `song_interpretation.json` (schema `schemas/song_interpretation.v1.json`): the rule-based reading of the analysis, with its vocabulary, skipped rules, stated limitations and provenance.
-- The motion timelines that drive the visuals are in `web_kit/public/motion/<song>/` (one per profile: balanced, bass_pulse, cinematic).
+- The motion timelines that drive the visuals are in `web_kit/public/motion/<song>/` (one per profile: balanced, bass_pulse, cinematic). `track-a` and `track-b` are two further pre-analysed songs, anonymised; only derived analysis data is stored, never audio.
 
 Regenerate with `audiolab analyze <file>` followed by `audiolab interpret`, `audiolab visual` and `audiolab motion`
-(see `audiolab --help`).
+(see `audiolab --help`). The pipeline accepts any audio file.

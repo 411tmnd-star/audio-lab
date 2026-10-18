@@ -612,6 +612,10 @@ video {
   visibility: visible;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .collapse {
   visibility: collapse;
 }
@@ -1179,6 +1183,16 @@ video {
 .bg-\[\#020308\] {
   --tw-bg-opacity: 1;
   background-color: rgb(2 3 8 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#02030a\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(2 3 10 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#02040c\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(2 4 12 / var(--tw-bg-opacity, 1));
 }
 
 .bg-\[\#03050b\] {

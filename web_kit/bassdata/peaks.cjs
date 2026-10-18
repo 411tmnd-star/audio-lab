@@ -1,6 +1,6 @@
 ﻿const fs = require("fs");
 const s = JSON.parse(fs.readFileSync("bassdata/bass_series.json", "utf8"));
-for (const song of ["seyi", "detty"]) {
+for (const song of ["track-a", "detty"]) {
   const d = s[song]; const t = d.t, db = d.bassDb, fps = 43.0664;
   // bass-level peaks (local maxima of the raw bass band, 2 frames either side) and their offset to the nearest beat
   const peaks = [];

@@ -471,7 +471,7 @@ def test_cli_map_reports_a_broken_input(song, capsys):
 
 # ---- real songs --------------------------------------------------------------------------------
 
-SEYI = ROOT / "outputs" / "Seyi-Vibez-SWAGUU-feat-Quavo" / "song_analysis.json"
+TRACK_A = ROOT / "outputs" / "track_a" / "song_analysis.json"
 DETTY = ROOT / "outputs" / "Detty - Party scatter demo" / "song_analysis.json"
 
 
@@ -479,14 +479,14 @@ def _profiles():
     return {p.stem: load_profile(p)[0] for p in sorted(PROFILES.glob("*.yaml"))}
 
 
-@pytest.mark.skipif(not SEYI.exists(), reason="Seyi analysis not generated")
-def test_seyi_channels_respond_at_the_bass_entry_and_keep_the_intro_quiet():
+@pytest.mark.skipif(not TRACK_A.exists(), reason="Track A analysis not generated")
+def test_track_a_channels_respond_at_the_bass_entry_and_keep_the_intro_quiet():
     from audiolab.interpretation.engine import load_interpretation
 
-    interp = load_interpretation(SEYI.parent / "song_interpretation.json")
+    interp = load_interpretation(TRACK_A.parent / "song_interpretation.json")
     t0 = next(i.start_s for i in interp.interpretations if i.label == "bass_entry")  # from data
     for name, prof in _profiles().items():
-        r = map_song(SEYI, prof, 30.0)
+        r = map_song(TRACK_A, prof, 30.0)
         t, x = r.arrays["times"], r.arrays["intensity"]
         before = x[(t > t0 - 8) & (t < t0 - 0.5)].mean()
         after = x[(t > t0 + 0.5) & (t < t0 + 8)].mean()
@@ -494,7 +494,7 @@ def test_seyi_channels_respond_at_the_bass_entry_and_keep_the_intro_quiet():
         tw = r.arrays["transition_weight"]
         win = (t >= t0 - 3) & (t <= t0 + 3)
         assert abs(t[win][np.argmax(tw[win])] - t0) <= 0.1, f"{name}: transition_weight peaks at the change"
-    bp = map_song(SEYI, _profiles()["bass_pulse"], 30.0)
+    bp = map_song(TRACK_A, _profiles()["bass_pulse"], 30.0)
     t = bp.arrays["times"]
     assert bp.arrays["pulse_strength"][(t >= t0) & (t <= t0 + 0.1)].max() >= 0.9
 
@@ -528,7 +528,7 @@ def test_detty_pulse_strength_follows_bass_at_each_beat():
     assert corr > 0.8
 
 
-@pytest.mark.parametrize("path", [SEYI, DETTY], ids=["seyi", "detty"])
+@pytest.mark.parametrize("path", [TRACK_A, DETTY], ids=["track_a", "detty"])
 def test_real_songs_map_validate_reproduce_and_leave_sources_alone(path, tmp_path):
     if not path.exists():
         pytest.skip("analysis not generated")
