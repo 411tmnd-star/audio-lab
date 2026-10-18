@@ -83,3 +83,7 @@ Browser kit, from `web_kit/`:
 
 - Audio files are not included. Supply files you have permission to use; the visuals also run on a built-in synthetic demo and the microphone.
 - [`docs/planning/upgrade-spec.md`](docs/planning/upgrade-spec.md) is the planning document for the next upgrade round.
+
+## License
+
+[MIT](LICENSE)
