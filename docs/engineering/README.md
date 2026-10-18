@@ -8,7 +8,7 @@ and comes from a recorded run, not an estimate.
 
 | Layer | Tooling | Result |
 |---|---|---|
-| Python analysis, interpretation, visual mapping, motion | pytest | 385 tests pass (baseline 2026-10-14, re-run 2026-10-18) |
+| Python analysis, interpretation, visual mapping, motion | pytest | 388 tests pass (385 at the 2026-10-14 baseline, plus 3 regression tests for the silence fix) |
 | Browser kit: parameters, scenes, animators, pipeline logic | Node test runner on TypeScript | 263 tests pass, 0 fail |
 | Browser kit: type safety | `tsc --noEmit` | clean |
 | Pipeline in a real browser (live audio vs. offline analysis) | Headless Edge over the DevTools Protocol | 13 of 13 checks pass |
@@ -45,11 +45,14 @@ A set of synthetic 120 BPM pulse trains probes edge cases. Observed behaviour of
 | Normal, very quiet (-70 dBFS), clipped, 48 kHz stereo, 8 kHz mono | Accepted. All return 117.45 BPM and 38 beats. |
 | Non-finite samples (NaN) | Rejected with a clear error before any output is written. |
 | Zero-byte file, text file named `.wav` | Rejected with an error; no output written. |
-| Digital silence | **Known limitation**: fails with a `ValueError` in beat diagnostics (`clicks.py`). |
-| Stereo with the right channel inverted (cancels to silence when mono-mixed) | **Known limitation**: same failure as silence. |
+| Digital silence | Rejected up front with a clear message and exit code 1. Nothing is written. |
+| Stereo with the right channel inverted (cancels to silence when mono-mixed) | Rejected the same way. |
 
-The two known limitations are tracked as upgrade work. The upload demo already guards against this: it rejects silent,
-too-short and beat-less files before the analyzer runs (see [DEMO.md](../../DEMO.md), "Minimum audio").
+The first run of this suite (2026-10-14) found the last two cases crashing with an unhandled `ValueError` after
+writing partial output. They are fixed: the analyzer now checks for a usable signal (peak above -80 dBFS) before
+creating any output, so a -70 dBFS recording is still analysed. `beat_diagnostics` also no longer fails when there are
+no beats to measure. Regression tests cover both. The upload demo additionally rejects silent, too-short and
+beat-less files before the analyzer runs (see [DEMO.md](../../DEMO.md), "Minimum audio").
 
 ## 4. Live versus offline timing
 

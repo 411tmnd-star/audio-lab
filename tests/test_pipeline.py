@@ -1,3 +1,4 @@
+import pytest
 import numpy as np
 import soundfile as sf
 
@@ -65,3 +66,27 @@ def test_offset_previews_one_file_per_offset_and_accents_move(tmp_path):
         env = np.abs(clicks).reshape(-1, sr // 10).max(axis=1)  # 100 ms blocks
         loud_windows.append(frozenset(np.flatnonzero(env > 0.7 * env.max())))
     assert len(set(loud_windows)) == 4  # each offset accents a different set of beats
+
+
+def test_silent_audio_is_rejected_before_any_output_is_written(tmp_path):
+    song = tmp_path / "silence.wav"
+    sf.write(song, np.zeros(5 * 22050, dtype=np.float32), 22050)
+    out = tmp_path / "out"
+    with pytest.raises(io.UnanalyzableAudioError, match="silent"):
+        analyze_song(song, load_config(None), out)
+    assert not out.exists()
+
+
+def test_stereo_that_cancels_to_silence_is_rejected(tmp_path):
+    left = np.sin(2 * np.pi * 440 * np.arange(5 * 22050) / 22050).astype(np.float32)
+    song = tmp_path / "cancelling.wav"
+    sf.write(song, np.stack([left, -left], axis=1), 22050)
+    with pytest.raises(io.UnanalyzableAudioError):
+        analyze_song(song, load_config(None), tmp_path / "out")
+
+
+def test_beat_diagnostics_survives_a_signal_without_beats():
+    from audiolab.clicks import beat_diagnostics
+
+    diag = beat_diagnostics(np.zeros(100, dtype=np.float32), np.array([]), 22050, 512)
+    assert np.isnan(diag["beat_onset_ratio"])

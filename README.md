@@ -32,11 +32,11 @@ Every stage writes a versioned JSON artifact validated against a schema in `sche
 
 ## Verification
 
-- Python: 385 tests (pytest).
+- Python: 388 tests (pytest).
 - Browser kit: 263 unit tests, a clean TypeScript check, and real-browser checks with a GPU: 70 for Constellation Core, 60 for Spectrum Matrix and 13 for the live-versus-offline pipeline.
 - Both new visuals hold 60 fps on integrated graphics (median frame 16.7 ms).
 
-Details, numbers and the known limitations are in [docs/engineering](docs/engineering/README.md).
+Details, numbers and how unusual input is handled are in [docs/engineering](docs/engineering/README.md).
 
 ## Repository layout
 
