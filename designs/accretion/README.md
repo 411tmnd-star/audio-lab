@@ -78,7 +78,7 @@ Verified on Intel UHD graphics, headless Edge:
 2. **One page, several visuals.** A single entry page that switches between Squall, Constellation and
    Accretion on the same song.
 3. **Check Accretion's context restore.** After a forced context loss the clear colour may reset to black. It was traced in
-   the source (`docs/upgrade-analysis-2026-10-15.md`, section 1.12) and needs a browser test before any change.
+   the source (`docs/planning/upgrade-analysis-2026-10-15.md`, section 1.12) and needs a browser test before any change.
 4. **Polish.** Make the black hole fill more of the frame, and tune the jets and flares against more songs.
 5. **Later, only if justified:** gravitational lensing and bloom, which v0 leaves out on purpose for cost
    reasons on this GPU.
@@ -91,5 +91,5 @@ Verified on Intel UHD graphics, headless Edge:
 | GL host (renderer, resize, context loss, dispose) | `web_kit/src/lib/gl/` |
 | React component and route | `web_kit/src/components/accretion/`, `web_kit/src/app/lab/accretion/` |
 | Tests and browser checks | `web_kit/tests/accretion*.test.ts`, `web_kit/tests/gl-host.test.ts`, `web_kit/preview/accretion-check.mjs` |
-| Upgrade spec, section 11 (M4a) | `AUDIO_LAB_UPGRADE_SPEC.md` |
+| Upgrade spec, section 11 (M4a) | `docs/planning/upgrade-spec.md` |
 | Architecture research | `web_kit/research/3d-shader-rendering-architecture-2026-10-12.md` |

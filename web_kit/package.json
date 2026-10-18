@@ -17,6 +17,7 @@
   "scripts": {
     "build:preview": "node preview/build.mjs",
     "serve": "node preview/serve.mjs 5353",
-    "test": "node --import ./tests/resolve-ts.mjs --experimental-transform-types --test tests/*.test.ts"
+    "test": "node --import ./tests/resolve-ts.mjs --experimental-transform-types --test tests/*.test.ts",
+    "build:site": "node scripts/build-site.mjs"
   }
 }

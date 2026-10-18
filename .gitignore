@@ -41,3 +41,4 @@ Thumbs.db
 web_kit/preview/dist/core.*
 web_kit/preview/dist/matrix.*
 web_kit/preview/dist/glhost.*
+web_kit/site/

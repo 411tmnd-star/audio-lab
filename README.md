@@ -1,12 +1,16 @@
-﻿# Audio Lab
+# Audio Lab
+
+[![CI](https://github.com/411tmnd-star/audio-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/411tmnd-star/audio-lab/actions/workflows/ci.yml)
 
 Audio Lab turns a song into a live, music-driven visual. A Python pipeline analyses the audio (tempo, beats, bars, spectral bands, onsets) and interprets it. A browser app then plays that analysis through four real-time visuals built with React, TypeScript and Three.js.
 
 | Squall: a weather map | Accretion: a black hole |
 |---|---|
-| ![Squall](designs/accretion/screenshots/04-squall-for-comparison.png) | ![Accretion](designs/accretion/screenshots/02-playing-jets.png) |
+| ![Squall](docs/media/squall.gif) | ![Accretion](docs/media/accretion.gif) |
 | **Constellation Core: a planetary system** | **Spectrum Matrix: a terrain** |
-| ![Constellation Core](designs/constellation-core/screenshots/02-playing.png) | ![Spectrum Matrix](designs/spectrum-matrix/screenshots/02-playing.png) |
+| ![Constellation Core](docs/media/core.gif) | ![Spectrum Matrix](docs/media/matrix.gif) |
+
+*Each clip is the built-in synthetic 120 BPM demo, recorded in headless Edge on integrated graphics.*
 
 All four read the same audio features, so any song drives any visual. Constellation Core and Spectrum Matrix share a source picker: a built-in demo, three pre-analysed songs, an uploaded file or the microphone.
 
@@ -48,7 +52,7 @@ Details, numbers and how unusual input is handled are in [docs/engineering](docs
 | `samples/` | Real pipeline output for three songs (JSON and plots) |
 | `configs/`, `schemas/` | Analysis, interpretation, motion and visual-profile configs; versioned JSON schemas |
 | `tests/`, `scripts/` | Python tests; the export script and the upload-demo server |
-| `docs/` | [Visualizer architecture](docs/architecture/visualizer-guide.md), [engineering notes](docs/engineering/README.md), upgrade analysis |
+| `docs/` | [Visualizer architecture](docs/architecture/visualizer-guide.md), [engineering notes](docs/engineering/README.md), [planning](docs/planning/) (upgrade spec and analysis), demo clips |
 
 ## Run it
 
@@ -71,8 +75,9 @@ Browser kit, from `web_kit/`:
     node preview/build.mjs                # bundle the previews
     node preview/serve.mjs 5353           # Squall at http://localhost:5353/squall
     node preview/serve-gl.mjs 5354        # /accretion, /core and /matrix on port 5354
+    npm run build:site                    # the static demo site, written to web_kit/site/
 
 ## Notes
 
 - Audio files are not included. Supply files you have permission to use; the visuals also run on a built-in synthetic demo and the microphone.
-- `AUDIO_LAB_UPGRADE_SPEC.md` is the planning document for the next upgrade round.
+- [`docs/planning/upgrade-spec.md`](docs/planning/upgrade-spec.md) is the planning document for the next upgrade round.
