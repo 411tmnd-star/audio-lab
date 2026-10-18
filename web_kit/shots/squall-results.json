@@ -7,7 +7,7 @@
  {
   "name": "the loop draws while idle (calm map)",
   "ok": true,
-  "detail": "30 -> 53 frames in 0.5 s"
+  "detail": "13 -> 26 frames in 0.5 s"
  },
  {
   "name": "idle: calm, Force 0, two storms",
@@ -58,5 +58,345 @@
   "name": "page errors during render checks",
   "ok": true,
   "detail": "[]"
+ },
+ {
+  "name": "file source adopted (kind live, seekable)",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "forecast strip fills after the file is decoded",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "play starts the audio",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "silence: RMS near zero, the map is calm (Force 0)",
+  "ok": true,
+  "detail": "rms max 0.00"
+ },
+ {
+  "name": "BASS: kicks raise bass and bass hit; storms deepen (vortex speed up)",
+  "ok": true,
+  "detail": "vortex 0.10 -> 0.41"
+ },
+ {
+  "name": "BASS HIT: inflow surges on kicks and a pressure ring leaves the eyes",
+  "ok": true,
+  "detail": "peak inflow 0.42, rings +11 (12 kicks)"
+ },
+ {
+  "name": "HIGH: hi-hats raise high and bring rain; kicks alone do not",
+  "ok": true,
+  "detail": "rain kicks 0.00 -> hats 0.28"
+ },
+ {
+  "name": "MID: tones raise mid and speed up the jet stream",
+  "ok": true,
+  "detail": "jet silence 0.02 -> mid 0.18"
+ },
+ {
+  "name": "RMS: overall energy raises the Beaufort force above silence in every loud segment",
+  "ok": true,
+  "detail": "force kicks 7.70, hats 1.28, mid 3.54"
+ },
+ {
+  "name": "ONSET: detected onsets strike lightning, at most 3 a second",
+  "ok": true,
+  "detail": "kick segment (5.2 s): 11 beat frames, 10 strikes; hats: 6"
+ },
+ {
+  "name": "silence again: calm returns, strikes stop",
+  "ok": true,
+  "detail": "force 0.00"
+ },
+ {
+  "name": "status chip says the doldrums or paused at the end",
+  "ok": true,
+  "detail": "silent"
+ },
+ {
+  "name": "no exceptions while playing a real file",
+  "ok": true,
+  "detail": "[]"
+ },
+ {
+  "name": "track loads as an offline source with a duration",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "forecast strip is ready",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "strip silhouette is drawn",
+  "ok": true,
+  "detail": "painted share 0.59"
+ },
+ {
+  "name": "click strip at 25% seeks while paused",
+  "ok": true,
+  "detail": "time 19.56 s, wanted 19.50"
+ },
+ {
+  "name": "click strip at 50% seeks while paused",
+  "ok": true,
+  "detail": "time 39.37 s, wanted 39.01"
+ },
+ {
+  "name": "click strip at 80% seeks while paused",
+  "ok": true,
+  "detail": "time 63.06 s, wanted 62.42"
+ },
+ {
+  "name": "playhead follows the seek",
+  "ok": true,
+  "detail": "80.93%"
+ },
+ {
+  "name": "scene state follows the motion timeline across seeks (rest, build, active, settle, rest)",
+  "ok": true,
+  "detail": "3s:rest  17s:build  25s:active  76s:settle  78s:rest"
+ },
+ {
+  "name": "HUD shows the scene",
+  "ok": true,
+  "detail": " · scene: rest"
+ },
+ {
+  "name": "seeking resets the strikes-per-minute history",
+  "ok": true,
+  "detail": "28 -> 0"
+ },
+ {
+  "name": "playback advances at real time (offline clock)",
+  "ok": true,
+  "detail": "1.01x"
+ },
+ {
+  "name": "clock, playhead and range value all track the frame time",
+  "ok": true,
+  "detail": "0:23.5, head 30.17%, range 23.54"
+ },
+ {
+  "name": "BAROMETER falls before a louder passage and rises as it clears (from the forecast)",
+  "ok": true,
+  "detail": "t=15.00s tendency 0.81 (falling); t=72.00s -0.76 (rising)"
+ },
+ {
+  "name": "keyboard: arrow keys seek by 5 s",
+  "ok": true,
+  "detail": "35.00, 30.00"
+ },
+ {
+  "name": "keyboard: space toggles play and pause",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "the strip's range input is keyboard-operable and seeks",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "no exceptions in the offline checks",
+  "ok": true,
+  "detail": "[]"
+ },
+ {
+  "name": "MOUSE drag on empty map blows gusts that then decay",
+  "ok": true,
+  "detail": "idle 0, mid-drag 8, after 0"
+ },
+ {
+  "name": "hovering an L shows the grab cursor",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "MOUSE drag on an L moves that storm under the pointer",
+  "ok": true,
+  "detail": "storm 677,432 vs pointer 672,435"
+ },
+ {
+  "name": "double-click on empty map seeds a storm there",
+  "ok": true,
+  "detail": "2 -> 3"
+ },
+ {
+  "name": "double-click on an L dissipates it",
+  "ok": true,
+  "detail": "2 storms"
+ },
+ {
+  "name": "at most five storms",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "at least one storm is kept",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "TOUCH drag blows gusts, the page does not scroll",
+  "ok": true,
+  "detail": "gusts mid-drag 8"
+ },
+ {
+  "name": "TOUCH double-tap seeds a storm",
+  "ok": true,
+  "detail": "2 -> 3"
+ },
+ {
+  "name": "TOUCH drag on an L moves the storm",
+  "ok": true,
+  "detail": "storm 500,405 vs finger 484,412"
+ },
+ {
+  "name": "Add and Remove storm buttons work (keyboard route)",
+  "ok": true,
+  "detail": "3 -> 4 -> 3"
+ },
+ {
+  "name": "no exceptions in the pointer checks",
+  "ok": true,
+  "detail": "[]"
+ },
+ {
+  "name": "while playing: one frame loop, an AudioContext, an object URL, window keydown listener",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "Squall's loop is stopped, its frame callbacks are gone, its source is cleared",
+  "ok": true,
+  "detail": "{\"loop\":false,\"frameCbs\":1,\"source\":null}"
+ },
+ {
+  "name": "audio resources released: no open AudioContext, no live object URL, no ResizeObserver",
+  "ok": true,
+  "detail": "{\"ctx\":0,\"urls\":0,\"ro\":0}"
+ },
+ {
+  "name": "Squall's own listeners are removed (window keydown, document fullscreenchange, every audio-element listener)",
+  "ok": true,
+  "detail": "{\"document:selectionchange\":1,\"window:resize\":1,\"mediaQuery:change\":1}"
+ },
+ {
+  "name": "Squall remounts on the same pipeline and draws again",
+  "ok": true,
+  "detail": "{\"loop\":true,\"source\":\"demo\"}"
+ },
+ {
+  "name": "after three round trips nothing has accumulated (frame callbacks, listeners, observers, rAF)",
+  "ok": true,
+  "detail": "{\"frameCbs\":5,\"ro\":2,\"keydown\":1,\"raf\":1}"
+ },
+ {
+  "name": "microphone source starts (fake device)",
+  "ok": true,
+  "detail": "{\"rafPending\":1,\"rafTotal\":259,\"listeners\":{\"document:selectionchange\":1,\"document:fullscreenchange\":1,\"window:keydown\":1,\"mediaQuery:change\":2},\"observers\":2,\"contexts\":2,\"contextsOpen\":1,\"tracksLive\":1,\"urlsLive\":0}"
+ },
+ {
+  "name": "leaving Squall stops the microphone tracks and closes its AudioContext",
+  "ok": true,
+  "detail": "{\"tracks\":0,\"ctx\":0}"
+ },
+ {
+  "name": "no exceptions while switching",
+  "ok": true,
+  "detail": "[]"
+ },
+ {
+  "name": "LOADING: the chosen track shows 'Loading…' and other tracks are disabled meanwhile",
+  "ok": true,
+  "detail": "{\"text\":\"Loading…\",\"others\":true}"
+ },
+ {
+  "name": "PAUSED: the map goes to the doldrums, Force 0 'Calm'",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "ERROR: an undecodable file shows a clear alert, the map stays calm",
+  "ok": true,
+  "detail": "This audio could not be loaded or decoded. Try an MP3, M4A, WAV or OGG."
+ },
+ {
+  "name": "ERROR: forecast strip says unavailable for the broken file",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "ERROR: a non-audio file is rejected with a message",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "DROP: dragging a file over the map shows the overlay, dropping loads it",
+  "ok": true,
+  "detail": "overlay true, loaded true"
+ },
+ {
+  "name": "ERROR: a denied microphone shows a message",
+  "ok": true,
+  "detail": "The microphone is unavailable or access was denied."
+ },
+ {
+  "name": "UNSUPPORTED Web Audio: a note explains it, file and mic are disabled, demo still offered",
+  "ok": true,
+  "detail": "{\"note\":\"This browser has no Web Audio, so it cannot analyse a file or the microphone. The demo and the pre-computed tracks still work.\",\"mic\":true,\"file\":true,\"full\":false,\"demo\":true}"
+ },
+ {
+  "name": "UNSUPPORTED Web Audio: the demo still plays and drives the map",
+  "ok": true,
+  "detail": "{\"frames\":86,\"force\":7}"
+ },
+ {
+  "name": "UNSUPPORTED fullscreen: no fullscreen button",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "UNSUPPORTED Web Audio: a pre-computed track still loads and plays",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "UNSUPPORTED Web Audio: its forecast still works (built from the features bundle, no decode)",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "no exceptions without Web Audio",
+  "ok": true,
+  "detail": "[]"
+ },
+ {
+  "name": "UNSUPPORTED Canvas 2D: a text fallback is shown instead of a blank page",
+  "ok": true,
+  "detail": "Canvas 2D is not available in this browser."
+ },
+ {
+  "name": "REDUCED MOTION: particle speed is scaled to 0.35 and the map still responds",
+  "ok": true,
+  "detail": "speedScale 0.35 vs 1"
+ },
+ {
+  "name": "every visible control has an accessible name",
+  "ok": true,
+  "detail": "0 unnamed"
+ },
+ {
+  "name": "the map has an aria-label that explains the controls",
+  "ok": true,
+  "detail": ""
  }
 ]

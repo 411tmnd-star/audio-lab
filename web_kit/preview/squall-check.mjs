@@ -208,6 +208,7 @@ try {
     check("playback advances at real time (offline clock)", Math.abs(rate - 1) < 0.1, `${f2(rate)}x`);
     check("clock, playhead and range value all track the frame time", Math.abs(a1.head - (a1.t / dur) * 100) < 1.5 && Math.abs(a1.range - a1.t) < 0.6 && a1.clock.startsWith(`${Math.floor(a1.t / 60)}:`), `${a1.clock}, head ${f2(a1.head)}%, range ${f2(a1.range)}`);
     // Barometer: it should fall ahead of a louder passage and be steady in a stable one. Truth comes from the same forecast code, run in Node.
+    const realFetch = globalThis.fetch;
     globalThis.fetch = async (u) => {
       try {
         return new Response(readFileSync(join(root, "public", String(u).replace(/^\//, ""))), { status: 200 });
@@ -215,7 +216,7 @@ try {
         return new Response("nope", { status: 404 });
       }
     };
-    const fc = await forecastFromSong("/motion/manifest.json", "seyi");
+    const fc = await forecastFromSong("/motion/manifest.json", "seyi").finally(() => { globalThis.fetch = realFetch; }); // later Edge launches need the real fetch
     let best = { t: 0, v: -1 };
     for (let t = 2; t < fc.durationS - 6; t += 0.25) if (tendencyAt(fc, t) > best.v) best = { t, v: tendencyAt(fc, t) };
     let low = { t: 0, v: 1 };

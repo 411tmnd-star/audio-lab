@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import tempfile
 import re
 import time
@@ -209,6 +210,7 @@ audio{flex:1;min-width:240px}.grid{display:grid;grid-template-columns:repeat(aut
  <h2>Playback driven by the motion timeline</h2>
  <canvas id=cv height=520></canvas>
  <div class=row><audio id=au controls></audio><label>Profile <select id=prof></select></label><span id=info></span>
+ <button id=sq type=button>Open in Squall</button><span id=sqmsg></span>
  <label><input type=checkbox id=diag> Diagnostics</label><select id=iso hidden><option value=off>all bands<option value=bass>bass only<option value=mid>mid only<option value=high>high only</select></div>
  <h2>Stage outputs</h2><div class=grid id=plots></div>
 </div>
@@ -238,6 +240,11 @@ async function poll(id,resumed){let j;
  if(j.stage=='done')return show(j,resumed);if(j.stage!='error')setTimeout(()=>poll(id,resumed),1000)}
 {const m=location.hash.match(/job=([a-f0-9]+)/);if(m)poll(m[1],true)}
 let V,P;
+$('sq').onclick=async()=>{const m=location.hash.match(/job=([a-f0-9]+)/);if(!m)return;const w=window.open('about:blank','_blank');
+ $('sq').disabled=true;$('sqmsg').textContent=' Preparing the weather map (about a minute)...';
+ try{const r=await fetch('/export/'+m[1],{method:'POST'});const j=await r.json().catch(()=>({}));
+  if(!r.ok||!j.url)throw new Error(j.error||('HTTP '+r.status));$('sqmsg').textContent='';if(w)w.location=j.url;else location.href=j.url}
+ catch(e){if(w)w.close();$('sqmsg').textContent=' Could not open Squall: '+e.message}$('sq').disabled=false};
 fetch('/jobs').then(r=>r.json()).then(js=>{if(!js.length)return;$('recent').hidden=false;
  $('rj').innerHTML=js.map(j=>`<li><a href="#job=${j.id}" data-id="${j.id}">${j.name.replace(/[<>&]/g,'')}</a><span class=t>${new Date(j.created*1000).toLocaleString()}</span><span class="b ${j.stage}">${j.stage=='done'?'completed':j.stage=='error'?'failed':'running: '+j.stage}</span></li>`).join('');
  $('rj').querySelectorAll('a').forEach(a=>a.onclick=e=>{e.preventDefault();location.hash='job='+a.dataset.id;location.reload()})}).catch(()=>{});
@@ -285,6 +292,31 @@ function draw(){requestAnimationFrame(draw);if(!V)return;const c=$('cv'),w=c.wid
 </script>"""
 
 
+WEB_KIT = ROOT / "web_kit"
+WEB_TYPES = {".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".json": "application/json",
+             ".bin": "application/octet-stream", ".mp3": "audio/mpeg", ".wav": "audio/wav", ".m4a": "audio/mp4", ".ogg": "audio/ogg", ".flac": "audio/flac"}
+
+
+def serve_web_kit(path: str) -> tuple[int, bytes, str] | None:
+    """Serve the prebuilt Squall page (web_kit/preview) and the exported songs (web_kit/public/motion).
+
+    Returns None when the path is not one of those. Build the bundles first: cd web_kit && npm run build:preview
+    """
+    if path == "/squall":
+        f = WEB_KIT / "preview" / "squall.html"
+    elif path in ("/squall.js", "/squall.css"):
+        f = WEB_KIT / "preview" / "dist" / path[1:]
+    elif path.startswith("/motion/"):
+        f = (WEB_KIT / "public" / path[1:]).resolve()
+        if (WEB_KIT / "public" / "motion").resolve() not in f.parents:
+            return 404, b"not found", "text/plain"
+    else:
+        return None
+    if not f.is_file():
+        return 404, b"Squall is not built. Run: cd web_kit && npm run build:preview", "text/plain"
+    return 200, f.read_bytes(), WEB_TYPES.get(f.suffix.lower(), "application/octet-stream")
+
+
 class H(BaseHTTPRequestHandler):
     def log_message(self, *a):  # quiet
         pass
@@ -296,12 +328,37 @@ class H(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _send_ranged(self, ctype: str, data: bytes) -> None:
+        m = re.match(r"bytes=(\d*)-(\d*)$", self.headers.get("Range", ""))
+        if m and (m[1] or m[2]):  # single byte range, so seeking works for audio
+            a = int(m[1]) if m[1] else max(0, len(data) - int(m[2]))
+            z = min(int(m[2]), len(data) - 1) if m[1] and m[2] else len(data) - 1
+            if a > z:
+                return self._send(416, b"", "text/plain")
+            self.send_response(206)
+            self.send_header("content-type", ctype)
+            self.send_header("content-range", f"bytes {a}-{z}/{len(data)}")
+            self.send_header("content-length", str(z - a + 1))
+            self.send_header("accept-ranges", "bytes")
+            self.end_headers()
+            self.wfile.write(data[a : z + 1])
+            return
+        self.send_response(200)
+        self.send_header("content-type", ctype)
+        self.send_header("content-length", str(len(data)))
+        self.send_header("accept-ranges", "bytes")
+        self.end_headers()
+        self.wfile.write(data)
+
     def do_GET(self):
         path = unquote(urlparse(self.path).path)
         if path == "/":
             return self._send(200, PAGE.replace("%STAGES%", json.dumps(STAGES)).encode())
         if path == "/favicon.ico":
             return self._send(204, b"", "image/x-icon")
+        web = serve_web_kit(path)
+        if web is not None:
+            return self._send_ranged(web[2], web[1]) if web[0] == 200 else self._send(*web)
         if path == "/jobs":
             return self._send(200, json.dumps(list_jobs()).encode(), "application/json")
         if path.startswith("/status/"):
@@ -314,26 +371,21 @@ class H(BaseHTTPRequestHandler):
             if JOBS.resolve() in f.parents and f.is_file():
                 ctype = {".json": "application/json", ".png": "image/png", ".wav": "audio/wav", ".mp3": "audio/mpeg",
                          ".m4a": "audio/mp4", ".flac": "audio/flac", ".ogg": "audio/ogg"}.get(f.suffix.lower(), "application/octet-stream")
-                data = f.read_bytes()
-                m = re.match(r"bytes=(\d*)-(\d*)$", self.headers.get("Range", ""))
-                if m and (m[1] or m[2]):  # single byte range, so seeking works for audio served from the job folder
-                    a = int(m[1]) if m[1] else max(0, len(data) - int(m[2]))
-                    z = min(int(m[2]), len(data) - 1) if m[1] and m[2] else len(data) - 1
-                    if a > z:
-                        return self._send(416, b"", "text/plain")
-                    self.send_response(206)
-                    self.send_header("content-type", ctype)
-                    self.send_header("content-range", f"bytes {a}-{z}/{len(data)}")
-                    self.send_header("content-length", str(z - a + 1))
-                    self.send_header("accept-ranges", "bytes")
-                    self.end_headers()
-                    self.wfile.write(data[a : z + 1])
-                    return
-                return self._send(200, data, ctype)
+                return self._send_ranged(ctype, f.read_bytes())
         self._send(404, b"not found", "text/plain")
 
     def do_POST(self):
         u = urlparse(self.path)
+        if u.path.startswith("/export/"):
+            if not RUN_LOCK.acquire(blocking=False):
+                return self._send(409, json.dumps({"error": "Another song is still being processed."}).encode(), "application/json")
+            try:
+                song_id = export_web(u.path[8:], None)
+            except SystemExit as e:  # export_web reports problems with sys.exit(message)
+                return self._send(400, json.dumps({"error": str(e.code)}).encode(), "application/json")
+            finally:
+                RUN_LOCK.release()
+            return self._send(200, json.dumps({"song": song_id, "url": f"/squall?source=song:{song_id}"}).encode(), "application/json")
         if u.path != "/upload":
             return self._send(404, b"", "text/plain")
         n = int(self.headers.get("content-length") or 0)
@@ -382,14 +434,14 @@ class H(BaseHTTPRequestHandler):
         self._send(200, json.dumps({"id": jid}).encode(), "application/json")
 
 
-def export_web(jid: str, song_id: str | None) -> None:
+def export_web(jid: str, song_id: str | None) -> str:
     """Add a finished job to the web_kit Squall/Constellation song list (web_kit/public/motion).
 
     Runs scripts/export_web.py into a temp folder, then merges that one song into manifest.json so the songs
     already there are left alone. The uploaded audio is copied next to it so the instrument can play it.
     """
     job = get_job(jid)
-    if not job or job.get("stage") != "done":
+    if not JOB_ID.match(jid) or not job or job.get("stage") != "done":
         sys.exit(f"job {jid} is not a finished job")
     job_dir = JOBS / jid
     audio = job_dir / job["audio"]
@@ -407,7 +459,8 @@ def export_web(jid: str, song_id: str | None) -> None:
     with tempfile.TemporaryDirectory() as tmp:
         (Path(tmp) / "spec.json").write_text(json.dumps(spec), encoding="utf-8")
         r = subprocess.run([sys.executable, str(ROOT / "scripts" / "export_web.py"), "--spec", str(Path(tmp) / "spec.json"),
-                            "--out", str(Path(tmp) / "out")], cwd=ROOT, capture_output=True, text=True)
+                            "--out", str(Path(tmp) / "out")], cwd=ROOT, capture_output=True, text=True,
+                           env={**os.environ, "PYTHONPATH": os.pathsep.join(filter(None, [str(ROOT / "src"), os.environ.get("PYTHONPATH")]))})
         print(r.stdout + r.stderr)
         if r.returncode:
             sys.exit("export_web.py failed; web_kit/public/motion/manifest.json was not changed")
@@ -419,7 +472,8 @@ def export_web(jid: str, song_id: str | None) -> None:
     manifest["songs"] = [x for x in manifest["songs"] if x["id"] != song_id] + [entry]
     mf.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(f"added '{song_id}' to {mf} ({len(manifest['songs'])} songs). Squall: node web_kit/preview/serve.mjs 5353, "
-          f"then http://localhost:5353/squall?source=song:{song_id}")
+          f"then http://localhost:5353/squall?source=song:{song_id} (or open it from this demo's page)")
+    return song_id
 
 
 def clean_old_jobs(port: int, keep: int, yes: bool) -> None:
@@ -467,7 +521,8 @@ if __name__ == "__main__":
     args = ap.parse_args()
     port = args.port
     if args.export_web:
-        sys.exit(export_web(args.export_web, args.song_id))
+        export_web(args.export_web, args.song_id)
+        sys.exit(0)
     if args.clean_old_jobs:
         sys.exit(clean_old_jobs(port, args.keep, args.yes))
     JOBS.mkdir(parents=True, exist_ok=True)

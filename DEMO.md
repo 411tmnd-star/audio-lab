@@ -23,6 +23,12 @@ The server binds to 127.0.0.1 only. It needs numpy, librosa and soundfile, which
 5. Use the Profile menu to switch between `balanced`, `bass_pulse` and `cinematic`.
 6. The gallery below shows each stage's plots (the `*_zoom` variants are generated but not shown).
 
+7. Press **Open in Squall** under the player. It adds the finished song to the web_kit song list (about a minute:
+   it computes the audio features), then opens Squall, the weather-map visual, playing that song at
+   `/squall?source=song:<id>`. The demo server serves Squall itself, so no second server is needed. Squall needs
+   its bundle built once: `cd web_kit && npm run build:preview`. The same export is available as
+   `python scripts/demo_server.py --export-web <job>`.
+
 Only one song is processed at a time; a second upload gets "Another song is still being processed" (HTTP 409).
 
 ## What the three bands do
