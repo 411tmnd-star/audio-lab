@@ -9,6 +9,7 @@ const isTest = (p) => p.startsWith("/_test/");
 const built = new Set(["/app.js", "/app.css", "/instrument.js", "/instrument.css", "/squall.js", "/squall.css"]);
 createServer(async (req, res) => {
   const p = decodeURIComponent(new URL(req.url, "http://x").pathname);
+  if (p === "/favicon.ico") { res.writeHead(204); return res.end(); }
   const file = isTest(p) ? join(root, "preview", normalize(p)) : pages[p] ? join(root, pages[p]) : built.has(p) ? join(root, "preview", "dist", p) : join(root, "public", normalize(p));
   try { const body = await readFile(file); res.writeHead(200, { "content-type": types[extname(file)] ?? "application/octet-stream", "cache-control": "no-store" }); res.end(body); }
   catch { res.writeHead(404); res.end("not found: " + p); }

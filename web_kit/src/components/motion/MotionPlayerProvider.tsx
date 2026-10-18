@@ -159,12 +159,14 @@ export function MotionPlayerProvider({
     const audio = audioRef.current;
     if (!audio || !timeline) return setWarning(null);
     const check = () => {
+      if (!Number.isFinite(audio.duration)) return setWarning(null); // unknown length (e.g. no range support): nothing to compare
       const off = Math.abs(audio.duration - timeline.durationS);
       setWarning(off > DURATION_TOLERANCE_S ? `This audio is ${audio.duration.toFixed(1)} s but the timeline was planned for ${timeline.durationS.toFixed(1)} s. Markers will not line up.` : null);
     };
-    if (Number.isFinite(audio.duration)) check();
+    check();
     audio.addEventListener("loadedmetadata", check);
-    return () => audio.removeEventListener("loadedmetadata", check);
+    audio.addEventListener("durationchange", check);
+    return () => { audio.removeEventListener("loadedmetadata", check); audio.removeEventListener("durationchange", check); };
   }, [timeline, song]);
 
   const seek = useCallback(

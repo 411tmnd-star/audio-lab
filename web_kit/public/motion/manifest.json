@@ -60,6 +60,39 @@
         "meta": "/motion/detty/features.json",
         "bin": "/motion/detty/features.bin"
       }
+    },
+    {
+      "id": "jeriq-airplane-mode",
+      "title": "Jeriq airplane mode",
+      "durationS": 258.168163,
+      "audio": {
+        "src": "/motion/audio/jeriq-airplane-mode.mp3",
+        "rights": "local test upload; the audio file is not committed (*.wav etc. are git-ignored)"
+      },
+      "profiles": [
+        {
+          "id": "balanced",
+          "label": "Balanced",
+          "timeline": "/motion/jeriq-airplane-mode/balanced.timeline.json",
+          "curves": "/motion/jeriq-airplane-mode/balanced.curves.bin"
+        },
+        {
+          "id": "bass_pulse",
+          "label": "Bass pulse",
+          "timeline": "/motion/jeriq-airplane-mode/bass_pulse.timeline.json",
+          "curves": "/motion/jeriq-airplane-mode/bass_pulse.curves.bin"
+        },
+        {
+          "id": "cinematic",
+          "label": "Cinematic",
+          "timeline": "/motion/jeriq-airplane-mode/cinematic.timeline.json",
+          "curves": "/motion/jeriq-airplane-mode/cinematic.curves.bin"
+        }
+      ],
+      "features": {
+        "meta": "/motion/jeriq-airplane-mode/features.json",
+        "bin": "/motion/jeriq-airplane-mode/features.bin"
+      }
     }
   ]
 }
