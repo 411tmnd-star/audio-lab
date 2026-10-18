@@ -48,7 +48,7 @@ Details, numbers and how unusual input is handled are in [docs/engineering](docs
 | `samples/` | Real pipeline output for three songs (JSON and plots) |
 | `configs/`, `schemas/` | Analysis, interpretation, motion and visual-profile configs; versioned JSON schemas |
 | `tests/`, `scripts/` | Python tests; the export script and the upload-demo server |
-| `docs/` | Engineering notes and the upgrade analysis |
+| `docs/` | [Visualizer architecture](docs/architecture/visualizer-guide.md), [engineering notes](docs/engineering/README.md), upgrade analysis |
 
 ## Run it
 
