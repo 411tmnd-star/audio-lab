@@ -33,11 +33,11 @@ def analyze_song(
     `settings` holds the meter and downbeat offset (defaults to cfg.bars); `settings_origin` is
     "stored" when they came from the per-song settings file. Returns the per-song output directory.
     """
+    y, sr = io.load_audio(song_path, cfg.audio)
+    io.require_signal(y, song_path)  # before any output is created
     out_dir = io.song_output_dir(outputs_root, song_path)
     plots_dir = out_dir / "plots"
     plots_dir.mkdir(exist_ok=True)
-
-    y, sr = io.load_audio(song_path, cfg.audio)
     hop = cfg.features.hop_length
 
     features = compute_features(y, sr, cfg.features)

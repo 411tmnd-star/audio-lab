@@ -187,13 +187,21 @@ def main(argv: list[str] | None = None) -> int:
             )
         return 0
 
+    from audiolab.io import UnanalyzableAudioError
+
+    failed = 0
     for song in args.songs:
         settings = stored(song)
-        out_dir = analyze_song(
-            song, cfg, args.out, settings, settings_origin=origin_of(song, settings)
-        )
+        try:
+            out_dir = analyze_song(
+                song, cfg, args.out, settings, settings_origin=origin_of(song, settings)
+            )
+        except UnanalyzableAudioError as err:
+            print(f"error: {err}", file=sys.stderr)
+            failed += 1
+            continue
         print(f"{song} -> {out_dir}")
-    return 0
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":

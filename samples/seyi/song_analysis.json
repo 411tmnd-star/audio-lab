@@ -1,0 +1,4633 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "file": "Seyi-Vibez-SWAGUU-feat-Quavo.mp3",
+    "sha256": "ff04b5be7399abc6e7603051d07ea324823b5c9dfefabc59f6b70d5b77ac23f2",
+    "size_bytes": 2170062,
+    "duration_s": 78.01904761904763,
+    "original_sample_rate_hz": 44100,
+    "original_channels": 2,
+    "analysis_sample_rate_hz": 22050,
+    "analysis_channels": 1
+  },
+  "provenance": {
+    "created_at": "2026-10-12T10:46:34+00:00",
+    "audiolab_version": "0.1.0",
+    "python_version": "3.11.0",
+    "libraries": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "librosa": "0.11.0",
+      "soundfile": "0.14.0",
+      "pydantic": "2.14.1",
+      "PyYAML": "6.0.3",
+      "matplotlib": "3.11.2"
+    },
+    "config": {
+      "audio": {
+        "sample_rate": 22050,
+        "mono": true
+      },
+      "features": {
+        "n_fft": 2048,
+        "hop_length": 512,
+        "bass_max_hz": 150.0,
+        "mid_max_hz": 2000.0,
+        "n_mels": 96
+      },
+      "beats": {
+        "start_bpm": 120.0,
+        "tightness": 100.0
+      },
+      "events": {
+        "onset_delta": 0.07,
+        "min_gap_s": 0.05,
+        "loud_threshold_db": -20.0,
+        "loud_hysteresis_db": 6.0,
+        "loud_min_duration_s": 0.5,
+        "loud_merge_gap_s": 0.5
+      },
+      "bars": {
+        "beats_per_bar": 4
+      },
+      "novelty": {
+        "kernel_beats": 16
+      },
+      "plots": {
+        "dpi": 120,
+        "max_points": 200000
+      }
+    },
+    "song_settings": {
+      "beats_per_bar": 4,
+      "downbeat_offset": 0,
+      "origin": "stored"
+    },
+    "analyzers": {
+      "features": {
+        "origin": "measured",
+        "method": "STFT-derived frame features",
+        "library": "librosa 0.11.0",
+        "params": {
+          "n_fft": 2048,
+          "hop_length": 512,
+          "bass_max_hz": 150.0,
+          "mid_max_hz": 2000.0,
+          "n_mels": 96
+        },
+        "output": "Frame curves in the sidecar file (see curves).",
+        "confidence": "Not applicable: these are measurements, not detections."
+      },
+      "beat_tracker": {
+        "origin": "estimated",
+        "method": "librosa.beat.beat_track on the onset envelope",
+        "library": "librosa 0.11.0",
+        "params": {
+          "start_bpm": 120.0,
+          "tightness": 100.0
+        },
+        "output": "tempo and beat events; beat events also carry bar position from bar_grid and novelty from novelty.",
+        "confidence": "Not provided by the method, so confidence is null. See diagnostics and each beat's onset_strength as evidence."
+      },
+      "onset_detector": {
+        "origin": "estimated",
+        "method": "librosa.onset.onset_detect peak picking",
+        "library": "librosa 0.11.0",
+        "params": {
+          "delta": 0.07,
+          "min_gap_s": 0.05
+        },
+        "output": "onset events; strength is the onset envelope at the onset.",
+        "confidence": "Not provided by the method, so confidence is null."
+      },
+      "loud_segments": {
+        "origin": "measured",
+        "method": "threshold on RMS dB with hysteresis, gap merging, minimum duration",
+        "library": null,
+        "params": {
+          "threshold_db": -20.0,
+          "hysteresis_db": 6.0,
+          "min_duration_s": 0.5,
+          "merge_gap_s": 0.5
+        },
+        "output": "loud_segment events (dB is relative to the song's loudest frame).",
+        "confidence": "Not applicable: a threshold rule, not a detection with uncertainty."
+      },
+      "bar_grid": {
+        "origin": "user_setting",
+        "method": "beats grouped by beats_per_bar from downbeat_offset",
+        "library": null,
+        "params": {
+          "beats_per_bar": 4,
+          "downbeat_offset": 0
+        },
+        "output": "bar events; bar fields on beat events.",
+        "confidence": "Not detected: meter and downbeat are chosen by a person, ideally checked by ear."
+      },
+      "novelty": {
+        "origin": "estimated",
+        "method": "Foote checkerboard-kernel novelty on beat-synchronous timbre, harmony and dynamics features",
+        "library": "librosa 0.11.0",
+        "params": {
+          "kernel_beats": 16,
+          "peak_height": 0.3,
+          "peak_distance_beats": 4
+        },
+        "output": "novelty value on each beat and novelty_peak events. Measures change only; it does not say what kind of section it is.",
+        "confidence": "Not provided by the method, so confidence is null."
+      }
+    }
+  },
+  "time_base": {
+    "unit": "seconds",
+    "hop_length": 512,
+    "frame_rate_hz": 43.06640625,
+    "n_frames": 3361
+  },
+  "tempo": {
+    "bpm": 117.45383522727273,
+    "source": "beat_tracker",
+    "confidence": null
+  },
+  "diagnostics": {
+    "beat_onset_ratio": 3.31355055281895,
+    "phase_peak_offset": 0.0,
+    "tempo_scores": {
+      "half": 0.43583011627197266,
+      "detected": 0.4689944386482239,
+      "double": 0.4406546354293823
+    },
+    "beat_interval_std_ms": 15.695291811968305,
+    "irregular_beat_gaps": 0
+  },
+  "curves": {
+    "file": "analysis.npz",
+    "sha256": "44161b05e807b90db7c343f6d358de29874782f09a4bea9d3b0e4dca3eb5b554",
+    "curves": [
+      {
+        "key": "times",
+        "grid": "frame",
+        "unit": "s",
+        "description": "Time of each frame."
+      },
+      {
+        "key": "rms",
+        "grid": "frame",
+        "unit": "amplitude",
+        "description": "Root-mean-square amplitude per frame."
+      },
+      {
+        "key": "rms_db",
+        "grid": "frame",
+        "unit": "dB",
+        "description": "RMS in dB relative to the loudest frame."
+      },
+      {
+        "key": "centroid",
+        "grid": "frame",
+        "unit": "Hz",
+        "description": "Spectral centroid."
+      },
+      {
+        "key": "flatness",
+        "grid": "frame",
+        "unit": "ratio",
+        "description": "Spectral flatness; near 1 is noise-like, near 0 is tonal."
+      },
+      {
+        "key": "onset_env",
+        "grid": "frame",
+        "unit": "arbitrary",
+        "description": "Onset strength envelope (librosa)."
+      },
+      {
+        "key": "band_bass_db",
+        "grid": "frame",
+        "unit": "dB",
+        "description": "Bass-band energy in dB relative to the loudest frame's total."
+      },
+      {
+        "key": "band_mid_db",
+        "grid": "frame",
+        "unit": "dB",
+        "description": "Mid-band energy in dB relative to the loudest frame's total."
+      },
+      {
+        "key": "band_high_db",
+        "grid": "frame",
+        "unit": "dB",
+        "description": "High-band energy in dB relative to the loudest frame's total."
+      },
+      {
+        "key": "band_edges_hz",
+        "grid": "frame",
+        "unit": "Hz",
+        "description": "[bass_max, mid_max] band edges used."
+      },
+      {
+        "key": "mel_db",
+        "grid": "mel",
+        "unit": "dB",
+        "description": "Mel spectrogram, rows x frames, 0 dB = loudest cell."
+      },
+      {
+        "key": "mel_freqs",
+        "grid": "mel",
+        "unit": "Hz",
+        "description": "Centre frequency of each spectrogram row."
+      },
+      {
+        "key": "beat_times",
+        "grid": "beat",
+        "unit": "s",
+        "description": "Estimated beat times."
+      },
+      {
+        "key": "novelty",
+        "grid": "beat",
+        "unit": "0..1",
+        "description": "Section novelty at each beat (1 = largest change in this song)."
+      }
+    ]
+  },
+  "events": [
+    {
+      "id": "onset:0000",
+      "time_s": 0.06965986394557823,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 1.750766634941101
+    },
+    {
+      "id": "loud_segment:000",
+      "time_s": 0.4179591836734694,
+      "source": "loud_segments",
+      "confidence": null,
+      "type": "loud_segment",
+      "end_s": 2.786394557823129,
+      "peak_db": -19.478893280029297
+    },
+    {
+      "id": "onset:0001",
+      "time_s": 1.5789569160997732,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.268920421600342
+    },
+    {
+      "id": "onset:0002",
+      "time_s": 2.1130158730158732,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.538912773132324
+    },
+    {
+      "id": "onset:0003",
+      "time_s": 3.1346938775510202,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.173541784286499
+    },
+    {
+      "id": "onset:0004",
+      "time_s": 3.645532879818594,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.172369956970215
+    },
+    {
+      "id": "onset:0005",
+      "time_s": 4.179591836734694,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.07267165184021
+    },
+    {
+      "id": "loud_segment:001",
+      "time_s": 4.295691609977324,
+      "source": "loud_segments",
+      "confidence": null,
+      "type": "loud_segment",
+      "end_s": 75.90603174603174,
+      "peak_db": 0.0
+    },
+    {
+      "id": "onset:0006",
+      "time_s": 5.735328798185941,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.8721861839294434
+    },
+    {
+      "id": "onset:0007",
+      "time_s": 6.222947845804988,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.2552735805511475
+    },
+    {
+      "id": "bar:0",
+      "time_s": 6.246167800453515,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 8.312743764172335,
+      "index": 0,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0000",
+      "time_s": 6.246167800453515,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 0,
+      "is_downbeat": true,
+      "onset_strength": 6.152108669281006,
+      "novelty": 0.10768697834022167
+    },
+    {
+      "id": "onset:0008",
+      "time_s": 6.455147392290249,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.2289235591888428
+    },
+    {
+      "id": "onset:0009",
+      "time_s": 6.5712471655328795,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.372396469116211
+    },
+    {
+      "id": "beat:0001",
+      "time_s": 6.8034467120181406,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 0,
+      "is_downbeat": false,
+      "onset_strength": 3.493014335632324,
+      "novelty": 0.061051308427207865
+    },
+    {
+      "id": "onset:0010",
+      "time_s": 6.8034467120181406,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.493014335632324
+    },
+    {
+      "id": "beat:0002",
+      "time_s": 7.314285714285714,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 0,
+      "is_downbeat": false,
+      "onset_strength": 2.03134822845459,
+      "novelty": 0.07427788921856691
+    },
+    {
+      "id": "onset:0011",
+      "time_s": 7.337505668934241,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.6148040294647217
+    },
+    {
+      "id": "beat:0003",
+      "time_s": 7.801904761904762,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 0,
+      "is_downbeat": false,
+      "onset_strength": 2.8937714099884033,
+      "novelty": 0.09775392731437947
+    },
+    {
+      "id": "onset:0012",
+      "time_s": 7.801904761904762,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.8937714099884033
+    },
+    {
+      "id": "bar:1",
+      "time_s": 8.312743764172335,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 10.402539682539683,
+      "index": 1,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0004",
+      "time_s": 8.312743764172335,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 1,
+      "is_downbeat": true,
+      "onset_strength": 3.157745838165283,
+      "novelty": 0.10963426961958965
+    },
+    {
+      "id": "onset:0013",
+      "time_s": 8.312743764172335,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.157745838165283
+    },
+    {
+      "id": "beat:0005",
+      "time_s": 8.823582766439909,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 1,
+      "is_downbeat": false,
+      "onset_strength": 0.5193183422088623,
+      "novelty": 0.08419472329892615
+    },
+    {
+      "id": "beat:0006",
+      "time_s": 9.357641723356009,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 1,
+      "is_downbeat": false,
+      "onset_strength": 0.6658005714416504,
+      "novelty": 0.07587426642223652
+    },
+    {
+      "id": "beat:0007",
+      "time_s": 9.868480725623582,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 1,
+      "is_downbeat": false,
+      "onset_strength": 3.6113975048065186,
+      "novelty": 0.1022589133335294
+    },
+    {
+      "id": "onset:0014",
+      "time_s": 9.868480725623582,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.6113975048065186
+    },
+    {
+      "id": "bar:2",
+      "time_s": 10.402539682539683,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 12.469115646258503,
+      "index": 2,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0008",
+      "time_s": 10.402539682539683,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 2,
+      "is_downbeat": true,
+      "onset_strength": 2.6196727752685547,
+      "novelty": 0.13819235874475913
+    },
+    {
+      "id": "onset:0015",
+      "time_s": 10.402539682539683,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.6196727752685547
+    },
+    {
+      "id": "beat:0009",
+      "time_s": 10.936598639455783,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 2,
+      "is_downbeat": false,
+      "onset_strength": 2.142760992050171,
+      "novelty": 0.11206150004225439
+    },
+    {
+      "id": "onset:0016",
+      "time_s": 10.936598639455783,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.142760992050171
+    },
+    {
+      "id": "beat:0010",
+      "time_s": 11.447437641723356,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 2,
+      "is_downbeat": false,
+      "onset_strength": 2.0462844371795654,
+      "novelty": 0.10893568059393254
+    },
+    {
+      "id": "beat:0011",
+      "time_s": 11.95827664399093,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 2,
+      "is_downbeat": false,
+      "onset_strength": 0.5583996176719666,
+      "novelty": 0.1297344103271228
+    },
+    {
+      "id": "onset:0017",
+      "time_s": 12.19047619047619,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.753697633743286
+    },
+    {
+      "id": "onset:0018",
+      "time_s": 12.445895691609977,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.4510433673858643
+    },
+    {
+      "id": "bar:3",
+      "time_s": 12.469115646258503,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 14.535691609977324,
+      "index": 3,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0012",
+      "time_s": 12.469115646258503,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 3,
+      "is_downbeat": true,
+      "onset_strength": 2.307784080505371,
+      "novelty": 0.18837992182022142
+    },
+    {
+      "id": "beat:0013",
+      "time_s": 12.979954648526077,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 3,
+      "is_downbeat": false,
+      "onset_strength": 0.8346080780029297,
+      "novelty": 0.13646822506552983
+    },
+    {
+      "id": "beat:0014",
+      "time_s": 13.49079365079365,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 3,
+      "is_downbeat": false,
+      "onset_strength": 0.7333848476409912,
+      "novelty": 0.1427524334271881
+    },
+    {
+      "id": "beat:0015",
+      "time_s": 14.001632653061224,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 3,
+      "is_downbeat": false,
+      "onset_strength": 3.1906068325042725,
+      "novelty": 0.2186745339448577
+    },
+    {
+      "id": "onset:0019",
+      "time_s": 14.001632653061224,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.1906068325042725
+    },
+    {
+      "id": "bar:4",
+      "time_s": 14.535691609977324,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 16.602267573696146,
+      "index": 4,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0016",
+      "time_s": 14.535691609977324,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 4,
+      "is_downbeat": true,
+      "onset_strength": 2.3269143104553223,
+      "novelty": 0.2802939538433307
+    },
+    {
+      "id": "onset:0020",
+      "time_s": 14.535691609977324,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.3269143104553223
+    },
+    {
+      "id": "onset:0021",
+      "time_s": 14.953650793650795,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.227281093597412
+    },
+    {
+      "id": "beat:0017",
+      "time_s": 15.046530612244897,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 4,
+      "is_downbeat": false,
+      "onset_strength": 1.9487859010696411,
+      "novelty": 0.3372335652344595
+    },
+    {
+      "id": "onset:0022",
+      "time_s": 15.139410430839002,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.4655025005340576
+    },
+    {
+      "id": "beat:0018",
+      "time_s": 15.557369614512472,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 4,
+      "is_downbeat": false,
+      "onset_strength": 7.576648235321045,
+      "novelty": 0.4426257461004291
+    },
+    {
+      "id": "onset:0023",
+      "time_s": 15.557369614512472,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 7.576648235321045
+    },
+    {
+      "id": "onset:0024",
+      "time_s": 15.766349206349206,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.685765266418457
+    },
+    {
+      "id": "onset:0025",
+      "time_s": 15.998548752834466,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.155710220336914
+    },
+    {
+      "id": "beat:0019",
+      "time_s": 16.04498866213152,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 4,
+      "is_downbeat": false,
+      "onset_strength": 2.6191859245300293,
+      "novelty": 0.6756181128151689
+    },
+    {
+      "id": "onset:0026",
+      "time_s": 16.207528344671204,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.502286434173584
+    },
+    {
+      "id": "onset:0027",
+      "time_s": 16.579047619047618,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.164313316345215
+    },
+    {
+      "id": "bar:5",
+      "time_s": 16.602267573696146,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 18.668843537414965,
+      "index": 5,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0020",
+      "time_s": 16.602267573696146,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 5,
+      "is_downbeat": true,
+      "onset_strength": 12.811612129211426,
+      "novelty": 1.0
+    },
+    {
+      "id": "novelty_peak:000",
+      "time_s": 16.602267573696146,
+      "source": "novelty",
+      "confidence": null,
+      "type": "novelty_peak",
+      "value": 1.0
+    },
+    {
+      "id": "onset:0028",
+      "time_s": 16.857687074829933,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.012112617492676
+    },
+    {
+      "id": "beat:0021",
+      "time_s": 17.11310657596372,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 5,
+      "is_downbeat": false,
+      "onset_strength": 5.332229137420654,
+      "novelty": 0.5877945896810884
+    },
+    {
+      "id": "onset:0029",
+      "time_s": 17.11310657596372,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.332229137420654
+    },
+    {
+      "id": "onset:0030",
+      "time_s": 17.368526077097506,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.2548985481262207
+    },
+    {
+      "id": "onset:0031",
+      "time_s": 17.623945578231293,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.905128479003906
+    },
+    {
+      "id": "beat:0022",
+      "time_s": 17.647165532879818,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 5,
+      "is_downbeat": false,
+      "onset_strength": 8.826788902282715,
+      "novelty": 0.34744219630440626
+    },
+    {
+      "id": "onset:0032",
+      "time_s": 17.87936507936508,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.585766792297363
+    },
+    {
+      "id": "onset:0033",
+      "time_s": 18.134784580498867,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.247231960296631
+    },
+    {
+      "id": "beat:0023",
+      "time_s": 18.15800453514739,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 5,
+      "is_downbeat": false,
+      "onset_strength": 6.822672367095947,
+      "novelty": 0.26693271046090833
+    },
+    {
+      "id": "onset:0034",
+      "time_s": 18.413424036281178,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.38606071472168
+    },
+    {
+      "id": "bar:6",
+      "time_s": 18.668843537414965,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 20.735419501133787,
+      "index": 6,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0024",
+      "time_s": 18.668843537414965,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 6,
+      "is_downbeat": true,
+      "onset_strength": 3.2101047039031982,
+      "novelty": 0.23728865028865637
+    },
+    {
+      "id": "onset:0035",
+      "time_s": 18.668843537414965,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.2101047039031982
+    },
+    {
+      "id": "onset:0036",
+      "time_s": 18.92426303854875,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.265444278717041
+    },
+    {
+      "id": "onset:0037",
+      "time_s": 19.156462585034014,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.842036008834839
+    },
+    {
+      "id": "beat:0025",
+      "time_s": 19.17968253968254,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 6,
+      "is_downbeat": false,
+      "onset_strength": 2.384624481201172,
+      "novelty": 0.09164938088501784
+    },
+    {
+      "id": "onset:0038",
+      "time_s": 19.690521541950112,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.036006927490234
+    },
+    {
+      "id": "beat:0026",
+      "time_s": 19.71374149659864,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 6,
+      "is_downbeat": false,
+      "onset_strength": 6.800514221191406,
+      "novelty": 0.06408093182723584
+    },
+    {
+      "id": "onset:0039",
+      "time_s": 19.969160997732427,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.218151330947876
+    },
+    {
+      "id": "onset:0040",
+      "time_s": 20.108480725623583,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.903383731842041
+    },
+    {
+      "id": "beat:0027",
+      "time_s": 20.224580498866214,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 6,
+      "is_downbeat": false,
+      "onset_strength": 2.8608896732330322,
+      "novelty": 0.08601773517335948
+    },
+    {
+      "id": "onset:0041",
+      "time_s": 20.224580498866214,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.8608896732330322
+    },
+    {
+      "id": "onset:0042",
+      "time_s": 20.29424036281179,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.700819969177246
+    },
+    {
+      "id": "onset:0043",
+      "time_s": 20.36390022675737,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.0111300945281982
+    },
+    {
+      "id": "onset:0044",
+      "time_s": 20.48,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.2554094791412354
+    },
+    {
+      "id": "bar:7",
+      "time_s": 20.735419501133787,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 22.801995464852606,
+      "index": 7,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0028",
+      "time_s": 20.735419501133787,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 7,
+      "is_downbeat": true,
+      "onset_strength": 8.034284591674805,
+      "novelty": 0.10940036719683535
+    },
+    {
+      "id": "onset:0045",
+      "time_s": 20.735419501133787,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 8.034284591674805
+    },
+    {
+      "id": "onset:0046",
+      "time_s": 20.990839002267574,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.985487699508667
+    },
+    {
+      "id": "onset:0047",
+      "time_s": 21.24625850340136,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3693015575408936
+    },
+    {
+      "id": "beat:0029",
+      "time_s": 21.269478458049885,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 7,
+      "is_downbeat": false,
+      "onset_strength": 3.6579222679138184,
+      "novelty": 0.06092163863403153
+    },
+    {
+      "id": "onset:0048",
+      "time_s": 21.524897959183672,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.213259696960449
+    },
+    {
+      "id": "onset:0049",
+      "time_s": 21.757097505668934,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.864530563354492
+    },
+    {
+      "id": "beat:0030",
+      "time_s": 21.78031746031746,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 7,
+      "is_downbeat": false,
+      "onset_strength": 9.629029273986816,
+      "novelty": 0.052806318008685446
+    },
+    {
+      "id": "onset:0050",
+      "time_s": 22.01251700680272,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.7970147132873535
+    },
+    {
+      "id": "beat:0031",
+      "time_s": 22.291156462585032,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 7,
+      "is_downbeat": false,
+      "onset_strength": 8.86450481414795,
+      "novelty": 0.12392295209587173
+    },
+    {
+      "id": "onset:0051",
+      "time_s": 22.291156462585032,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 8.86450481414795
+    },
+    {
+      "id": "onset:0052",
+      "time_s": 22.54657596371882,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.961106777191162
+    },
+    {
+      "id": "bar:8",
+      "time_s": 22.801995464852606,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 24.891791383219953,
+      "index": 8,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0032",
+      "time_s": 22.801995464852606,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 8,
+      "is_downbeat": true,
+      "onset_strength": 3.054971694946289,
+      "novelty": 0.2434983435515401
+    },
+    {
+      "id": "onset:0053",
+      "time_s": 22.801995464852606,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.054971694946289
+    },
+    {
+      "id": "onset:0054",
+      "time_s": 23.057414965986396,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.472041130065918
+    },
+    {
+      "id": "onset:0055",
+      "time_s": 23.289614512471655,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.528456449508667
+    },
+    {
+      "id": "beat:0033",
+      "time_s": 23.312834467120183,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 8,
+      "is_downbeat": false,
+      "onset_strength": 1.4555939435958862,
+      "novelty": 0.10884739238158808
+    },
+    {
+      "id": "onset:0056",
+      "time_s": 23.521814058956917,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.6252641677856445
+    },
+    {
+      "id": "onset:0057",
+      "time_s": 23.73079365079365,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.6012301445007324
+    },
+    {
+      "id": "beat:0034",
+      "time_s": 23.84689342403628,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 8,
+      "is_downbeat": false,
+      "onset_strength": 9.644922256469727,
+      "novelty": 0.040045030395882496
+    },
+    {
+      "id": "onset:0058",
+      "time_s": 23.84689342403628,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 9.644922256469727
+    },
+    {
+      "id": "onset:0059",
+      "time_s": 24.079092970521543,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.2087368965148926
+    },
+    {
+      "id": "onset:0060",
+      "time_s": 24.288072562358277,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.083387851715088
+    },
+    {
+      "id": "beat:0035",
+      "time_s": 24.357732426303855,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 8,
+      "is_downbeat": false,
+      "onset_strength": 3.606675386428833,
+      "novelty": 0.08138032225176907
+    },
+    {
+      "id": "onset:0061",
+      "time_s": 24.357732426303855,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.606675386428833
+    },
+    {
+      "id": "onset:0062",
+      "time_s": 24.636371882086166,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.271082878112793
+    },
+    {
+      "id": "onset:0063",
+      "time_s": 24.86857142857143,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.8425745964050293
+    },
+    {
+      "id": "bar:9",
+      "time_s": 24.891791383219953,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 26.93514739229025,
+      "index": 9,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0036",
+      "time_s": 24.891791383219953,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 9,
+      "is_downbeat": true,
+      "onset_strength": 4.253047466278076,
+      "novelty": 0.16444910586681172
+    },
+    {
+      "id": "onset:0064",
+      "time_s": 25.123990929705215,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.284251689910889
+    },
+    {
+      "id": "beat:0037",
+      "time_s": 25.402630385487527,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 9,
+      "is_downbeat": false,
+      "onset_strength": 3.2173964977264404,
+      "novelty": 0.08656297417202768
+    },
+    {
+      "id": "onset:0065",
+      "time_s": 25.402630385487527,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.2173964977264404
+    },
+    {
+      "id": "onset:0066",
+      "time_s": 25.658049886621317,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.950575828552246
+    },
+    {
+      "id": "beat:0038",
+      "time_s": 25.913469387755104,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 9,
+      "is_downbeat": false,
+      "onset_strength": 8.064532279968262,
+      "novelty": 0.035897230552823026
+    },
+    {
+      "id": "onset:0067",
+      "time_s": 25.913469387755104,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 8.064532279968262
+    },
+    {
+      "id": "onset:0068",
+      "time_s": 26.16888888888889,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.9926466941833496
+    },
+    {
+      "id": "beat:0039",
+      "time_s": 26.424308390022677,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 9,
+      "is_downbeat": false,
+      "onset_strength": 4.283553123474121,
+      "novelty": 0.07444456478945785
+    },
+    {
+      "id": "onset:0069",
+      "time_s": 26.424308390022677,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.283553123474121
+    },
+    {
+      "id": "onset:0070",
+      "time_s": 26.679727891156464,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.295461177825928
+    },
+    {
+      "id": "bar:10",
+      "time_s": 26.93514739229025,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 29.024943310657598,
+      "index": 10,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0040",
+      "time_s": 26.93514739229025,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 10,
+      "is_downbeat": true,
+      "onset_strength": 3.1092684268951416,
+      "novelty": 0.15019092259298
+    },
+    {
+      "id": "onset:0071",
+      "time_s": 26.93514739229025,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.1092684268951416
+    },
+    {
+      "id": "onset:0072",
+      "time_s": 27.00480725623583,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.1290016174316406
+    },
+    {
+      "id": "onset:0073",
+      "time_s": 27.190566893424037,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.6990585327148438
+    },
+    {
+      "id": "onset:0074",
+      "time_s": 27.422766439909296,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.544793128967285
+    },
+    {
+      "id": "beat:0041",
+      "time_s": 27.445986394557824,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 10,
+      "is_downbeat": false,
+      "onset_strength": 1.6749578714370728,
+      "novelty": 0.1082264666166986
+    },
+    {
+      "id": "beat:0042",
+      "time_s": 27.980045351473922,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 10,
+      "is_downbeat": false,
+      "onset_strength": 7.417435169219971,
+      "novelty": 0.12664486450905868
+    },
+    {
+      "id": "onset:0075",
+      "time_s": 27.980045351473922,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 7.417435169219971
+    },
+    {
+      "id": "beat:0043",
+      "time_s": 28.490884353741496,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 10,
+      "is_downbeat": false,
+      "onset_strength": 3.099065065383911,
+      "novelty": 0.1569610719154862
+    },
+    {
+      "id": "onset:0076",
+      "time_s": 28.490884353741496,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.099065065383911
+    },
+    {
+      "id": "onset:0077",
+      "time_s": 28.63020408163265,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.312206268310547
+    },
+    {
+      "id": "onset:0078",
+      "time_s": 28.76952380952381,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.0927791595458984
+    },
+    {
+      "id": "onset:0079",
+      "time_s": 28.88562358276644,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.9569365978240967
+    },
+    {
+      "id": "onset:0080",
+      "time_s": 29.00172335600907,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.4375808238983154
+    },
+    {
+      "id": "bar:11",
+      "time_s": 29.024943310657598,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 31.091519274376417,
+      "index": 11,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0044",
+      "time_s": 29.024943310657598,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 11,
+      "is_downbeat": true,
+      "onset_strength": 5.2414140701293945,
+      "novelty": 0.1535605034558415
+    },
+    {
+      "id": "onset:0081",
+      "time_s": 29.280362811791385,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.9504568576812744
+    },
+    {
+      "id": "beat:0045",
+      "time_s": 29.53578231292517,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 11,
+      "is_downbeat": false,
+      "onset_strength": 5.0365681648254395,
+      "novelty": 0.05195950599915285
+    },
+    {
+      "id": "onset:0082",
+      "time_s": 29.53578231292517,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.0365681648254395
+    },
+    {
+      "id": "onset:0083",
+      "time_s": 29.791201814058958,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.3154778480529785
+    },
+    {
+      "id": "onset:0084",
+      "time_s": 30.023401360544216,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.605666637420654
+    },
+    {
+      "id": "beat:0046",
+      "time_s": 30.046621315192745,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 11,
+      "is_downbeat": false,
+      "onset_strength": 4.238708019256592,
+      "novelty": 0.027793826940159517
+    },
+    {
+      "id": "onset:0085",
+      "time_s": 30.30204081632653,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.513432502746582
+    },
+    {
+      "id": "beat:0047",
+      "time_s": 30.55746031746032,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 11,
+      "is_downbeat": false,
+      "onset_strength": 4.1942138671875,
+      "novelty": 0.10690388692113724
+    },
+    {
+      "id": "onset:0086",
+      "time_s": 30.55746031746032,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.1942138671875
+    },
+    {
+      "id": "onset:0087",
+      "time_s": 30.812879818594105,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.5019171237945557
+    },
+    {
+      "id": "onset:0088",
+      "time_s": 30.975419501133786,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.433406352996826
+    },
+    {
+      "id": "bar:12",
+      "time_s": 31.091519274376417,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 33.158095238095235,
+      "index": 12,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0048",
+      "time_s": 31.091519274376417,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 12,
+      "is_downbeat": true,
+      "onset_strength": 2.6182992458343506,
+      "novelty": 0.15451057190370432
+    },
+    {
+      "id": "onset:0089",
+      "time_s": 31.091519274376417,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.6182992458343506
+    },
+    {
+      "id": "onset:0090",
+      "time_s": 31.32371882086168,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.9565634727478027
+    },
+    {
+      "id": "beat:0049",
+      "time_s": 31.60235827664399,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 12,
+      "is_downbeat": false,
+      "onset_strength": 2.8916409015655518,
+      "novelty": 0.10155221640470671
+    },
+    {
+      "id": "onset:0091",
+      "time_s": 31.60235827664399,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.8916409015655518
+    },
+    {
+      "id": "onset:0092",
+      "time_s": 31.741678004535146,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.524343490600586
+    },
+    {
+      "id": "onset:0093",
+      "time_s": 32.113197278911564,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.472869396209717
+    },
+    {
+      "id": "beat:0050",
+      "time_s": 32.13641723356009,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 12,
+      "is_downbeat": false,
+      "onset_strength": 5.5817766189575195,
+      "novelty": 0.08633083085724745
+    },
+    {
+      "id": "beat:0051",
+      "time_s": 32.69369614512472,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 12,
+      "is_downbeat": false,
+      "onset_strength": 3.6322808265686035,
+      "novelty": 0.08396206526361608
+    },
+    {
+      "id": "onset:0094",
+      "time_s": 32.69369614512472,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.6322808265686035
+    },
+    {
+      "id": "onset:0095",
+      "time_s": 33.041995464852604,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.924827814102173
+    },
+    {
+      "id": "bar:13",
+      "time_s": 33.158095238095235,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 35.20145124716553,
+      "index": 13,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0052",
+      "time_s": 33.158095238095235,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 13,
+      "is_downbeat": true,
+      "onset_strength": 5.712363243103027,
+      "novelty": 0.1749616861357449
+    },
+    {
+      "id": "onset:0096",
+      "time_s": 33.158095238095235,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.712363243103027
+    },
+    {
+      "id": "onset:0097",
+      "time_s": 33.41351473922902,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.191929817199707
+    },
+    {
+      "id": "beat:0053",
+      "time_s": 33.66893424036281,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 13,
+      "is_downbeat": false,
+      "onset_strength": 5.77903938293457,
+      "novelty": 0.09503436828367241
+    },
+    {
+      "id": "onset:0098",
+      "time_s": 33.66893424036281,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.77903938293457
+    },
+    {
+      "id": "onset:0099",
+      "time_s": 33.924353741496596,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.4422078132629395
+    },
+    {
+      "id": "onset:0100",
+      "time_s": 34.11011337868481,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.0207138061523438
+    },
+    {
+      "id": "beat:0054",
+      "time_s": 34.202993197278914,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 13,
+      "is_downbeat": false,
+      "onset_strength": 4.988624572753906,
+      "novelty": 0.06379685615532449
+    },
+    {
+      "id": "onset:0101",
+      "time_s": 34.202993197278914,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.988624572753906
+    },
+    {
+      "id": "onset:0102",
+      "time_s": 34.4584126984127,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 1.9343557357788086
+    },
+    {
+      "id": "beat:0055",
+      "time_s": 34.71383219954649,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 13,
+      "is_downbeat": false,
+      "onset_strength": 3.770029306411743,
+      "novelty": 0.056594433664826284
+    },
+    {
+      "id": "onset:0103",
+      "time_s": 34.71383219954649,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.770029306411743
+    },
+    {
+      "id": "onset:0104",
+      "time_s": 34.94603174603174,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.5791985988616943
+    },
+    {
+      "id": "bar:14",
+      "time_s": 35.20145124716553,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 37.29124716553288,
+      "index": 14,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0056",
+      "time_s": 35.20145124716553,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 14,
+      "is_downbeat": true,
+      "onset_strength": 5.956664562225342,
+      "novelty": 0.06401234725765487
+    },
+    {
+      "id": "onset:0105",
+      "time_s": 35.20145124716553,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.956664562225342
+    },
+    {
+      "id": "onset:0106",
+      "time_s": 35.41043083900227,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.323378086090088
+    },
+    {
+      "id": "onset:0107",
+      "time_s": 35.48009070294785,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.4451236724853516
+    },
+    {
+      "id": "onset:0108",
+      "time_s": 35.71229024943311,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.7508368492126465
+    },
+    {
+      "id": "beat:0057",
+      "time_s": 35.735510204081635,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 14,
+      "is_downbeat": false,
+      "onset_strength": 4.136855602264404,
+      "novelty": 0.09786937705916426
+    },
+    {
+      "id": "onset:0109",
+      "time_s": 36.08380952380952,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.7617297172546387
+    },
+    {
+      "id": "onset:0110",
+      "time_s": 36.24634920634921,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.51000452041626
+    },
+    {
+      "id": "beat:0058",
+      "time_s": 36.26956916099773,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 14,
+      "is_downbeat": false,
+      "onset_strength": 6.501838684082031,
+      "novelty": 0.09677045487184646
+    },
+    {
+      "id": "onset:0111",
+      "time_s": 36.617868480725626,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.8368442058563232
+    },
+    {
+      "id": "onset:0112",
+      "time_s": 36.75718820861678,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.7771525382995605
+    },
+    {
+      "id": "beat:0059",
+      "time_s": 36.78040816326531,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 14,
+      "is_downbeat": false,
+      "onset_strength": 4.225661277770996,
+      "novelty": 0.09342898172161576
+    },
+    {
+      "id": "onset:0113",
+      "time_s": 37.03582766439909,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.9395530223846436
+    },
+    {
+      "id": "bar:15",
+      "time_s": 37.29124716553288,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 39.3578231292517,
+      "index": 15,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0060",
+      "time_s": 37.29124716553288,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 15,
+      "is_downbeat": true,
+      "onset_strength": 5.323225021362305,
+      "novelty": 0.13978168352268597
+    },
+    {
+      "id": "onset:0114",
+      "time_s": 37.29124716553288,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.323225021362305
+    },
+    {
+      "id": "onset:0115",
+      "time_s": 37.54666666666667,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.118757724761963
+    },
+    {
+      "id": "beat:0061",
+      "time_s": 37.802086167800454,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 15,
+      "is_downbeat": false,
+      "onset_strength": 5.251511573791504,
+      "novelty": 0.12501870865721457
+    },
+    {
+      "id": "onset:0116",
+      "time_s": 37.802086167800454,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.251511573791504
+    },
+    {
+      "id": "onset:0117",
+      "time_s": 38.080725623582765,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.907219886779785
+    },
+    {
+      "id": "onset:0118",
+      "time_s": 38.26648526077098,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.509695291519165
+    },
+    {
+      "id": "beat:0062",
+      "time_s": 38.33614512471655,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 15,
+      "is_downbeat": false,
+      "onset_strength": 4.396542549133301,
+      "novelty": 0.14935560351642413
+    },
+    {
+      "id": "onset:0119",
+      "time_s": 38.33614512471655,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.396542549133301
+    },
+    {
+      "id": "onset:0120",
+      "time_s": 38.59156462585034,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.732377052307129
+    },
+    {
+      "id": "beat:0063",
+      "time_s": 38.846984126984125,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 15,
+      "is_downbeat": false,
+      "onset_strength": 3.5666613578796387,
+      "novelty": 0.06770575722791106
+    },
+    {
+      "id": "onset:0121",
+      "time_s": 38.846984126984125,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.5666613578796387
+    },
+    {
+      "id": "onset:0122",
+      "time_s": 39.10240362811791,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.521428346633911
+    },
+    {
+      "id": "onset:0123",
+      "time_s": 39.334603174603174,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.5998213291168213
+    },
+    {
+      "id": "bar:16",
+      "time_s": 39.3578231292517,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 41.424399092970525,
+      "index": 16,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0064",
+      "time_s": 39.3578231292517,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 16,
+      "is_downbeat": true,
+      "onset_strength": 2.492215394973755,
+      "novelty": 0.07130190055190189
+    },
+    {
+      "id": "onset:0124",
+      "time_s": 39.566802721088436,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.7005248069763184
+    },
+    {
+      "id": "onset:0125",
+      "time_s": 39.72934240362812,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.6838321685791016
+    },
+    {
+      "id": "beat:0065",
+      "time_s": 39.8918820861678,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 16,
+      "is_downbeat": false,
+      "onset_strength": 0.9595023393630981,
+      "novelty": 0.061320267001369215
+    },
+    {
+      "id": "onset:0126",
+      "time_s": 40.054421768707485,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.4497201442718506
+    },
+    {
+      "id": "onset:0127",
+      "time_s": 40.263401360544215,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 1.9797440767288208
+    },
+    {
+      "id": "onset:0128",
+      "time_s": 40.379501133786846,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.8358728885650635
+    },
+    {
+      "id": "beat:0066",
+      "time_s": 40.40272108843537,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 16,
+      "is_downbeat": false,
+      "onset_strength": 7.5744853019714355,
+      "novelty": 0.0818298886931222
+    },
+    {
+      "id": "onset:0129",
+      "time_s": 40.658140589569165,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.1656529903411865
+    },
+    {
+      "id": "onset:0130",
+      "time_s": 40.77424036281179,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.4495980739593506
+    },
+    {
+      "id": "onset:0131",
+      "time_s": 40.84390022675737,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.881376266479492
+    },
+    {
+      "id": "beat:0067",
+      "time_s": 40.91356009070295,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 16,
+      "is_downbeat": false,
+      "onset_strength": 3.695420265197754,
+      "novelty": 0.2000352243439454
+    },
+    {
+      "id": "onset:0132",
+      "time_s": 40.91356009070295,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.695420265197754
+    },
+    {
+      "id": "onset:0133",
+      "time_s": 40.983219954648526,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.7628815174102783
+    },
+    {
+      "id": "onset:0134",
+      "time_s": 41.16897959183674,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.423920631408691
+    },
+    {
+      "id": "bar:17",
+      "time_s": 41.424399092970525,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 43.490975056689344,
+      "index": 17,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0068",
+      "time_s": 41.424399092970525,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 17,
+      "is_downbeat": true,
+      "onset_strength": 4.130988121032715,
+      "novelty": 0.29226900275492507
+    },
+    {
+      "id": "onset:0135",
+      "time_s": 41.424399092970525,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.130988121032715
+    },
+    {
+      "id": "onset:0136",
+      "time_s": 41.67981859410431,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 8.807905197143555
+    },
+    {
+      "id": "onset:0137",
+      "time_s": 41.9352380952381,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.57462477684021
+    },
+    {
+      "id": "beat:0069",
+      "time_s": 41.95845804988662,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 17,
+      "is_downbeat": false,
+      "onset_strength": 3.5838677883148193,
+      "novelty": 0.18954282521377422
+    },
+    {
+      "id": "onset:0138",
+      "time_s": 42.190657596371885,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.62457275390625
+    },
+    {
+      "id": "onset:0139",
+      "time_s": 42.44607709750567,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.345470428466797
+    },
+    {
+      "id": "beat:0070",
+      "time_s": 42.4692970521542,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 17,
+      "is_downbeat": false,
+      "onset_strength": 5.826962471008301,
+      "novelty": 0.16018538257184545
+    },
+    {
+      "id": "onset:0140",
+      "time_s": 42.72471655328798,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.418253183364868
+    },
+    {
+      "id": "beat:0071",
+      "time_s": 42.98013605442177,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 17,
+      "is_downbeat": false,
+      "onset_strength": 6.2279953956604,
+      "novelty": 0.1104833686568817
+    },
+    {
+      "id": "onset:0141",
+      "time_s": 42.98013605442177,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.2279953956604
+    },
+    {
+      "id": "onset:0142",
+      "time_s": 43.23555555555556,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.671851634979248
+    },
+    {
+      "id": "onset:0143",
+      "time_s": 43.46775510204082,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3508310317993164
+    },
+    {
+      "id": "bar:18",
+      "time_s": 43.490975056689344,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 45.55755102040816,
+      "index": 18,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0072",
+      "time_s": 43.490975056689344,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 18,
+      "is_downbeat": true,
+      "onset_strength": 4.906308650970459,
+      "novelty": 0.14662169390167504
+    },
+    {
+      "id": "onset:0144",
+      "time_s": 43.67673469387755,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.2289857864379883
+    },
+    {
+      "id": "onset:0145",
+      "time_s": 43.97859410430839,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.740579605102539
+    },
+    {
+      "id": "beat:0073",
+      "time_s": 44.00181405895692,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 18,
+      "is_downbeat": false,
+      "onset_strength": 3.5306177139282227,
+      "novelty": 0.0928340939627185
+    },
+    {
+      "id": "onset:0146",
+      "time_s": 44.35011337868481,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.411944627761841
+    },
+    {
+      "id": "onset:0147",
+      "time_s": 44.51265306122449,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.8369343280792236
+    },
+    {
+      "id": "beat:0074",
+      "time_s": 44.535873015873015,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 18,
+      "is_downbeat": false,
+      "onset_strength": 6.000173568725586,
+      "novelty": 0.06323133733583536
+    },
+    {
+      "id": "onset:0148",
+      "time_s": 45.023492063492064,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.292879581451416
+    },
+    {
+      "id": "beat:0075",
+      "time_s": 45.04671201814059,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 18,
+      "is_downbeat": false,
+      "onset_strength": 5.136957168579102,
+      "novelty": 0.12875419690780793
+    },
+    {
+      "id": "onset:0149",
+      "time_s": 45.186031746031745,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.154336929321289
+    },
+    {
+      "id": "onset:0150",
+      "time_s": 45.302131519274376,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3776540756225586
+    },
+    {
+      "id": "onset:0151",
+      "time_s": 45.44145124716553,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.7760746479034424
+    },
+    {
+      "id": "bar:19",
+      "time_s": 45.55755102040816,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 47.62412698412698,
+      "index": 19,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0076",
+      "time_s": 45.55755102040816,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 19,
+      "is_downbeat": true,
+      "onset_strength": 7.385130405426025,
+      "novelty": 0.12144303241947844
+    },
+    {
+      "id": "onset:0152",
+      "time_s": 45.55755102040816,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 7.385130405426025
+    },
+    {
+      "id": "onset:0153",
+      "time_s": 45.81297052154195,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.5775997638702393
+    },
+    {
+      "id": "onset:0154",
+      "time_s": 46.068390022675736,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.9844257831573486
+    },
+    {
+      "id": "beat:0077",
+      "time_s": 46.09160997732426,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 19,
+      "is_downbeat": false,
+      "onset_strength": 3.6818652153015137,
+      "novelty": 0.07180051087860997
+    },
+    {
+      "id": "onset:0155",
+      "time_s": 46.32380952380952,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.520078659057617
+    },
+    {
+      "id": "beat:0078",
+      "time_s": 46.602448979591834,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 19,
+      "is_downbeat": false,
+      "onset_strength": 7.9282307624816895,
+      "novelty": 0.11325117132167974
+    },
+    {
+      "id": "onset:0156",
+      "time_s": 46.602448979591834,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 7.9282307624816895
+    },
+    {
+      "id": "onset:0157",
+      "time_s": 46.85786848072562,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.731429100036621
+    },
+    {
+      "id": "beat:0079",
+      "time_s": 47.11328798185941,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 19,
+      "is_downbeat": false,
+      "onset_strength": 4.030268669128418,
+      "novelty": 0.20175449034508472
+    },
+    {
+      "id": "onset:0158",
+      "time_s": 47.11328798185941,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.030268669128418
+    },
+    {
+      "id": "onset:0159",
+      "time_s": 47.34548752834467,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.353457450866699
+    },
+    {
+      "id": "onset:0160",
+      "time_s": 47.600907029478456,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.159472942352295
+    },
+    {
+      "id": "bar:20",
+      "time_s": 47.62412698412698,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 49.69070294784581,
+      "index": 20,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0080",
+      "time_s": 47.62412698412698,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 20,
+      "is_downbeat": true,
+      "onset_strength": 2.7639594078063965,
+      "novelty": 0.3763763084758821
+    },
+    {
+      "id": "onset:0161",
+      "time_s": 47.67056689342404,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.054739236831665
+    },
+    {
+      "id": "onset:0162",
+      "time_s": 47.809886621315194,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.415739059448242
+    },
+    {
+      "id": "onset:0163",
+      "time_s": 47.9956462585034,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.1693480014801025
+    },
+    {
+      "id": "beat:0081",
+      "time_s": 48.15818594104309,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 20,
+      "is_downbeat": false,
+      "onset_strength": 4.115993976593018,
+      "novelty": 0.37498445209596604
+    },
+    {
+      "id": "onset:0164",
+      "time_s": 48.15818594104309,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.115993976593018
+    },
+    {
+      "id": "onset:0165",
+      "time_s": 48.29750566893424,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.041343688964844
+    },
+    {
+      "id": "onset:0166",
+      "time_s": 48.529705215419504,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 1.9088599681854248
+    },
+    {
+      "id": "onset:0167",
+      "time_s": 48.66902494331066,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.968416690826416
+    },
+    {
+      "id": "beat:0082",
+      "time_s": 48.692244897959185,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 20,
+      "is_downbeat": false,
+      "onset_strength": 5.924676895141602,
+      "novelty": 0.48403891784849823
+    },
+    {
+      "id": "onset:0168",
+      "time_s": 49.0637641723356,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.969273328781128
+    },
+    {
+      "id": "beat:0083",
+      "time_s": 49.22630385487528,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 20,
+      "is_downbeat": false,
+      "onset_strength": 3.3839144706726074,
+      "novelty": 0.5276238625025815
+    },
+    {
+      "id": "onset:0169",
+      "time_s": 49.22630385487528,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3839144706726074
+    },
+    {
+      "id": "novelty_peak:001",
+      "time_s": 49.22630385487528,
+      "source": "novelty",
+      "confidence": null,
+      "type": "novelty_peak",
+      "value": 0.5276238625025815
+    },
+    {
+      "id": "onset:0170",
+      "time_s": 49.504943310657595,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.544783115386963
+    },
+    {
+      "id": "bar:21",
+      "time_s": 49.69070294784581,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 51.757278911564626,
+      "index": 21,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0084",
+      "time_s": 49.69070294784581,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 21,
+      "is_downbeat": true,
+      "onset_strength": 5.467189788818359,
+      "novelty": 0.48256829699898574
+    },
+    {
+      "id": "onset:0171",
+      "time_s": 49.69070294784581,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.467189788818359
+    },
+    {
+      "id": "onset:0172",
+      "time_s": 49.946122448979594,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.6984646320343018
+    },
+    {
+      "id": "onset:0173",
+      "time_s": 50.108662131519274,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.7127795219421387
+    },
+    {
+      "id": "beat:0085",
+      "time_s": 50.224761904761905,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 21,
+      "is_downbeat": false,
+      "onset_strength": 1.4532699584960938,
+      "novelty": 0.35142192360192964
+    },
+    {
+      "id": "onset:0174",
+      "time_s": 50.45696145124717,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.621973752975464
+    },
+    {
+      "id": "onset:0175",
+      "time_s": 50.68916099773243,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.4248046875
+    },
+    {
+      "id": "beat:0086",
+      "time_s": 50.73560090702948,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 21,
+      "is_downbeat": false,
+      "onset_strength": 5.707939624786377,
+      "novelty": 0.20271527967639036
+    },
+    {
+      "id": "onset:0176",
+      "time_s": 50.991020408163266,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.159151077270508
+    },
+    {
+      "id": "beat:0087",
+      "time_s": 51.24643990929705,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 21,
+      "is_downbeat": false,
+      "onset_strength": 4.068444728851318,
+      "novelty": 0.1328357080365776
+    },
+    {
+      "id": "onset:0177",
+      "time_s": 51.24643990929705,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.068444728851318
+    },
+    {
+      "id": "onset:0178",
+      "time_s": 51.43219954648526,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.867367744445801
+    },
+    {
+      "id": "onset:0179",
+      "time_s": 51.50185941043084,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.2251625061035156
+    },
+    {
+      "id": "bar:22",
+      "time_s": 51.757278911564626,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 53.823854875283445,
+      "index": 22,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0088",
+      "time_s": 51.757278911564626,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 22,
+      "is_downbeat": true,
+      "onset_strength": 1.3556371927261353,
+      "novelty": 0.0852016003619902
+    },
+    {
+      "id": "onset:0180",
+      "time_s": 51.89659863945578,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.917776346206665
+    },
+    {
+      "id": "onset:0181",
+      "time_s": 52.01269841269841,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.017874240875244
+    },
+    {
+      "id": "onset:0182",
+      "time_s": 52.22167800453515,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.465543270111084
+    },
+    {
+      "id": "beat:0089",
+      "time_s": 52.2681179138322,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 22,
+      "is_downbeat": false,
+      "onset_strength": 2.517000675201416,
+      "novelty": 0.07609702018096859
+    },
+    {
+      "id": "onset:0183",
+      "time_s": 52.38421768707483,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.952694416046143
+    },
+    {
+      "id": "onset:0184",
+      "time_s": 52.73251700680272,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.753000020980835
+    },
+    {
+      "id": "beat:0090",
+      "time_s": 52.8021768707483,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 22,
+      "is_downbeat": false,
+      "onset_strength": 6.319620609283447,
+      "novelty": 0.07460448111665179
+    },
+    {
+      "id": "onset:0185",
+      "time_s": 52.8021768707483,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.319620609283447
+    },
+    {
+      "id": "onset:0186",
+      "time_s": 53.057596371882084,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.7568881511688232
+    },
+    {
+      "id": "onset:0187",
+      "time_s": 53.2433560090703,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3161802291870117
+    },
+    {
+      "id": "beat:0091",
+      "time_s": 53.26657596371882,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 22,
+      "is_downbeat": false,
+      "onset_strength": 4.871481895446777,
+      "novelty": 0.13428656684604387
+    },
+    {
+      "id": "onset:0188",
+      "time_s": 53.56843537414966,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.328598976135254
+    },
+    {
+      "id": "bar:23",
+      "time_s": 53.823854875283445,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 55.913650793650795,
+      "index": 23,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0092",
+      "time_s": 53.823854875283445,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 23,
+      "is_downbeat": true,
+      "onset_strength": 4.432492256164551,
+      "novelty": 0.09089314070546607
+    },
+    {
+      "id": "onset:0189",
+      "time_s": 53.823854875283445,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.432492256164551
+    },
+    {
+      "id": "beat:0093",
+      "time_s": 54.35791383219954,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 23,
+      "is_downbeat": false,
+      "onset_strength": 2.8067357540130615,
+      "novelty": 0.0998740155352068
+    },
+    {
+      "id": "onset:0190",
+      "time_s": 54.35791383219954,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.8067357540130615
+    },
+    {
+      "id": "onset:0191",
+      "time_s": 54.427573696145124,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.6137537956237793
+    },
+    {
+      "id": "onset:0192",
+      "time_s": 54.61333333333334,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.7499747276306152
+    },
+    {
+      "id": "beat:0094",
+      "time_s": 54.868752834467124,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 23,
+      "is_downbeat": false,
+      "onset_strength": 6.342080116271973,
+      "novelty": 0.050700183243143536
+    },
+    {
+      "id": "onset:0193",
+      "time_s": 54.868752834467124,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.342080116271973
+    },
+    {
+      "id": "onset:0194",
+      "time_s": 55.12417233560091,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.7259347438812256
+    },
+    {
+      "id": "onset:0195",
+      "time_s": 55.309931972789116,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.613861560821533
+    },
+    {
+      "id": "beat:0095",
+      "time_s": 55.3795918367347,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 23,
+      "is_downbeat": false,
+      "onset_strength": 4.882354259490967,
+      "novelty": 0.046305993720237346
+    },
+    {
+      "id": "onset:0196",
+      "time_s": 55.3795918367347,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.882354259490967
+    },
+    {
+      "id": "onset:0197",
+      "time_s": 55.54213151927438,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.290637016296387
+    },
+    {
+      "id": "onset:0198",
+      "time_s": 55.77433106575964,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.4195191860198975
+    },
+    {
+      "id": "bar:24",
+      "time_s": 55.913650793650795,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 57.95700680272109,
+      "index": 24,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0096",
+      "time_s": 55.913650793650795,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 24,
+      "is_downbeat": true,
+      "onset_strength": 2.5002095699310303,
+      "novelty": 0.06893271307639895
+    },
+    {
+      "id": "onset:0199",
+      "time_s": 55.913650793650795,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.5002095699310303
+    },
+    {
+      "id": "onset:0200",
+      "time_s": 56.122630385487525,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.027486324310303
+    },
+    {
+      "id": "beat:0097",
+      "time_s": 56.42448979591837,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 24,
+      "is_downbeat": false,
+      "onset_strength": 1.3489153385162354,
+      "novelty": 0.05743598322881126
+    },
+    {
+      "id": "onset:0201",
+      "time_s": 56.49414965986394,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.468362331390381
+    },
+    {
+      "id": "onset:0202",
+      "time_s": 56.58702947845805,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.66825795173645
+    },
+    {
+      "id": "onset:0203",
+      "time_s": 56.81922902494331,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.9921956062316895
+    },
+    {
+      "id": "beat:0098",
+      "time_s": 56.93532879818594,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 24,
+      "is_downbeat": false,
+      "onset_strength": 4.872106075286865,
+      "novelty": 0.08339092331514435
+    },
+    {
+      "id": "onset:0204",
+      "time_s": 56.93532879818594,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.872106075286865
+    },
+    {
+      "id": "onset:0205",
+      "time_s": 57.12108843537415,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.2398037910461426
+    },
+    {
+      "id": "onset:0206",
+      "time_s": 57.30684807256236,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.740112543106079
+    },
+    {
+      "id": "beat:0099",
+      "time_s": 57.446167800453516,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 24,
+      "is_downbeat": false,
+      "onset_strength": 4.588128566741943,
+      "novelty": 0.1767161618858948
+    },
+    {
+      "id": "onset:0207",
+      "time_s": 57.446167800453516,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.588128566741943
+    },
+    {
+      "id": "onset:0208",
+      "time_s": 57.7015873015873,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 8.686043739318848
+    },
+    {
+      "id": "onset:0209",
+      "time_s": 57.86412698412698,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.584179401397705
+    },
+    {
+      "id": "bar:25",
+      "time_s": 57.95700680272109,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 60.02358276643991,
+      "index": 25,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0100",
+      "time_s": 57.95700680272109,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 25,
+      "is_downbeat": true,
+      "onset_strength": 4.824754238128662,
+      "novelty": 0.1576332269750378
+    },
+    {
+      "id": "onset:0210",
+      "time_s": 57.95700680272109,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.824754238128662
+    },
+    {
+      "id": "onset:0211",
+      "time_s": 58.212426303854876,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.6188013553619385
+    },
+    {
+      "id": "onset:0212",
+      "time_s": 58.44462585034014,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.6002726554870605
+    },
+    {
+      "id": "beat:0101",
+      "time_s": 58.46784580498866,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 25,
+      "is_downbeat": false,
+      "onset_strength": 2.2970430850982666,
+      "novelty": 0.22888264708307635
+    },
+    {
+      "id": "onset:0213",
+      "time_s": 58.746485260770974,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.9582395553588867
+    },
+    {
+      "id": "beat:0102",
+      "time_s": 59.00190476190476,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 25,
+      "is_downbeat": false,
+      "onset_strength": 5.018219470977783,
+      "novelty": 0.3056345808403605
+    },
+    {
+      "id": "onset:0214",
+      "time_s": 59.00190476190476,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.018219470977783
+    },
+    {
+      "id": "onset:0215",
+      "time_s": 59.25732426303855,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.138424396514893
+    },
+    {
+      "id": "onset:0216",
+      "time_s": 59.48952380952381,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 7.085809707641602
+    },
+    {
+      "id": "beat:0103",
+      "time_s": 59.512743764172335,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 25,
+      "is_downbeat": false,
+      "onset_strength": 7.101869106292725,
+      "novelty": 0.4979589578013899
+    },
+    {
+      "id": "novelty_peak:002",
+      "time_s": 59.512743764172335,
+      "source": "novelty",
+      "confidence": null,
+      "type": "novelty_peak",
+      "value": 0.4979589578013899
+    },
+    {
+      "id": "onset:0217",
+      "time_s": 59.65206349206349,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.5022599697113037
+    },
+    {
+      "id": "onset:0218",
+      "time_s": 59.76816326530612,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.8873021602630615
+    },
+    {
+      "id": "bar:26",
+      "time_s": 60.02358276643991,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 62.11337868480726,
+      "index": 26,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0104",
+      "time_s": 60.02358276643991,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 26,
+      "is_downbeat": true,
+      "onset_strength": 2.9168472290039062,
+      "novelty": 0.30365362579592886
+    },
+    {
+      "id": "onset:0219",
+      "time_s": 60.02358276643991,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.9168472290039062
+    },
+    {
+      "id": "onset:0220",
+      "time_s": 60.162902494331064,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.816336154937744
+    },
+    {
+      "id": "onset:0221",
+      "time_s": 60.30222222222222,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.3384222984313965
+    },
+    {
+      "id": "onset:0222",
+      "time_s": 60.51120181405896,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.748897075653076
+    },
+    {
+      "id": "beat:0105",
+      "time_s": 60.53442176870748,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 26,
+      "is_downbeat": false,
+      "onset_strength": 3.786087989807129,
+      "novelty": 0.2264810751766601
+    },
+    {
+      "id": "onset:0223",
+      "time_s": 60.81306122448979,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.2232933044433594
+    },
+    {
+      "id": "onset:0224",
+      "time_s": 60.929160997732424,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.3236587047576904
+    },
+    {
+      "id": "beat:0106",
+      "time_s": 61.06848072562358,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 26,
+      "is_downbeat": false,
+      "onset_strength": 4.174812316894531,
+      "novelty": 0.19328767791002846
+    },
+    {
+      "id": "onset:0225",
+      "time_s": 61.06848072562358,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.174812316894531
+    },
+    {
+      "id": "onset:0226",
+      "time_s": 61.32390022675737,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.468799114227295
+    },
+    {
+      "id": "onset:0227",
+      "time_s": 61.44,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.2023987770080566
+    },
+    {
+      "id": "onset:0228",
+      "time_s": 61.55609977324263,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.589679718017578
+    },
+    {
+      "id": "beat:0107",
+      "time_s": 61.57931972789115,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 26,
+      "is_downbeat": false,
+      "onset_strength": 8.065698623657227,
+      "novelty": 0.20168198128109074
+    },
+    {
+      "id": "onset:0229",
+      "time_s": 61.718639455782316,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.6157710552215576
+    },
+    {
+      "id": "onset:0230",
+      "time_s": 61.83473922902494,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.2638020515441895
+    },
+    {
+      "id": "onset:0231",
+      "time_s": 62.09015873015873,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3765811920166016
+    },
+    {
+      "id": "bar:27",
+      "time_s": 62.11337868480726,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 64.17995464852608,
+      "index": 27,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0108",
+      "time_s": 62.11337868480726,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 27,
+      "is_downbeat": true,
+      "onset_strength": 5.239645481109619,
+      "novelty": 0.15680425879655843
+    },
+    {
+      "id": "onset:0232",
+      "time_s": 62.368798185941046,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.5704195499420166
+    },
+    {
+      "id": "beat:0109",
+      "time_s": 62.62421768707483,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 27,
+      "is_downbeat": false,
+      "onset_strength": 4.100300312042236,
+      "novelty": 0.144551416776726
+    },
+    {
+      "id": "onset:0233",
+      "time_s": 62.62421768707483,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.100300312042236
+    },
+    {
+      "id": "onset:0234",
+      "time_s": 62.69387755102041,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.2810213565826416
+    },
+    {
+      "id": "onset:0235",
+      "time_s": 62.87963718820862,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.449560642242432
+    },
+    {
+      "id": "onset:0236",
+      "time_s": 63.135056689342406,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.347144603729248
+    },
+    {
+      "id": "beat:0110",
+      "time_s": 63.15827664399093,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 27,
+      "is_downbeat": false,
+      "onset_strength": 5.520807266235352,
+      "novelty": 0.12962482234032888
+    },
+    {
+      "id": "onset:0237",
+      "time_s": 63.39047619047619,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 7.1062822341918945
+    },
+    {
+      "id": "beat:0111",
+      "time_s": 63.64589569160998,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 27,
+      "is_downbeat": false,
+      "onset_strength": 5.744124889373779,
+      "novelty": 0.1429294100417852
+    },
+    {
+      "id": "onset:0238",
+      "time_s": 63.64589569160998,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.744124889373779
+    },
+    {
+      "id": "onset:0239",
+      "time_s": 63.85487528344671,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.0907950401306152
+    },
+    {
+      "id": "bar:28",
+      "time_s": 64.17995464852608,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 66.2465306122449,
+      "index": 28,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0112",
+      "time_s": 64.17995464852608,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 28,
+      "is_downbeat": true,
+      "onset_strength": 4.340311050415039,
+      "novelty": 0.17836006096790294
+    },
+    {
+      "id": "onset:0240",
+      "time_s": 64.17995464852608,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.340311050415039
+    },
+    {
+      "id": "onset:0241",
+      "time_s": 64.43537414965986,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.31020450592041
+    },
+    {
+      "id": "onset:0242",
+      "time_s": 64.57469387755103,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.2731494903564453
+    },
+    {
+      "id": "beat:0113",
+      "time_s": 64.69079365079365,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 28,
+      "is_downbeat": false,
+      "onset_strength": 3.3466219902038574,
+      "novelty": 0.16350394323035988
+    },
+    {
+      "id": "onset:0243",
+      "time_s": 64.69079365079365,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3466219902038574
+    },
+    {
+      "id": "onset:0244",
+      "time_s": 64.83011337868481,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.258255958557129
+    },
+    {
+      "id": "onset:0245",
+      "time_s": 64.94621315192744,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.0929317474365234
+    },
+    {
+      "id": "onset:0246",
+      "time_s": 65.20163265306122,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.146718502044678
+    },
+    {
+      "id": "beat:0114",
+      "time_s": 65.22485260770975,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 28,
+      "is_downbeat": false,
+      "onset_strength": 6.860673427581787,
+      "novelty": 0.11665824791266394
+    },
+    {
+      "id": "onset:0247",
+      "time_s": 65.45705215419501,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3878962993621826
+    },
+    {
+      "id": "onset:0248",
+      "time_s": 65.7124716553288,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.036331653594971
+    },
+    {
+      "id": "beat:0115",
+      "time_s": 65.73569160997732,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 28,
+      "is_downbeat": false,
+      "onset_strength": 3.702223777770996,
+      "novelty": 0.0826060739573781
+    },
+    {
+      "id": "onset:0249",
+      "time_s": 65.96789115646258,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.546509027481079
+    },
+    {
+      "id": "onset:0250",
+      "time_s": 66.22331065759637,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.633264541625977
+    },
+    {
+      "id": "bar:29",
+      "time_s": 66.2465306122449,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 68.31310657596372,
+      "index": 29,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0116",
+      "time_s": 66.2465306122449,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 29,
+      "is_downbeat": true,
+      "onset_strength": 8.213227272033691,
+      "novelty": 0.26029499228345127
+    },
+    {
+      "id": "onset:0251",
+      "time_s": 66.47873015873016,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 7.905700206756592
+    },
+    {
+      "id": "onset:0252",
+      "time_s": 66.66448979591837,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.636078119277954
+    },
+    {
+      "id": "beat:0117",
+      "time_s": 66.75736961451247,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 29,
+      "is_downbeat": false,
+      "onset_strength": 1.5679460763931274,
+      "novelty": 0.21127925992433075
+    },
+    {
+      "id": "onset:0253",
+      "time_s": 67.01278911564626,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3977158069610596
+    },
+    {
+      "id": "onset:0254",
+      "time_s": 67.24498866213152,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.308581829071045
+    },
+    {
+      "id": "beat:0118",
+      "time_s": 67.26820861678004,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 29,
+      "is_downbeat": false,
+      "onset_strength": 3.8510308265686035,
+      "novelty": 0.261474715666625
+    },
+    {
+      "id": "onset:0255",
+      "time_s": 67.54684807256236,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.979998826980591
+    },
+    {
+      "id": "onset:0256",
+      "time_s": 67.77904761904762,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.119265079498291
+    },
+    {
+      "id": "beat:0119",
+      "time_s": 67.80226757369614,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 29,
+      "is_downbeat": false,
+      "onset_strength": 4.066905498504639,
+      "novelty": 0.15460553023899884
+    },
+    {
+      "id": "onset:0257",
+      "time_s": 68.05768707482993,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.086950302124023
+    },
+    {
+      "id": "onset:0258",
+      "time_s": 68.28988662131519,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.2130331993103027
+    },
+    {
+      "id": "bar:30",
+      "time_s": 68.31310657596372,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 70.37968253968253,
+      "index": 30,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0120",
+      "time_s": 68.31310657596372,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 30,
+      "is_downbeat": true,
+      "onset_strength": 4.676348686218262,
+      "novelty": 0.10313813733910285
+    },
+    {
+      "id": "onset:0259",
+      "time_s": 68.42920634920635,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.076676845550537
+    },
+    {
+      "id": "onset:0260",
+      "time_s": 68.5685260770975,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.079222679138184
+    },
+    {
+      "id": "beat:0121",
+      "time_s": 68.82394557823129,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 30,
+      "is_downbeat": false,
+      "onset_strength": 4.709328651428223,
+      "novelty": 0.08953271705980052
+    },
+    {
+      "id": "onset:0261",
+      "time_s": 68.82394557823129,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.709328651428223
+    },
+    {
+      "id": "beat:0122",
+      "time_s": 69.35800453514739,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 30,
+      "is_downbeat": false,
+      "onset_strength": 7.428733825683594,
+      "novelty": 0.1073881514837244
+    },
+    {
+      "id": "onset:0262",
+      "time_s": 69.35800453514739,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 7.428733825683594
+    },
+    {
+      "id": "onset:0263",
+      "time_s": 69.65986394557824,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.811220645904541
+    },
+    {
+      "id": "onset:0264",
+      "time_s": 69.84562358276644,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.4425222873687744
+    },
+    {
+      "id": "beat:0123",
+      "time_s": 69.86884353741496,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 30,
+      "is_downbeat": false,
+      "onset_strength": 5.756502151489258,
+      "novelty": 0.07548181819042327
+    },
+    {
+      "id": "onset:0265",
+      "time_s": 70.12426303854875,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3345019817352295
+    },
+    {
+      "id": "onset:0266",
+      "time_s": 70.26358276643991,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3014769554138184
+    },
+    {
+      "id": "bar:31",
+      "time_s": 70.37968253968253,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 72.44625850340137,
+      "index": 31,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0124",
+      "time_s": 70.37968253968253,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 31,
+      "is_downbeat": true,
+      "onset_strength": 9.046385765075684,
+      "novelty": 0.07378160184853731
+    },
+    {
+      "id": "onset:0267",
+      "time_s": 70.37968253968253,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 9.046385765075684
+    },
+    {
+      "id": "onset:0268",
+      "time_s": 70.6118820861678,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.3310961723327637
+    },
+    {
+      "id": "beat:0125",
+      "time_s": 70.89052154195011,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 31,
+      "is_downbeat": false,
+      "onset_strength": 2.7985236644744873,
+      "novelty": 0.10996529204630308
+    },
+    {
+      "id": "onset:0269",
+      "time_s": 70.89052154195011,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.7985236644744873
+    },
+    {
+      "id": "onset:0270",
+      "time_s": 70.98340136054422,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.433284044265747
+    },
+    {
+      "id": "onset:0271",
+      "time_s": 71.12272108843537,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.6177542209625244
+    },
+    {
+      "id": "onset:0272",
+      "time_s": 71.30848072562358,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.823188304901123
+    },
+    {
+      "id": "beat:0126",
+      "time_s": 71.42458049886622,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 31,
+      "is_downbeat": false,
+      "onset_strength": 5.211099624633789,
+      "novelty": 0.0975583411611823
+    },
+    {
+      "id": "onset:0273",
+      "time_s": 71.42458049886622,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.211099624633789
+    },
+    {
+      "id": "onset:0274",
+      "time_s": 71.68,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.014627456665039
+    },
+    {
+      "id": "beat:0127",
+      "time_s": 71.9354195011338,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 31,
+      "is_downbeat": false,
+      "onset_strength": 3.7933449745178223,
+      "novelty": 0.11571478842787761
+    },
+    {
+      "id": "onset:0275",
+      "time_s": 71.9354195011338,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.7933449745178223
+    },
+    {
+      "id": "onset:0276",
+      "time_s": 72.02829931972789,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.452529191970825
+    },
+    {
+      "id": "onset:0277",
+      "time_s": 72.19083900226758,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.370835781097412
+    },
+    {
+      "id": "onset:0278",
+      "time_s": 72.28371882086168,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.2501652240753174
+    },
+    {
+      "id": "bar:32",
+      "time_s": 72.44625850340137,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 74.53605442176871,
+      "index": 32,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0128",
+      "time_s": 72.44625850340137,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 32,
+      "is_downbeat": true,
+      "onset_strength": 2.487872362136841,
+      "novelty": 0.15528631016885752
+    },
+    {
+      "id": "onset:0279",
+      "time_s": 72.44625850340137,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.487872362136841
+    },
+    {
+      "id": "onset:0280",
+      "time_s": 72.58557823129252,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 6.0323028564453125
+    },
+    {
+      "id": "onset:0281",
+      "time_s": 72.77133786848073,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.754931449890137
+    },
+    {
+      "id": "beat:0129",
+      "time_s": 72.98031746031747,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 32,
+      "is_downbeat": false,
+      "onset_strength": 3.9176554679870605,
+      "novelty": 0.27520829458040325
+    },
+    {
+      "id": "onset:0282",
+      "time_s": 72.98031746031747,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.9176554679870605
+    },
+    {
+      "id": "onset:0283",
+      "time_s": 73.09641723356009,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.078086853027344
+    },
+    {
+      "id": "onset:0284",
+      "time_s": 73.23573696145125,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.679182529449463
+    },
+    {
+      "id": "beat:0130",
+      "time_s": 73.49115646258504,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 32,
+      "is_downbeat": false,
+      "onset_strength": 7.04910135269165,
+      "novelty": 0.4240965743818743
+    },
+    {
+      "id": "onset:0285",
+      "time_s": 73.49115646258504,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 7.04910135269165
+    },
+    {
+      "id": "onset:0286",
+      "time_s": 73.74657596371883,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.608992099761963
+    },
+    {
+      "id": "beat:0131",
+      "time_s": 74.00199546485261,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 4,
+      "bar_index": 32,
+      "is_downbeat": false,
+      "onset_strength": 4.73455810546875,
+      "novelty": 0.43529714628501986
+    },
+    {
+      "id": "onset:0287",
+      "time_s": 74.00199546485261,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.73455810546875
+    },
+    {
+      "id": "novelty_peak:003",
+      "time_s": 74.00199546485261,
+      "source": "novelty",
+      "confidence": null,
+      "type": "novelty_peak",
+      "value": 0.43529714628501986
+    },
+    {
+      "id": "onset:0288",
+      "time_s": 74.2574149659864,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 5.320834636688232
+    },
+    {
+      "id": "onset:0289",
+      "time_s": 74.51283446712019,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.627439498901367
+    },
+    {
+      "id": "bar:33",
+      "time_s": 74.53605442176871,
+      "source": "bar_grid",
+      "confidence": null,
+      "type": "bar",
+      "end_s": 78.01904761904763,
+      "index": 33,
+      "beats_per_bar": 4
+    },
+    {
+      "id": "beat:0132",
+      "time_s": 74.53605442176871,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 1,
+      "bar_index": 33,
+      "is_downbeat": true,
+      "onset_strength": 9.697708129882812,
+      "novelty": 0.4340371046289737
+    },
+    {
+      "id": "onset:0290",
+      "time_s": 74.7914739229025,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.591343641281128
+    },
+    {
+      "id": "beat:0133",
+      "time_s": 75.04689342403628,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 2,
+      "bar_index": 33,
+      "is_downbeat": false,
+      "onset_strength": 4.5652875900268555,
+      "novelty": 0.5549429902088263
+    },
+    {
+      "id": "onset:0291",
+      "time_s": 75.04689342403628,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 4.5652875900268555
+    },
+    {
+      "id": "onset:0292",
+      "time_s": 75.30231292517007,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.094663143157959
+    },
+    {
+      "id": "onset:0293",
+      "time_s": 75.55773242630386,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 3.206350803375244
+    },
+    {
+      "id": "beat:0134",
+      "time_s": 75.58095238095238,
+      "source": "beat_tracker",
+      "confidence": null,
+      "type": "beat",
+      "beat_in_bar": 3,
+      "bar_index": 33,
+      "is_downbeat": false,
+      "onset_strength": 7.643527984619141,
+      "novelty": 0.6975343495519786
+    },
+    {
+      "id": "onset:0294",
+      "time_s": 75.83637188208617,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.9680819511413574
+    },
+    {
+      "id": "onset:0295",
+      "time_s": 76.09179138321996,
+      "source": "onset_detector",
+      "confidence": null,
+      "type": "onset",
+      "strength": 2.6195902824401855
+    }
+  ]
+}

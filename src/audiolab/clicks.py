@@ -67,6 +67,14 @@ def beat_diagnostics(
     - `tempo_scores`: autocorrelation strength at half, 1x and double the detected beat period,
       as a hint to octave errors (a larger half or double score than 1x is a warning sign).
     """
+    nan = float("nan")
+    if len(beat_times) < 2 or len(onset_env) == 0:
+        # Silence, or audio whose channels cancel when mixed to mono, has no beats to measure.
+        return {
+            "beat_onset_ratio": nan,
+            "phase_peak_offset": nan,
+            "tempo_scores": {"half": nan, "detected": nan, "double": nan},
+        }
     fps = sr / hop_length
     frames = np.round(beat_times * fps).astype(int)
     frames = frames[(frames >= 0) & (frames < len(onset_env))]

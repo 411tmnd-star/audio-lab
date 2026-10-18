@@ -11,10 +11,27 @@ import numpy as np
 from audiolab.config import AudioConfig
 
 
+SILENCE_PEAK = 1e-4  # -80 dBFS: below this there is nothing to analyze (a -70 dBFS file still passes)
+
+
+class UnanalyzableAudioError(ValueError):
+    """The audio decoded fine but contains nothing the analysis can work on."""
+
+
 def load_audio(path: str | Path, cfg: AudioConfig) -> tuple[np.ndarray, int]:
     """Load an audio file as a float32 array at cfg.sample_rate."""
     y, sr = librosa.load(str(path), sr=cfg.sample_rate, mono=cfg.mono)
     return y, sr
+
+
+def require_signal(y: np.ndarray, path: str | Path) -> None:
+    """Raise UnanalyzableAudioError for digital silence, including stereo whose channels cancel
+    when mixed to mono."""
+    if y.size == 0 or float(np.max(np.abs(y))) < SILENCE_PEAK:
+        raise UnanalyzableAudioError(
+            f"{Path(path).name}: the audio is silent (or its channels cancel when mixed to mono), "
+            "so there is nothing to analyze"
+        )
 
 
 def song_output_dir(root: str | Path, song_path: str | Path) -> Path:

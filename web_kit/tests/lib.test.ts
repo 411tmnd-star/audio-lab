@@ -29,7 +29,7 @@ const throwsAt = (fn: () => unknown, path: RegExp) =>
 
 describe("the real exported bundle", () => {
   it("parses the manifest, every timeline and every curves file", () => {
-    assert.deepEqual(manifest.songs.map((s) => s.id), ["seyi", "detty"]);
+    assert.deepEqual(manifest.songs.map((s) => s.id), ["seyi", "detty", "jeriq-airplane-mode"]);
     for (const song of manifest.songs) {
       assert.deepEqual(song.profiles.map((p) => p.id), PROFILES);
       for (const p of PROFILES) {
