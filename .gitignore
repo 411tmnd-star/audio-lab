@@ -31,3 +31,13 @@ pnpm-debug.log*
 *.swo
 .DS_Store
 Thumbs.db
+
+# Local working folders (project history, snapshots, scratch captures); not part of the published project
+/audio_lab_m0_run/
+/audio_lab_snapshots/
+/audio_lab_work/
+/scratch_shots/
+*.npz
+web_kit/preview/dist/core.*
+web_kit/preview/dist/matrix.*
+web_kit/preview/dist/glhost.*

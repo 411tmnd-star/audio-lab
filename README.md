@@ -1,85 +1,78 @@
-﻿# AudioLab
+﻿# Audio Lab
 
-AudioLab is an active research and development project for per-song audio
-analysis, structured interpretation, and audio-driven visual experiences.
+Audio Lab turns a song into a live, music-driven visual. A Python pipeline analyses the audio (tempo, beats, bars, spectral bands, onsets) and interprets it. A browser app then plays that analysis through four real-time visuals built with React, TypeScript and Three.js.
 
-The project combines a Python analysis package with a browser-based
-visualization workspace. Its implementation and verification status are
-evolving; individual capabilities should be treated as complete only where
-supported by code and test evidence.
+| Squall: a weather map | Accretion: a black hole |
+|---|---|
+| ![Squall](designs/accretion/screenshots/04-squall-for-comparison.png) | ![Accretion](designs/accretion/screenshots/02-playing-jets.png) |
+| **Constellation Core: a planetary system** | **Spectrum Matrix: a terrain** |
+| ![Constellation Core](designs/constellation-core/screenshots/02-playing.png) | ![Spectrum Matrix](designs/spectrum-matrix/screenshots/02-playing.png) |
 
-## Project Areas
+All four read the same audio features, so any song drives any visual. Constellation Core and Spectrum Matrix share a source picker: a built-in demo, three pre-analysed songs, an uploaded file or the microphone.
 
-### Python analysis — `src/audiolab/`
-- Audio input and analysis pipeline
-- Feature extraction, beats, bars, novelty, and events
-- Song analysis schemas and structured exports
-- Interpretation rules and validation
-- Motion timeline generation and review
-- Visual mapping, signal processing, and calibration
-- Command-line entry points
+## How it works
 
-### Browser visualization — `web_kit/`
-- Audio-reactive visual experiments and rendering
-- Constellation and particle-based visualizations
-- Motion Lab and instrument visualization work
-- Squall visual experiments
-- Research notes, design documentation, and test artifacts
+    audio file
+       |
+       v
+    1. analyze          tempo, beats, bars, band energy, onsets        -> song_analysis.json
+       |
+    2. interpret        rule-based reading of the analysis             -> song_interpretation.json
+       |
+    3. visual mapping   audio features -> visual signals (3 profiles)
+       |
+    4. motion           scene states (rest, build, active, settle)     -> motion timeline
+       |
+    5. export           compact bundles for the browser                -> web_kit/public/motion/
+       |
+       v
+    browser app         plays the timeline, or analyses live audio, and drives the visuals
 
-### Supporting material
-- `configs/` — analysis, interpretation, motion, and visual profiles
-- `schemas/` — versioned JSON schemas
-- `tests/` — Python tests
-- `scripts/` — supporting utilities
-- `AUDIO_LAB_UPGRADE_SPEC.md` — upgrade decisions, evidence labels,
-  architecture, proposed milestones, risks, and open work
+Every stage writes a versioned JSON artifact validated against a schema in `schemas/`. The analysis stage is deterministic: the same audio and configuration give byte-identical arrays.
 
-## Python Setup
+## Verification
 
-Python 3.10 or later is required.
+- Python: 385 tests (pytest).
+- Browser kit: 263 unit tests, a clean TypeScript check, and real-browser checks with a GPU: 70 for Constellation Core, 60 for Spectrum Matrix and 13 for the live-versus-offline pipeline.
+- Both new visuals hold 60 fps on integrated graphics (median frame 16.7 ms).
 
-From the repository root:
+Details, numbers and the known limitations are in [docs/engineering](docs/engineering/README.md).
+
+## Repository layout
+
+| Path | Contents |
+|---|---|
+| `src/audiolab/` | Python package: analysis, interpretation, visual mapping, motion, CLI |
+| `web_kit/` | Browser app and the four visuals ([design notes](web_kit/DESIGN.md)) |
+| `designs/` | Per-visual notes and screenshots: `accretion/`, `constellation-core/`, `spectrum-matrix/` |
+| `samples/` | Real pipeline output for three songs (JSON and plots) |
+| `configs/`, `schemas/` | Analysis, interpretation, motion and visual-profile configs; versioned JSON schemas |
+| `tests/`, `scripts/` | Python tests; the export script and the upload-demo server |
+| `docs/` | Engineering notes and the upgrade analysis |
+
+## Run it
+
+Python 3.10 or later and Node 22.7 or later (developed on Node 24).
 
     python -m venv .venv
-
-On Windows PowerShell:
-
-    .\.venv\Scripts\Activate.ps1
-    python -m pip install --upgrade pip
+    .\.venv\Scripts\Activate.ps1          # Windows PowerShell
     python -m pip install -e ".[dev]"
-
-Run the Python test suite with:
-
     python -m pytest
 
-Inspect the command-line options with:
+Analyse a song and open the upload demo:
 
     audiolab --help
+    python scripts/demo_server.py         # http://localhost:8765, see DEMO.md
 
-These are setup and verification instructions; successful execution has not
-been asserted by this README.
+Browser kit, from `web_kit/`:
 
-## Browser Workspace
+    npm install
+    npm test
+    node preview/build.mjs                # bundle the previews
+    node preview/serve.mjs 5353           # Squall at http://localhost:5353/squall
+    node preview/serve-gl.mjs 5354        # /accretion, /core and /matrix on port 5354
 
-The `web_kit/` directory contains its own browser-based implementation and
-supporting artifacts. Consult `web_kit/package.json` and `web_kit/DESIGN.md`
-for the available scripts and design-specific setup.
+## Notes
 
-## Reproducibility and Evidence
-
-Audio analysis and visualization can depend on input media, configuration,
-runtime dependencies, and browser or rendering behavior. Record these
-conditions when evaluating results. Proposed milestones and research notes
-are not proof of completed implementation.
-
-## Data and Media
-
-Personal audio samples and other local media are not required to publish
-the source code. Audio files are excluded by the repository ignore rules;
-supply media you have permission to use when running local experiments.
-
-## Status
-
-Active development. This repository preserves the current project structure
-and supporting research; it does not claim production readiness or
-independent validation of every feature.
+- Audio files are not included. Supply files you have permission to use; the visuals also run on a built-in synthetic demo and the microphone.
+- `AUDIO_LAB_UPGRADE_SPEC.md` is the planning document for the next upgrade round.
