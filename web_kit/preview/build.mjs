@@ -1,12 +1,12 @@
-// Builds every preview bundle: node preview/build.mjs [app instrument squall]
+// Builds every preview bundle: node preview/build.mjs [app instrument squall accretion]
 import { build } from "esbuild";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const targets = { app: "entry.tsx", instrument: "instrument-entry.tsx", squall: "squall-entry.tsx" };
-const css = { app: "input.css", instrument: "input.css", squall: "input.css" };
+const targets = { app: "entry.tsx", instrument: "instrument-entry.tsx", squall: "squall-entry.tsx", accretion: "accretion-entry.tsx" };
+const css = { app: "input.css", instrument: "input.css", squall: "input.css", accretion: "input.css" };
 const want = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(targets);
 
 for (const name of want) {
