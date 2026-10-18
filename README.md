@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/411tmnd-star/audio-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/411tmnd-star/audio-lab/actions/workflows/ci.yml)
 
+**Live demo: [audio-lab-git-main-411-004b.vercel.app](https://audio-lab-git-main-411-004b.vercel.app)** (pick a visual, then press Demo, choose a pre-analysed song, or use your microphone)
+
 Audio Lab turns a song into a live, music-driven visual. A Python pipeline analyses the audio (tempo, beats, bars, spectral bands, onsets) and interprets it. A browser app then plays that analysis through four real-time visuals built with React, TypeScript and Three.js.
 
 | Squall: a weather map | Accretion: a black hole |
