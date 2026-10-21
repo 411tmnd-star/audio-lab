@@ -18,6 +18,18 @@ const map = {
   "/matrix": "preview/matrix.html",
   "/matrix.js": "preview/dist/matrix.js",
   "/matrix.css": "preview/dist/matrix.css",
+  "/resonator": "preview/resonator.html",
+  "/resonator.js": "preview/dist/resonator.js",
+  "/resonator.css": "preview/dist/resonator.css",
+  "/score": "preview/score.html",
+  "/score.js": "preview/dist/score.js",
+  "/score.css": "preview/dist/score.css",
+  "/terrain": "preview/terrain.html",
+  "/terrain.js": "preview/dist/terrain.js",
+  "/terrain.css": "preview/dist/terrain.css",
+  "/chroma": "preview/chroma.html",
+  "/chroma.js": "preview/dist/chroma.js",
+  "/chroma.css": "preview/dist/chroma.css",
 };
 createServer(async (req, res) => {
   const p = decodeURIComponent(new URL(req.url, "http://x").pathname);

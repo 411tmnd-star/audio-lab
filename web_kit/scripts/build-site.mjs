@@ -13,6 +13,10 @@ const visuals = [
   { id: "accretion", title: "Accretion", tagline: "A black hole seen from the side. The disk turns with the music and bass hits fire the jets.", shot: "designs/accretion/screenshots/02-playing-jets.png" },
   { id: "core", title: "Constellation Core", tagline: "A glowing core with orbiting moons and rings. Bass swells it, mids speed the orbits, hits surge the beam.", shot: "designs/constellation-core/screenshots/02-playing.png" },
   { id: "matrix", title: "Spectrum Matrix", tagline: "A wireframe terrain shaped by bass, mids and highs. Bass hits raise a ridge across it.", shot: "designs/spectrum-matrix/screenshots/02-playing.png" },
+  { id: "resonator", title: "Resonator", tagline: "A glass orb and plasma heart inside concentric fluid ribbons. Bass pulses the core, highs ripple the outer rings, onsets flash the gold tracks.", shot: "designs/resonator/screenshots/02-playing.png" },
+  { id: "score", title: "Score", tagline: "Music written as it plays: three lanes scroll right to left, bass in amber, mids in cyan, highs in violet, with detected onsets marked.", shot: "designs/score/screenshots/01-pattern.png" },
+  { id: "terrain", title: "Terrain with Memory", tagline: "The music becomes land. Bass raises ridges, mids roll valleys, highs add fine crests, and the terrain keeps what was played as it recedes.", shot: "designs/terrain/screenshots/terrain-08-detty-live.png" },
+  { id: "chroma", title: "Chroma Field", tagline: "A volume of drifting colour and particles. Bass swells it, mids swirl it, highs shimmer and scatter colour, onsets burst through it.", shot: "designs/chroma/screenshots/chroma-07-detty-live.png" },
 ];
 
 execFileSync(process.execPath, [join(root, "preview", "build.mjs"), ...visuals.map((v) => v.id)], { stdio: "inherit", cwd: root });
@@ -49,7 +53,7 @@ const cards = visuals.map((v) => `
 writeFileSync(join(out, "index.html"), `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,"><title>Audio Lab</title>
-<meta name="description" content="Four real-time, music-driven visuals built with React, TypeScript and Three.js, fed by a Python audio-analysis pipeline.">
+<meta name="description" content="Eight real-time, music-driven visuals built with React, TypeScript and Three.js, fed by a Python audio-analysis pipeline.">
 <style>
 :root{color-scheme:dark;--bg:#04060d;--panel:#0b1020;--line:#1a2340;--text:#e8eefc;--muted:#93a3c4;--accent:#6aa8ff}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
@@ -65,7 +69,7 @@ h1{font-size:clamp(2rem,5vw,3rem);margin:0 0 12px;letter-spacing:-.02em}
 @media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
 </style></head><body><main>
 <h1>Audio Lab</h1>
-<p class="lede">Four real-time visuals that react to music. A Python pipeline analyses each song (tempo, beats, bands, onsets); a browser app plays the result through React, TypeScript and Three.js. Pick a visual, then choose Demo, a pre-analysed song, or your microphone.</p>
+<p class="lede">Eight real-time visuals that react to music. A Python pipeline analyses each song (tempo, beats, bands, onsets); a browser app plays the result through React, TypeScript and Three.js. Pick a visual, then choose Demo, a pre-analysed song, or your microphone.</p>
 <div class="grid">${cards}
 </div>
 <p class="how">Pre-analysed songs play as a silent, synced visual: only the analysis data is hosted, never the audio. Source code, tests and engineering notes: <a href="https://github.com/411tmnd-star/audio-lab">github.com/411tmnd-star/audio-lab</a>.</p>

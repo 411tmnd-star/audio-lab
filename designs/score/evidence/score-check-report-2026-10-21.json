@@ -1,0 +1,631 @@
+{
+ "when": "2026-10-21T06:11:03.480Z",
+ "completed": true,
+ "results": [
+  {
+   "kind": "SYNTHETIC",
+   "name": "no console errors, exceptions or WebGL warnings",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "the host is ready and drawing",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "the frame is mostly dark with the instrument lit (mean luminance 0.01..0.20, corners dark)",
+   "ok": true,
+   "detail": "mean 0.027"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "draw calls stay small (<= 20)",
+   "ok": true,
+   "detail": "13 calls, 542 triangles, 7 programs"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "bass: a full bass level FILLS the bass lane (mean luminance up by 0.1+, trace spread up by 0.4+ units), and the mid and high lanes do not move",
+   "ok": true,
+   "detail": "{\"fillLift\":0.20644006355642736,\"spread\":0.6985404662824316,\"midCentre\":0,\"highSpread\":0}"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "mid: a full mid level RAISES the mid trace (by 0.8+ world units) and the bass and high lanes do not move",
+   "ok": true,
+   "detail": "{\"centre\":1.40586376085753,\"bassSpread\":0,\"highSpread\":0}"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "high: a full high level WIDENS the fine trace around its centre line (spread up by 0.15+ units) and the bass and mid lanes do not move",
+   "ok": true,
+   "detail": "{\"spread\":0.20171815902049064,\"midCentre\":0,\"bassSpread\":0}"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "the three lanes are different kinds of mark: the bass lane's fill carries far more light than the mid or high trace (3x or more)",
+   "ok": true,
+   "detail": "bass fill 0.206"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "lane hues are the specified ones: bass amber (R > G > B), mid cyan (R lowest, G and B high), high violet (R and B above G)",
+   "ok": true,
+   "detail": "bass 92,56,6 mid 3,12,19 high 8,4,18"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "one sample per playhead step at most: appended is well under frames offered, and no two samples are closer than the step",
+   "ok": true,
+   "detail": "871 of 1788, min spacing 0.032 s"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "samples are strictly ordered in time and no gap broke the line",
+   "ok": true,
+   "detail": "maxDt 0.034"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "history is bounded by its capacity",
+   "ok": true,
+   "detail": "421"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "one marker per kick: the 120 BPM pattern's onsets are recorded once each, at 0.5 s spacing (within one frame)",
+   "ok": true,
+   "detail": "28 markers, max offset from a kick 0.001 s"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "no duplicate markers: onsets recorded equal onsets asserted",
+   "ok": true,
+   "detail": "34 recorded"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "each marker sits on its kick's attack edge on screen (median distance <= 4 px at three instants): history and markers share one timeline",
+   "ok": true,
+   "detail": "1.000 1.000 1.000"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "history advances right to left at the stated rate: a 0.2 s advance of the clock moves the markers left by 0.2 x px/s (+-2 px)",
+   "ok": true,
+   "detail": "expected -14.973 px, measured -15.000 px"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "a one-frame onset records exactly one marker; two separate onsets record two",
+   "ok": true,
+   "detail": "+1, +2"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "paused: no samples or markers are added while frames keep being drawn, and the clock holds still",
+   "ok": true,
+   "detail": "count 512 -> 512, now 20.817 -> 20.817"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "paused: the picture is frozen (lane luminance within 0.0005; every marker and attack stays on exactly the same screen column)",
+   "ok": true,
+   "detail": "bass 0.117 -> 0.117, 19 markers"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "resumed: recording continues from the same playhead with no gap, and the clock moves again",
+   "ok": true,
+   "detail": "appended 1074 -> 1149, now 20.817 -> 23.334"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "a 6x slower main thread (a much lower and uneven frame rate): the clock still tracks the playhead (within 0.12 s), order holds and no duplicate samples appear",
+   "ok": true,
+   "detail": "frame interval median 22.400 ms, clock error -0.004 s"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "changing source clears the old record: the history restarts from the new source's timeline",
+   "ok": true,
+   "detail": "resets 10 -> 11, count 46"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "720p: frame interval median <= 20 ms, under 2% of frames over 33 ms",
+   "ok": true,
+   "detail": "median 16.700 over33 0.000"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "720p: main-thread cost per frame median <= 2 ms",
+   "ok": true,
+   "detail": "0.600 ms"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "720p: synchronous GPU time median <= 5 ms",
+   "ok": true,
+   "detail": "4.000 ms"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "1080p window: frame interval median <= 20 ms, under 2% over 33 ms",
+   "ok": true,
+   "detail": "median 16.700"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "playing for 20 s does not grow the JS heap by more than 1 MB (after GC), and GPU geometry count is steady",
+   "ok": true,
+   "detail": "growth 146 KB, geometries 10 -> 10"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "unmounting disposes the host and the scene",
+   "ok": true,
+   "detail": "{\"h\":{\"created\":1,\"disposed\":1},\"s\":{\"created\":1,\"disposed\":1},\"dbg\":false}"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "remounting draws again and a new source fills a fresh history",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "context loss is reported",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "context restore redraws the lanes from the preserved history (lit, history kept)",
+   "ok": true,
+   "detail": "bass lane 0.108, samples 153"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "desktop 1280x900: all three lanes are visible inside the canvas",
+   "ok": true,
+   "detail": "lane luminance 0.029 0.050 0.114"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "phone 390x844: all three lanes are visible inside the canvas",
+   "ok": true,
+   "detail": "lane luminance 0.037 0.058 0.120"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "square 900x900: all three lanes are visible inside the canvas",
+   "ok": true,
+   "detail": "lane luminance 0.029 0.051 0.124"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "prefers-reduced-motion: the scroll (the data) continues, and the marker arrival lift is switched off",
+   "ok": true,
+   "detail": "now 3.550 -> 5.083"
+  },
+  {
+   "kind": "DETTY",
+   "name": "the manifest song loads through loadOfflineSource (the source picker's call) and plays",
+   "ok": true,
+   "detail": "{\"kind\":\"offline\",\"label\":\"Detty - Party scatter demo\",\"duration\":113.454558}"
+  },
+  {
+   "kind": "DETTY",
+   "name": "Detty feeds the scene: history fills in order and spacing is at least the step",
+   "ok": true,
+   "detail": "437 samples"
+  },
+  {
+   "kind": "DETTY",
+   "name": "every onset edge Detty asserted during playback is a marker at exactly that playhead time, none missed, none duplicated",
+   "ok": true,
+   "detail": "32 edges, 32 markers"
+  },
+  {
+   "kind": "DETTY",
+   "name": "Detty frame pacing: median interval <= 20 ms, under 2% over 33 ms",
+   "ok": true,
+   "detail": "median 16.700 over33 0.000"
+  },
+  {
+   "kind": "DETTY",
+   "name": "Detty frame: all three lanes lit, corners dark",
+   "ok": true,
+   "detail": "lanes 0.030 0.052 0.227"
+  },
+  {
+   "kind": "DETTY",
+   "name": "Detty replay: reaches every requested time",
+   "ok": true,
+   "detail": "5/5"
+  },
+  {
+   "kind": "DETTY",
+   "name": "Detty replay: two runs give pixel-identical captures and identical history statistics",
+   "ok": true,
+   "detail": "b31151 911dce 849ecf 140681 3b1b41"
+  },
+  {
+   "kind": "DETTY",
+   "name": "Detty replay: onsets recorded equal onset edges asserted over the whole song (nothing missed or doubled), and the newest markers carry the same times",
+   "ok": true,
+   "detail": "222 recorded vs 222 asserted"
+  },
+  {
+   "kind": "DETTY",
+   "name": "Detty replay: no duplicate samples (spacing >= step), ordered, no gaps, and the stored record is bounded",
+   "ok": true,
+   "detail": "min spacing 0.0333 s, 512 samples held of 3001 appended"
+  },
+  {
+   "kind": "DETTY",
+   "name": "Detty replay: every capture shows three lit lanes and dark corners",
+   "ok": true,
+   "detail": "0.219 0.184 0.233 0.111 0.235"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "hierarchy: the three lanes are the primary layer (at least 3x the onset markers), the markers are secondary (above the time grid), the grid is tertiary",
+   "ok": true,
+   "detail": "lanes 0.01851, markers 0.00313, grid 0.00044"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "hierarchy: the decorative plates and the supporting rules and boundary are each far below the lanes (under a quarter)",
+   "ok": true,
+   "detail": "plates 0.00246, rules 0.00118, boundary 0.00064"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "core geometry: with the plates removed the lanes, markers and grid still draw, and the marker timeline is unchanged",
+   "ok": true,
+   "detail": "diamonds 22, lane luminance 0.061 vs 0.067"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "ambient: loudness-driven illumination stays subordinate (the same lanes change by under 25% between silence and full loudness)",
+   "ok": true,
+   "detail": "{\"lo\":0.07180740763823663,\"hi\":0.07986986858343757}"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "no console errors, exceptions or WebGL warnings during the whole run (deliberate context loss excluded)",
+   "ok": true,
+   "detail": "[]"
+  }
+ ],
+ "measurements": {
+  "gpu": {
+   "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+   "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+  },
+  "drawStats": {
+   "geometries": 10,
+   "textures": 0,
+   "programs": 7,
+   "calls": 13,
+   "triangles": 542
+  },
+  "synthetic": {
+   "bassOnly": {
+    "bass": 0.23645481302034255,
+    "mid": 0.04287502190666626,
+    "high": 0.02258404457836074
+   },
+   "midOnly": {
+    "bass": 0.030014749463915184,
+    "mid": 0.04291115208271908,
+    "high": 0.02258404457836074
+   },
+   "highOnly": {
+    "bass": 0.030012292359694187,
+    "mid": 0.04287502190666626,
+    "high": 0.0230716882279251
+   },
+   "quiet": {
+    "bass": 0.030014749463915184,
+    "mid": 0.04287502190666626,
+    "high": 0.02258404457836074
+   },
+   "response": {
+    "bassOnly": {
+     "fillLift": 0.20644006355642736,
+     "spread": 0.6985404662824316,
+     "midCentre": 0,
+     "highSpread": 0
+    },
+    "midOnly": {
+     "centre": 1.40586376085753,
+     "bassSpread": 0,
+     "highSpread": 0
+    },
+    "highOnly": {
+     "spread": 0.20171815902049064,
+     "midCentre": 0,
+     "bassSpread": 0
+    }
+   }
+  },
+  "pattern": {
+   "count": 421,
+   "markers": 28,
+   "minDt": 0.03249999999999886,
+   "maxDt": 0.03439999999999799,
+   "stats": {
+    "offered": 1788,
+    "appended": 871,
+    "duplicateFrames": 47,
+    "invalid": 0,
+    "skipped": 870,
+    "resets": 10,
+    "gaps": 0,
+    "onsets": 34
+   }
+  },
+  "alignmentPx": [
+   1,
+   1,
+   1
+  ],
+  "scroll": {
+   "expectedPx": 14.97340425531918,
+   "measured": -15
+  },
+  "performance": {
+   "720p": {
+    "interval": {
+     "n": 361,
+     "median": 16.700000000186265,
+     "p95": 17.09999999962747,
+     "p99": 17.59999999962747,
+     "max": 19.399999999441206,
+     "over33": 0
+    },
+    "cpu": {
+     "n": 361,
+     "median": 0.599999999627471,
+     "p95": 1.400000000372529,
+     "p99": 2.1000000005587935,
+     "max": 5.2999999998137355,
+     "over33": 0
+    },
+    "gpuSync": {
+     "n": 80,
+     "median": 4,
+     "p95": 4.7999999998137355,
+     "p99": 5.7999999998137355,
+     "max": 5.7999999998137355,
+     "over33": 0,
+     "buffer": [
+      1248,
+      410
+     ],
+     "pixelRatio": 1
+    },
+    "buffer": [
+     1248,
+     410
+    ],
+    "calls": 13
+   },
+   "1080p": {
+    "interval": {
+     "n": 360,
+     "median": 16.700000000186265,
+     "p95": 17.100000000558794,
+     "p99": 17.399999999441206,
+     "max": 17.799999999813735,
+     "over33": 0
+    },
+    "cpu": {
+     "n": 360,
+     "median": 0.7000000001862645,
+     "p95": 1.3999999994412065,
+     "p99": 2,
+     "max": 6.1000000005587935,
+     "over33": 0
+    },
+    "gpuSync": {
+     "n": 80,
+     "median": 5,
+     "p95": 6.2999999998137355,
+     "p99": 7.2999999998137355,
+     "max": 7.2999999998137355,
+     "over33": 0,
+     "buffer": [
+      1248,
+      716
+     ],
+     "pixelRatio": 1
+    },
+    "buffer": [
+     1248,
+     716
+    ],
+    "calls": 13
+   }
+  },
+  "heap": {
+   "before": 4739368,
+   "after": 4889236,
+   "growthKB": 146.35546875,
+   "geometries": [
+    10,
+    10
+   ]
+  },
+  "dettyRoute": {
+   "kind": "offline",
+   "label": "Detty - Party scatter demo",
+   "duration": 113.454558
+  },
+  "dettyLive": {
+   "history": {
+    "count": 437,
+    "markers": 34,
+    "minDt": 0.030200000000185412,
+    "maxDt": 29.997200000000184,
+    "stats": {
+     "offered": 878,
+     "appended": 437,
+     "duplicateFrames": 3,
+     "invalid": 0,
+     "skipped": 438,
+     "resets": 1,
+     "gaps": 1,
+     "onsets": 34
+    }
+   },
+   "flagged": 32,
+   "interval": {
+    "n": 841,
+    "median": 16.699999999254942,
+    "p95": 17.100000000558794,
+    "p99": 17.300000000745058,
+    "max": 21.200000000186265,
+    "over33": 0
+   }
+  },
+  "dettyDiamonds": [
+   26,
+   26,
+   25
+  ],
+  "dettyReplay": {
+   "stats": {
+    "offered": 6001,
+    "appended": 3001,
+    "duplicateFrames": 0,
+    "invalid": 0,
+    "skipped": 3000,
+    "resets": 0,
+    "gaps": 0,
+    "onsets": 222
+   },
+   "spacing": {
+    "count": 512,
+    "minDt": 0.03333333333333144,
+    "maxDt": 0.03333333333334565,
+    "ordered": true,
+    "first": 82.96666666666792,
+    "last": 100.00000000000621
+   },
+   "flagged": 222,
+   "captures": [
+    {
+     "t": 10,
+     "features": {
+      "bass": 0.8680050821053983,
+      "mid": 0.5790353654062751,
+      "high": 0.07627673415690997,
+      "rms": 0.6160400510048867,
+      "beat": false
+     },
+     "lanes": {
+      "high": 0.02797145687080454,
+      "mid": 0.04931213758714407,
+      "bass": 0.2191836133856589
+     },
+     "count": 301
+    },
+    {
+     "t": 30,
+     "features": {
+      "bass": 0.8908537647316369,
+      "mid": 0.6380551774620241,
+      "high": 0.36201091555508963,
+      "rms": 0.6428182184098806,
+      "beat": false
+     },
+     "lanes": {
+      "high": 0.028069427902837604,
+      "mid": 0.04782420368846805,
+      "bass": 0.18397585884720036
+     },
+     "count": 512
+    },
+    {
+     "t": 53,
+     "features": {
+      "bass": 0.750421569109942,
+      "mid": 0.6179963742119057,
+      "high": 0.3749608839670946,
+      "rms": 0.5607052338729068,
+      "beat": false
+     },
+     "lanes": {
+      "high": 0.028174717438405213,
+      "mid": 0.048881887637248045,
+      "bass": 0.2325864863211684
+     },
+     "count": 512
+    },
+    {
+     "t": 60,
+     "features": {
+      "bass": 0.20922372428821176,
+      "mid": 0.4580831875173909,
+      "high": 0.1972137425337528,
+      "rms": 0.37446301149548794,
+      "beat": false
+     },
+     "lanes": {
+      "high": 0.029959102027630323,
+      "mid": 0.04895367628600293,
+      "bass": 0.11116182272855032
+     },
+     "count": 512
+    },
+    {
+     "t": 100,
+     "features": {
+      "bass": 0.9171838057267396,
+      "mid": 0.6689346400009522,
+      "high": 0.2947846340645666,
+      "rms": 0.6589751463525222,
+      "beat": false
+     },
+     "lanes": {
+      "high": 0.027658443015055857,
+      "mid": 0.047463762960265915,
+      "bass": 0.23454706469533967
+     },
+     "count": 512
+    }
+   ]
+  },
+  "hierarchy": {
+   "decorOn": {
+    "background": 0.016551372549138473,
+    "lanes": 0.018511279728778515,
+    "markers": 0.0031305312757952328,
+    "plates": 0.002458632437416175,
+    "grid": 0.00044358161162571033,
+    "rules": 0.0011805404838109608,
+    "boundary": 0.0006406769648946986
+   },
+   "decorOff": {
+    "background": 0.016551372549138473,
+    "lanes": 0.018573915835932243,
+    "markers": 0.0032810649871881543,
+    "plates": 0,
+    "grid": 0.00045698288188975034,
+    "rules": 0.0011805404838109608,
+    "boundary": 0.0006406769648946986
+   }
+  },
+  "ambient": {
+   "lo": 0.07180740763823663,
+   "hi": 0.07986986858343757
+  }
+ }
+}
