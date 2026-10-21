@@ -1,0 +1,684 @@
+{
+ "when": "2026-10-21T09:00:59.249Z",
+ "completed": true,
+ "passed": 38,
+ "inconclusive": 2,
+ "total": 41,
+ "failed": [
+  "[SYNTHETIC] 720p: synchronous GPU time median <= 5 ms"
+ ],
+ "moved": [
+  {
+   "check": "high: colour dispersion (absolute bound replaced by a relative one, set AFTER seeing the number)",
+   "from": "mean RGB difference 0.015+ (absolute)",
+   "to": "mean RGB difference at least 10% of the frame mean",
+   "reason": "The first run of the recolour check measured an RGB difference of 0.004 in a state whose frame mean is 0.028 (only the high register is up, which is dim by design), so the absolute 0.015 could not be met by any recolouring of that frame. The relative bound (10%) was chosen after the measurement, which was about 14% of the frame mean: this is weak evidence and is recorded as such. Whether the dispersion reads as dispersion is a human-inspection item."
+  },
+  {
+   "check": "high: colour dispersion (claim narrowed, metric replaced a third time)",
+   "from": "dispersion makes the colours more varied: hue entropy +5%",
+   "to": "dispersion recolours the field without moving or dimming it: mean RGB difference 0.015+ with the frame mean within 3%",
+   "reason": "Hue entropy rose by about 2.7% in two runs (3.670 to 3.769 and 3.686 to 3.785 bits) although the dispersion strength was doubled between them: the full-frame hue histogram is near the palette's ceiling, so the metric cannot show more variety. The claim that dispersion increases colour variety is therefore NOT verified and is not made; what is verified is that it changes the colours of particles that stay where they are and as bright as they were. The thresholds for the new claim were set before it was measured."
+  },
+  {
+   "check": "high: colour dispersion (design strengthened, criterion unchanged)",
+   "from": "dispersion 0.7 (high register) and 0.35 (others) of the palette per unit of the random offset",
+   "to": "1.4 and 0.9",
+   "reason": "The second measurement was +2.7% hue entropy (3.670 to 3.769 bits) against the +5% bound: the right direction but weak, because the full-frame hue histogram is already close to saturated. Dispersion is a named part of the high band's grammar and should be visible, so the strength was raised; the +5% bound is unchanged."
+  },
+  {
+   "check": "bass hit: compression (design strengthened, criterion unchanged)",
+   "from": "compression 0.16 of the bass hit",
+   "to": "0.28",
+   "reason": "The first measurement was a 2.5% fall in luminous spread against a 3% bound: the effect existed but was weak (particles near the frame edge are clipped, and sprite sizes do not change). A deep compression pulse should be visible, so the strength was raised; the 3% bound is unchanged."
+  },
+  {
+   "check": "high: colour dispersion (metric replaced)",
+   "from": "circular hue standard deviation, high 0.3 against 0.9, +10%",
+   "to": "hue entropy, dispersion 0 against 0.9 at the same visibility, +5%",
+   "reason": "See the note above the list: the first probe confounded visibility with dispersion, the second used a metric that is not monotonic in colour variety (43.0 to 38.3 degrees with the dispersion on)."
+  },
+  {
+   "check": "paused: nothing on screen changes",
+   "from": "identical frame mean and centroid (exact equality)",
+   "to": "clock, flow, hue and shimmer exactly equal; frame mean within 0.5% and centroid within 0.1% of the frame",
+   "reason": "Ill-posed: while paused the band envelopes keep easing towards silence by design (the field calms), so pixels change by a few parts in a thousand for several seconds. The quantities that must hold still (the visual clock and the flow phase) are still asserted exactly."
+  }
+ ],
+ "measurements": {
+  "gpu": {
+   "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009B41) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+   "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+   "pointSizeMax": {
+    "0": 1,
+    "1": 1024
+   }
+  },
+  "drawStats": {
+   "geometries": 2,
+   "textures": 0,
+   "programs": 1,
+   "calls": 2,
+   "points": 36900,
+   "triangles": 0
+  },
+  "grammar": {
+   "quiet": {
+    "mean": 0.023775844427761678,
+    "hue": {
+     "indigo": 0.4765756656555443,
+     "teal": 0.0669025952140209,
+     "magenta": 0.2347067745197169,
+     "pink": 0,
+     "other": 0.2218149646107179
+    }
+   },
+   "bass": {
+    "mean": 0.05754290289098771,
+    "hue": {
+     "indigo": 0.7089668052858937,
+     "teal": 0.004487769484511149,
+     "magenta": 0.15836854799158878,
+     "pink": 0,
+     "other": 0.1281768772380063
+    }
+   },
+   "mid": {
+    "mean": 0.03591087985578113,
+    "hue": {
+     "indigo": 0.3966280969464235,
+     "teal": 0.1458070166574032,
+     "magenta": 0.07185084129149613,
+     "pink": 0,
+     "other": 0.3857140451046772
+    }
+   },
+   "high": {
+    "mean": 0.028096957218848674,
+    "hue": {
+     "indigo": 0.4429758744084036,
+     "teal": 0.12233060140828812,
+     "magenta": 0.20749163107468543,
+     "pink": 0,
+     "other": 0.22720189310862288
+    }
+   },
+   "flow": {
+    "move": 0.044916422006206214,
+    "same": 0
+   },
+   "shimmer": {
+    "withHigh": 0.006843854878562306,
+    "withoutHigh": 0
+   },
+   "dispersion": {
+    "rgbDiff": 0.003693780118657043,
+    "lumaDiff": 0.0015752248110614507,
+    "meanOff": 0.028024141514888478,
+    "meanOn": 0.028096957218848674,
+    "entropyOff": 3.670418500925469,
+    "entropyOn": 3.728483530143476
+   },
+   "compression": {
+    "spread0": 0.45980476580167284,
+    "spread1": 0.43091388151270177
+   },
+   "exposure": {
+    "lo": 0.041187466567860445,
+    "hi": 0.06353457277479997,
+    "centroidShift": 0.009743333875892254
+   }
+  },
+  "burst": [
+   {
+    "ta": 0.3,
+    "energy": 973.6231772548385,
+    "meanDist": 188.80566863997507,
+    "origin": {
+     "x": 691.629258829263,
+     "y": 202.037330428126
+    },
+    "strength": 0.8999999761581421,
+    "speed": 4.5
+   },
+   {
+    "ta": 0.9,
+    "energy": 3330.219009411503,
+    "meanDist": 273.9267079686059,
+    "origin": {
+     "x": 691.1558546508451,
+     "y": 202.1947269460038
+    },
+    "strength": 0.8999999761581421,
+    "speed": 4.5
+   },
+   {
+    "ta": 1.5,
+    "energy": 2884.869239215184,
+    "meanDist": 366.500655995289,
+    "origin": {
+     "x": 690.6838562368994,
+     "y": 202.3518862186824
+    },
+    "strength": 0.8999999761581421,
+    "speed": 4.5
+   },
+   {
+    "ta": 2.6,
+    "energy": 0,
+    "meanDist": 0,
+    "origin": {
+     "x": 689.8228623914056,
+     "y": 202.63907977103324
+    },
+    "strength": 0.8999999761581421,
+    "speed": 4.5
+   }
+  ],
+  "composition": [
+   {
+    "name": "bass-only",
+    "centreRatio": 1.685545967407196,
+    "bbox": [
+     0.9983974358974359,
+     0.9982238010657194
+    ],
+    "lit": 0.6849908343580635
+   },
+   {
+    "name": "mid-only",
+    "centreRatio": 2.2810636354183256,
+    "bbox": [
+     0.9975961538461539,
+     0.9982238010657194
+    ],
+    "lit": 0.4072875392813226
+   },
+   {
+    "name": "high-only",
+    "centreRatio": 1.5535683852217383,
+    "bbox": [
+     0.9975961538461539,
+     0.9982238010657194
+    ],
+    "lit": 0.23621880265974404
+   },
+   {
+    "name": "all bands",
+    "centreRatio": 1.656244741825344,
+    "bbox": [
+     0.999198717948718,
+     0.9982238010657194
+    ],
+    "lit": 0.6696028032062668
+   }
+  ],
+  "lite": {
+   "mean": 0.030627640435937516,
+   "points": 14350
+  },
+  "dettyLive": {
+   "source": {
+    "id": "offline:detty",
+    "kind": "offline",
+    "label": "Detty - Party scatter demo",
+    "canSeek": true
+   },
+   "onsets": 28,
+   "mean": 0.05438811926311381,
+   "hue": {
+    "indigo": 0.7171064481268011,
+    "teal": 0.017778878482228627,
+    "magenta": 0.11276717098943324,
+    "pink": 0,
+    "other": 0.152347502401537
+   },
+   "anim": {
+    "bass": 0.7331508676526416,
+    "mid": 0.5616176297493466,
+    "high": 0.140987157190898
+   }
+  },
+  "dettyReplay": {
+   "flagged": 222,
+   "onsets": 222,
+   "captures": [
+    {
+     "t": 20,
+     "mean": 0.07352103922891987,
+     "centreRatio": 1.3826146468743377,
+     "hue": {
+      "indigo": 0.576278911669731,
+      "teal": 0.016732846128887723,
+      "magenta": 0.07095622885218547,
+      "pink": 0,
+      "other": 0.3360320133491958
+     },
+     "env": {
+      "bass": 0.6467123568443055,
+      "mid": 0.624111006513488,
+      "high": 0.39118629599177185,
+      "exposure": 0.8086190975903612
+     },
+     "sha": "5d3f71ffc970521b"
+    },
+    {
+     "t": 45,
+     "mean": 0.05674286907614662,
+     "centreRatio": 2.1158368746151415,
+     "hue": {
+      "indigo": 0.47438612372900535,
+      "teal": 0.010238006713977035,
+      "magenta": 0.3170064068368331,
+      "pink": 0,
+      "other": 0.1983694627201845
+     },
+     "env": {
+      "bass": 0.8688808554824161,
+      "mid": 0.6322442945083437,
+      "high": 0.30257266717962245,
+      "exposure": 0.8290090688706466
+     },
+     "sha": "a3b4be21978ed071"
+    },
+    {
+     "t": 80,
+     "mean": 0.08014792894220642,
+     "centreRatio": 1.2137400793404565,
+     "hue": {
+      "indigo": 0.5962921482637338,
+      "teal": 0.008273926749007444,
+      "magenta": 0.17970780140059017,
+      "pink": 0,
+      "other": 0.2157261235866686
+     },
+     "env": {
+      "bass": 0.8936303067258347,
+      "mid": 0.6674981746791955,
+      "high": 0.3586832625136462,
+      "exposure": 0.8369770994847453
+     },
+     "sha": "80ef5739dee1c979"
+    },
+    {
+     "t": 100,
+     "mean": 0.0728324395478739,
+     "centreRatio": 1.6011444014812781,
+     "hue": {
+      "indigo": 0.7188084979415829,
+      "teal": 0.010748525008258533,
+      "magenta": 0.10908012375367195,
+      "pink": 0,
+      "other": 0.16136285329648667
+     },
+     "env": {
+      "bass": 0.9125888600363774,
+      "mid": 0.6679200709644652,
+      "high": 0.31005221936245936,
+      "exposure": 0.8429522016852177
+     },
+     "sha": "45d5c7ac25829659"
+    }
+   ]
+  },
+  "environment": {
+   "controlTerrainIntervalMedian": 33.30000000074506,
+   "battery": {
+    "charging": false,
+    "level": 0.02
+   }
+  },
+  "performance": {
+   "720p": {
+    "interval": {
+     "n": 181,
+     "median": 33.299999999813735,
+     "p95": 33.700000000186265,
+     "p99": 34.10000000055879,
+     "max": 34.19999999925494,
+     "over33": 0.39779005524861877
+    },
+    "cpu": {
+     "n": 181,
+     "median": 0.40000000037252903,
+     "p95": 0.7000000001862645,
+     "p99": 0.8999999994412065,
+     "max": 1.2999999998137355,
+     "over33": 0
+    },
+    "gpuSync": {
+     "n": 80,
+     "median": 5.400000000372529,
+     "p95": 7.8999999994412065,
+     "p99": 8.900000000372529,
+     "max": 8.900000000372529,
+     "over33": 0,
+     "buffer": [
+      1248,
+      410
+     ],
+     "pixelRatio": 1
+    },
+    "buffer": [
+     1248,
+     410
+    ],
+    "calls": 2,
+    "points": 36900
+   },
+   "1080p": {
+    "interval": {
+     "n": 166,
+     "median": 33.299999999813735,
+     "p95": 34.299999999813735,
+     "p99": 49.19999999925494,
+     "max": 469.40000000037253,
+     "over33": 0.41566265060240964
+    },
+    "cpu": {
+     "n": 166,
+     "median": 0.599999999627471,
+     "p95": 0.900000000372529,
+     "p99": 1,
+     "max": 1.400000000372529,
+     "over33": 0
+    },
+    "gpuSync": {
+     "n": 80,
+     "median": 6.699999999254942,
+     "p95": 10.299999999813735,
+     "p99": 11.299999999813735,
+     "max": 11.299999999813735,
+     "over33": 0,
+     "buffer": [
+      1248,
+      716
+     ],
+     "pixelRatio": 1
+    },
+    "buffer": [
+     1248,
+     716
+    ],
+    "calls": 2,
+    "points": 36900
+   },
+   "lite720": {
+    "gpuSync": {
+     "n": 80,
+     "median": 4.7999999998137355,
+     "p95": 8.700000000186265,
+     "p99": 9.799999999813735,
+     "max": 9.799999999813735,
+     "over33": 0,
+     "buffer": [
+      1248,
+      716
+     ],
+     "pixelRatio": 1
+    }
+   }
+  },
+  "heap": {
+   "beforeMB": 4.415008544921875,
+   "afterMB": 4.554344177246094,
+   "growthKB": 142.6796875,
+   "geometries": [
+    2,
+    2
+   ],
+   "textures": [
+    0,
+    0
+   ]
+  }
+ },
+ "results": [
+  {
+   "kind": "SYNTHETIC",
+   "name": "no console errors, exceptions or WebGL warnings",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "the host is ready and drawing",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "a dark void with a lit volume: mean luminance 0.02..0.30, not all lit (a quarter or more of the frame stays dark)",
+   "ok": true,
+   "detail": "mean 0.050, lit 0.607"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "two point layers and nothing else: 2 draw calls, 0 triangles, 0 lines, 1-2 programs",
+   "ok": true,
+   "detail": "2 calls, 36900 points, 0 triangles, 1 programs"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "bass: density. A full bass level makes the field at least 1.5x brighter than silence (more of the population is drawn)",
+   "ok": true,
+   "detail": "2.420x"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "mid and high also raise their own populations (each at least 1.15x over silence)",
+   "ok": true,
+   "detail": "mid 1.510x, high 1.182x"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "colour is per register: bass is indigo/magenta (more than teal), mid is teal-led (more teal than bass has), high is magenta/pink-led (more than mid has)",
+   "ok": true,
+   "detail": "teal bass 0.004 mid 0.146; magenta+pink mid 0.072 high 0.207"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "mid: the flow phase moves the field (a phase step changes the frame by 0.01+ mean luminance) and the same phase renders identically (determinism)",
+   "ok": true,
+   "detail": "moved 0.045, same 0"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "high: shimmer. A phase step changes the frame when the high band is up (0.004+), and not when it is silent",
+   "ok": true,
+   "detail": "high 0.9: 0.007, high 0: 0.000"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "high: colour dispersion recolours the field without moving or dimming it (same state, dispersion 0 against 0.9: mean RGB difference at least 10% of the frame mean, frame mean within 3%)",
+   "ok": true,
+   "detail": "rgb diff 0.004 (0.132 of the frame mean), mean 0.028 -> 0.028; hue entropy 3.670 -> 3.728 bits (variety is NOT claimed: it rose about 2.7%)"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "bass hit: compression. The luminous spread of the field is smaller during a hit (down 3%+) and recovers",
+   "ok": true,
+   "detail": "0.460 -> 0.431"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "rmsEnergy: exposure only. Louder is brighter (1.3x+) with no change of layout (luminance centroid moves under 1% of the frame)",
+   "ok": true,
+   "detail": "1.543x, shift 0.010"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "one scripted onset is one burst",
+   "ok": true,
+   "detail": "{\"onsets\":1,\"bursts\":1}"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "the burst is visible while alive (energy above 5.0 at 0.3 s, 0.9 s and 1.5 s) and gone after its life (under 0.05 at 2.6 s)",
+   "ok": true,
+   "detail": "[973.62,3330.22,2884.87,0]"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "it spreads outward: the changed pixels lie farther from the burst origin at 0.9 s than at 0.3 s (25%+)",
+   "ok": true,
+   "detail": "188.806 -> 273.927 px"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "reduced motion: the shockwave and the shimmer are off",
+   "ok": true,
+   "detail": "{\"reduced\":true,\"burst\":0,\"shimmer\":0}"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "a new source forgets the old onsets",
+   "ok": true,
+   "detail": "{\"onsets\":0,\"bursts\":0,\"resets\":3}"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "paused: the field holds still (visual clock and flow phase exactly equal; frame mean within 0.5% and centroid within 0.1%)",
+   "ok": true,
+   "detail": "mean 0.050 vs 0.050, clock 10.625"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "resume: the visual clock and the flow continue from where they stopped",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "no central anchor: the luminance in a disc at the centre (12% of the short side) is under 2.5x the frame mean in every state",
+   "ok": true,
+   "detail": "[1.69,2.28,1.55,1.66]"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "a distributed volume, not a point or a band: lit pixels span over 80% of the width and height of the frame with all bands up",
+   "ok": true,
+   "detail": "[0.999198717948718,0.9982238010657194]"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "lite draws fewer particles (under 60% of full) and still reads as the field (mean 0.01..0.30, hue spread over 10 degrees)",
+   "ok": true,
+   "detail": "14350 points vs 36900, mean 0.031, hue spread 28.624"
+  },
+  {
+   "kind": "DETTY",
+   "name": "Detty loads through the application's offline-source route and plays",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "kind": "DETTY",
+   "name": "live: the field is lit and coloured (mean 0.02..0.35), onsets become bursts, no console problems, status ready",
+   "ok": true,
+   "detail": "onsets 28"
+  },
+  {
+   "kind": "DETTY",
+   "name": "live: the palette shows indigo/magenta masses and teal, with no flat monochrome (indigo+magenta over 40% of coloured pixels, teal over 1%)",
+   "ok": true,
+   "detail": "{\"indigo\":0.717,\"teal\":0.018,\"magenta\":0.113,\"pink\":0,\"other\":0.152}"
+  },
+  {
+   "kind": "DETTY",
+   "name": "replay of 100 s: every onset edge the source asserted is a recorded burst, none invented",
+   "ok": true,
+   "detail": "222 of 222"
+  },
+  {
+   "kind": "DETTY",
+   "name": "replay is deterministic: two runs give pixel-identical frames at 20, 45, 80 and 100 s",
+   "ok": true,
+   "detail": "5d3f71ffc970521b a3b4be21978ed071 80ef5739dee1c979 45d5c7ac25829659"
+  },
+  {
+   "kind": "DETTY",
+   "name": "the field at different moments of the song is different (4 distinct frames) and never a central anchor (centre ratio under 2.5)",
+   "ok": true,
+   "detail": "[1.38,2.12,1.21,1.6]"
+  },
+  {
+   "kind": "DETTY",
+   "name": "the four moments respond to different music (band envelopes differ across the captures)",
+   "ok": true,
+   "detail": "[[0.65,0.62,0.39],[0.87,0.63,0.3],[0.89,0.67,0.36],[0.91,0.67,0.31]]"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "720p: frame interval median <= 20 ms, under 2% of frames over 33 ms",
+   "ok": null,
+   "detail": "median 33.300 over33 0.398; the Terrain control in this session measured 33.300 ms (throttled)"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "720p: main-thread cost per frame median <= 2 ms",
+   "ok": true,
+   "detail": "0.400 ms"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "720p: synchronous GPU time median <= 5 ms",
+   "ok": false,
+   "detail": "5.400 ms"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "1080p window: frame interval median <= 20 ms, under 2% over 33 ms",
+   "ok": null,
+   "detail": "median 33.300 over33 0.416; the Terrain control in this session measured 33.300 ms (throttled)"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "20 s of playback: GPU geometry and texture counts steady and JS heap growth under 1 MB (a measurement, not a zero-allocation claim)",
+   "ok": true,
+   "detail": "142.680 KB"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "unmount disposes the scene and the host; nothing left drawing",
+   "ok": true,
+   "detail": "{\"h\":{\"created\":1,\"disposed\":1},\"s\":{\"created\":1,\"disposed\":1},\"dbg\":false}"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "remount draws again from audio (clock running, field lit) with no console errors",
+   "ok": true,
+   "detail": "clock 2.074, mean 0.065"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "context loss is reported and a restore resumes drawing the field (clock continues)",
+   "ok": true,
+   "detail": "lost -> ready, mean 0.050, clock 2.128 -> 4.571"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "desktop (1920x1080 @1): the field is drawn, dark void kept, no console errors",
+   "ok": true,
+   "detail": "mean 0.070, lit 0.779"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "tablet (768x1024 @1): the field is drawn, dark void kept, no console errors",
+   "ok": true,
+   "detail": "mean 0.051, lit 0.663"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "phone (390x844 @1): the field is drawn, dark void kept, no console errors",
+   "ok": true,
+   "detail": "mean 0.049, lit 0.636"
+  },
+  {
+   "kind": "SYNTHETIC",
+   "name": "dpr1p5 (1280x900 @1.5): the field is drawn, dark void kept, no console errors",
+   "ok": true,
+   "detail": "mean 0.055, lit 0.634"
+  }
+ ]
+}
